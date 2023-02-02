@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 88318539035009685}
   - component: {fileID: 544035066131854620}
+  - component: {fileID: 4024928757392704784}
   - component: {fileID: 88318539035009682}
   - component: {fileID: 88318539035009683}
   - component: {fileID: 88318539035009684}
-  - component: {fileID: 4024928757392704784}
   m_Layer: 0
   m_Name: Sheldon
   m_TagString: Untagged
@@ -52,6 +52,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 6
   runSpeed: 9
+--- !u!114 &4024928757392704784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88318539035009686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81003026efa6cfd4c8238db8b25d1a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packageMount: {fileID: 5161023617940579251}
+  targetPackage: {fileID: 0}
 --- !u!143 &88318539035009682
 CharacterController:
   m_ObjectHideFlags: 0
@@ -84,7 +98,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &88318539035009684
 CapsuleCollider:
@@ -100,18 +114,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4024928757392704784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88318539035009686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81003026efa6cfd4c8238db8b25d1a17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &88318539408043097
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5161023617940579251}
   m_Layer: 0
-  m_Name: PackageTarget
+  m_Name: PackageMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962563423465141791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.242, z: 0.903}
+  m_LocalPosition: {x: 0, y: 1.242, z: 1.357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 88318539035009685}
