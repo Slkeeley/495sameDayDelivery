@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 
 namespace SameDayDelivery
@@ -8,10 +7,10 @@ namespace SameDayDelivery
         [Tooltip("Walk speed in meters")]
         public float walkSpeed = 6f;
         [Tooltip("Run speed in meters (when activated by player. Unconfirmed feature)")]
-        public float runSpeed = 9f;
+        public float runSpeed = 12f;
 
         [SerializeField]
-        private CinemachineFreeLook _vCam;
+        private Camera _cam;
         
         private CharacterController _characterController;
         private Rigidbody _rigidBody;
@@ -20,6 +19,8 @@ namespace SameDayDelivery
         {
             _characterController = GetComponent<CharacterController>();
             _rigidBody = GetComponent<Rigidbody>();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void Update()
@@ -29,11 +30,27 @@ namespace SameDayDelivery
 
             var speed = (Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
 
-            var motion = _vCam.transform.forward + new Vector3(horizontalInput, 0f, verticalInput) * (speed * Time.deltaTime);
-            
-            _characterController.Move(motion);
+            var forward = _cam.transform.forward;
+            var right = _cam.transform.right;
 
-            transform.forward = _vCam.transform.forward;
+            forward.y = 0f;
+            right.y = 0f;
+            
+            // ensure we are only talking about direction, and not speed
+            forward.Normalize();
+            right.Normalize();
+            
+            // combine the vertical and horizontal vectors, and once again normalize them so we don't move faster diagonally
+            var motion = (forward * verticalInput + right * horizontalInput).normalized;
+            
+            // direction, speed, and time coefficient, and we're done!
+            var motionWithSpeed = motion * (speed * Time.deltaTime);
+            
+            // transform.Translate(motion * (speed * Time.deltaTime));
+            _characterController.Move(motionWithSpeed);
+            
+            // "rotates" character to always face in direction of camera. We may want to slerp this in the future.
+            transform.forward = forward;
         }
     }
 }
