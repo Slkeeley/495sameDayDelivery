@@ -1,59 +1,67 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SameDayDelivery
 {
     public class PackagePickup : MonoBehaviour
     {
-        public Transform packageMount;
-        public GameObject targetPackage;
-        public float dropTime = 1f;
-        public GameObject packagesParent;
-
-        private bool _carrying;
-
-        private float _dropTimer;
-
-        private void Awake()
-        {
-            _dropTimer = dropTime;
-        }
+        [SerializeField] private Transform packageMount;
+        [SerializeField] private Transform packagesParent;
+        [SerializeField] private Package carryingPackage;
+        private readonly List<Package> _availablePackages = new List<Package>();
 
         private void Update()
         {
-            if (_dropTimer > 0)
-                _dropTimer -= Time.deltaTime;
-
             if (!Input.GetKey(KeyCode.E)) return;
-            Debug.Log($"E pressed");
-            if (!_carrying) return;
-            Debug.Log($"carrying package");
-            if (_dropTimer > 0) return;
-            Debug.Log($"drop timer done");
-            Drop();
+            if (carryingPackage)
+                DropPackage();
+            else
+                PickupPackage();
         }
 
-        public void Pickup(GameObject package)
+        private void DropPackage()
         {
-            targetPackage = package;
-            var rb = package.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.detectCollisions = false;
-            package.transform.SetParent(packageMount);
-            package.transform.localPosition = Vector3.zero;
-            package.transform.rotation = Quaternion.identity;
-            _carrying = true;
-            _dropTimer = dropTime;
-            targetPackage.GetComponent<Package>().ResetPickupTimer();
+            carryingPackage.transform.SetParent(packagesParent);
+            carryingPackage.transform.position = packageMount.position;
+            carryingPackage.Drop();
+            carryingPackage = null;
         }
 
-        public void Drop()
+        private void PickupPackage()
         {
-            Debug.Log($"Drop");
-            var rb = targetPackage.GetComponent<Rigidbody>();
-            targetPackage.transform.SetParent(packagesParent.transform);
-            rb.isKinematic = false;
-            rb.detectCollisions = true;
-            _carrying = false;
+            
+            if (_availablePackages.Count <= 0) return;
+
+            var targetPackage = _availablePackages[0];
+            var finalDistance = Vector3.Distance(transform.position, targetPackage.transform.position);
+
+            foreach (var package in _availablePackages)
+            {
+                var newDistance = Vector3.Distance(transform.position, package.transform.position);
+                if (!(finalDistance < newDistance)) continue;
+                finalDistance = newDistance;
+                targetPackage = package;
+            }
+
+            carryingPackage = targetPackage;
+            carryingPackage.Pickup();
+            carryingPackage.transform.position = packageMount.position;
+            carryingPackage.transform.SetParent(packageMount);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var package = other.GetComponent<Package>();
+            if (!package) return;
+            _availablePackages.Add(package);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var package = other.GetComponent<Package>();
+            if (!package) return;
+            if (_availablePackages.Contains(package))
+                _availablePackages.Remove(package);
         }
     }
 }

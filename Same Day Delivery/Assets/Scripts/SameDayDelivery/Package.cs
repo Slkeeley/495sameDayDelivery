@@ -5,43 +5,27 @@ namespace SameDayDelivery
 {
     public class Package : MonoBehaviour
     {
-        public float pickupTime = 1f;
-        
-        private bool _pickupValid;
-        private PackagePickup _packagePickup;
-
-        private float pickupTimer;
+        private Rigidbody _rigidbody;
 
         private void Awake()
         {
-            pickupTimer = pickupTime;
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void Update()
+        public void Pickup()
         {
-            if (pickupTimer > 0)
-                pickupTimer -= Time.deltaTime;
-
-            if (_pickupValid) return;
-            
-            if (Input.GetKey(KeyCode.E))
-            {
-                if (_packagePickup && pickupTimer <= 0)
-                    _packagePickup.Pickup(gameObject);
-            }
+            Debug.Log($"Picked up {gameObject.name}");
+            _rigidbody.isKinematic = true;
+            _rigidbody.detectCollisions = false;
+            _rigidbody.useGravity = false;
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void Drop()
         {
-            _packagePickup = other.GetComponent<PackagePickup>();
-            if (!_packagePickup) return;
-            _pickupValid = true;
-        }
-
-        public void ResetPickupTimer()
-        {
-            _pickupValid = false;
-            pickupTimer = pickupTime;
+            Debug.Log($"Dropped up {gameObject.name}");
+            _rigidbody.isKinematic = false;
+            _rigidbody.detectCollisions = true;
+            _rigidbody.useGravity = true;
         }
     }
 }
