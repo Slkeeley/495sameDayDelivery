@@ -40,7 +40,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
         rotation *= Time.deltaTime;
         rotation = Mathf.Clamp(rotation, -45, 45);
-        // transform.Rotate(0, rotation, 0);
+        transform.Rotate(0, rotation, 0);
         //if the player presses W move forward in the direction they face
         if (Input.GetKey(KeyCode.W))
         {
