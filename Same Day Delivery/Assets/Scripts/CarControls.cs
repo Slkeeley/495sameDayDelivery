@@ -36,19 +36,11 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
     void drive()
     {
-        /*  if (!accelerating)
-          {
 
-              float translation = Input.GetAxis("Vertical") * topSpeed;
-              float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-
-              translation *= Time.deltaTime;
-              rotation *= Time.deltaTime;
-
-              transform.Translate(0, 0, translation);
-
-              transform.Rotate(0, rotation, 0);
-          }*/
+        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        rotation *= Time.deltaTime;
+        rotation = Mathf.Clamp(rotation, -45, 45);
+        // transform.Rotate(0, rotation, 0);
         //if the player presses W move forward in the direction they face
         if (Input.GetKey(KeyCode.W))
         {
@@ -121,7 +113,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
 
     }
 
-    public IEnumerator decellerate()
+    public IEnumerator decellerate()//for the car to continue to move forward once the player has let go of w
     {
 
         transform.position += Vector3.forward * currSpeed* Time.deltaTime;
@@ -131,7 +123,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     }
 
 
-    public IEnumerator decellerateBackwards()
+    public IEnumerator decellerateBackwards()//for the car to continue to move backward once the player has let go of s
     {
 
         transform.position += Vector3.back * currSpeed * Time.deltaTime;
