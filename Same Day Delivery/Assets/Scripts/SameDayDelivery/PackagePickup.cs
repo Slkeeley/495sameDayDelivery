@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,28 @@ namespace SameDayDelivery
         [SerializeField] private Transform packagesParent;
         [SerializeField] private Package carryingPackage;
         private readonly List<Package> _availablePackages = new List<Package>();
+        private PlayerControlManager _playerControls;
 
-        private void Update()
+        private void Awake()
         {
-            if (!Input.GetKey(KeyCode.E)) return;
+            _playerControls = GetComponent<PlayerControlManager>();
+        }
+
+        private void OnEnable()
+        {
+            if (!_playerControls)
+                _playerControls = GetComponent<PlayerControlManager>();
+            
+            _playerControls.Interact += PackageInteraction;
+        }
+
+        private void OnDisable()
+        {
+            _playerControls.Interact -= PackageInteraction;
+        }
+
+        private void PackageInteraction()
+        {
             if (carryingPackage)
                 DropPackage();
             else

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 88318539035009685}
   - component: {fileID: 544035066131854620}
   - component: {fileID: 4024928757392704784}
+  - component: {fileID: 1805516048126420529}
+  - component: {fileID: 7573072436782857217}
   - component: {fileID: 88318539035009682}
   - component: {fileID: 88318539035009683}
   - component: {fileID: 88318539035009684}
@@ -52,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  runSpeed: 9
+  runSpeed: 12
   _cam: {fileID: 0}
 --- !u!114 &4024928757392704784
 MonoBehaviour:
@@ -69,6 +71,49 @@ MonoBehaviour:
   packageMount: {fileID: 5161023617940579251}
   packagesParent: {fileID: 0}
   carryingPackage: {fileID: 0}
+--- !u!114 &1805516048126420529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88318539035009686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0beae010a31a2bd4792cc7a4e4b263b9, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &7573072436782857217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88318539035009686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70558a1cc45158347b0c80549bb37418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
 --- !u!143 &88318539035009682
 CharacterController:
   m_ObjectHideFlags: 0
