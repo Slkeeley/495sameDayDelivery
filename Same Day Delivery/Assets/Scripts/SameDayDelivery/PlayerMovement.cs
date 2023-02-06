@@ -14,41 +14,58 @@ namespace SameDayDelivery
         
         private CharacterController _characterController;
         private Rigidbody _rigidBody;
+        private PlayerControlManager _playerControlManager;
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
             _rigidBody = GetComponent<Rigidbody>();
+            _playerControlManager = GetComponent<PlayerControlManager>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
+        private void OnEnable()
+        {
+            _playerControlManager.MoveBegin += Movement;
+        }
+
+        private void OnDisable()
+        {
+            _playerControlManager.MoveBegin -= Movement;
+        }
+
         private void Update()
         {
-            var horizontalInput = Input.GetAxis("Horizontal");
-            var verticalInput = Input.GetAxis("Vertical");
+            Movement();
+        }
 
-            var speed = (Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
+        private void Movement()
+        {
+            var horizontalInput = _playerControlManager.move.x;
+            var verticalInput = _playerControlManager.move.y;
+
+            var speed = (_playerControlManager.sprinting) ? runSpeed : walkSpeed;
 
             var forward = _cam.transform.forward;
             var right = _cam.transform.right;
 
             forward.y = 0f;
             right.y = 0f;
-            
+
             // ensure we are only talking about direction, and not speed
             forward.Normalize();
             right.Normalize();
-            
+
             // combine the vertical and horizontal vectors, and once again normalize them so we don't move faster diagonally
             var motion = (forward * verticalInput + right * horizontalInput).normalized;
-            
+
             // direction, speed, and time coefficient, and we're done!
             var motionWithSpeed = motion * (speed * Time.deltaTime);
-            
+
             // transform.Translate(motion * (speed * Time.deltaTime));
             _characterController.Move(motionWithSpeed);
-            
+
             // "rotates" character to always face in direction of camera. We may want to slerp this in the future.
             transform.forward = forward;
         }

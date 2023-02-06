@@ -4,23 +4,61 @@ using UnityEngine.InputSystem;
 public class PlayerControlManager : MonoBehaviour
 {
     public delegate void InputEvent();
-    public InputEvent Interact;
+    public InputEvent InteractBegin;
+    public InputEvent InteractEnd;
+    public InputEvent MoveBegin;
+    public InputEvent MoveEnd;
+    public InputEvent SprintBegin;
+    public InputEvent SprintEnd;
     
     public Vector2 move;
-    
-    private void OnMove(InputValue value)
+    public bool sprinting;
+    public bool interacting;
+
+    public void OnMove(InputAction.CallbackContext context)
     {
-        MoveInput(value.Get<Vector2>());
+        if (context.performed)
+        {
+            move = context.ReadValue<Vector2>();
+            MoveBegin?.Invoke();
+        }
+
+        if (context.canceled)
+        {
+            move = Vector2.zero;
+            MoveEnd?.Invoke();
+        }
     }
 
-    private void OnInteract(InputValue value)
+    public void OnSprint(InputAction.CallbackContext context)
     {
-        if (value.isPressed)
-            Interact?.Invoke();
+        Debug.Log($"Sprinting!");
+        if (context.performed)
+        {
+            sprinting = true;
+            SprintBegin?.Invoke();
+        }
+
+        if (context.canceled)
+        {
+            sprinting = false;
+            SprintEnd?.Invoke();
+        }
     }
 
-    private void MoveInput(Vector2 value)
+    public void OnInteract(InputAction.CallbackContext context)
     {
-        move = value;
+        Debug.Log($"Interacting!");
+        if (context.performed)
+        {
+            interacting = true;
+            InteractBegin?.Invoke();
+        }
+
+        if (context.canceled)
+        {
+            interacting = false;
+            InteractEnd?.Invoke();
+        }
     }
 }

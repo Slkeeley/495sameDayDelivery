@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SameDayDelivery
+namespace SameDayDelivery.PackageSystem
 {
     public class PackagePickup : MonoBehaviour
     {
@@ -19,15 +19,12 @@ namespace SameDayDelivery
 
         private void OnEnable()
         {
-            if (!_playerControls)
-                _playerControls = GetComponent<PlayerControlManager>();
-            
-            _playerControls.Interact += PackageInteraction;
+            _playerControls.InteractBegin += PackageInteraction;
         }
 
         private void OnDisable()
         {
-            _playerControls.Interact -= PackageInteraction;
+            _playerControls.InteractBegin -= PackageInteraction;
         }
 
         private void PackageInteraction()

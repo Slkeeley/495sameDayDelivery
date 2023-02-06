@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SameDayDelivery
+namespace SameDayDelivery.PackageSystem
 {
     public class Package : MonoBehaviour
     {
