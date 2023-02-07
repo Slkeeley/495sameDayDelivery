@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
 {
-
+    
     [Header("Van Speed")]
     public float topSpeed;//the fastest speed that the van can move 
     public float topReverseSpeed;//the fastest speed that the van can move 
@@ -22,9 +22,13 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     public bool backwards = false;
     public float brakeForce;
     public float currentTurnAngle; 
-    public float maxTurnAngle; 
-
+    public float maxTurnAngle;
+    Rigidbody rb; 
     // Start is called before the first frame update
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>(); 
+    }
     void Start()
     {
         accelerating = false;
@@ -46,16 +50,13 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
          void drive()
       {
-        /*  rotationSpeed = currSpeed*0.5f;
+            rotationSpeed = currSpeed;
 
             float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
-
-
-          Debug.Log(rotation);
             transform.Rotate(0, rotation, 0);
-          */
+          
         //if the player presses W move forward in the direction they face
         if (Input.GetKey(KeyCode.W))
           {
@@ -165,19 +166,17 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
         }
     }
     public IEnumerator decellerate()//for the car to continue to move forward once the player has let go of w
-    {
-
-        transform.position += Vector3.forward * currSpeed* Time.deltaTime;
+    {       
+        transform.Translate(Vector3.forward *currSpeed*  Time.deltaTime);
         currSpeed -= decellerationSpeed;
         yield return new WaitForEndOfFrame();
         if (currSpeed <= 0) decellerating = false;
     }
-
+  
 
     public IEnumerator decellerateBackwards()//for the car to continue to move backward once the player has let go of s
     {
-
-        transform.position += Vector3.back * currSpeed * Time.deltaTime;
+        transform.Translate(Vector3.back * currSpeed * Time.deltaTime);
         currSpeed -= (decellerationSpeed*2);
         yield return new WaitForEndOfFrame();
         if (currSpeed <= 0) decellerating = false;
