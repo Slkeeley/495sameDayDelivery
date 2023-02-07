@@ -21,14 +21,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     public bool forwards = false;
     public bool backwards = false;
     public float brakeForce;
-    public float currentTurnAngle; 
-    public float maxTurnAngle;
-    Rigidbody rb; 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>(); 
-    }
+
     void Start()
     {
         accelerating = false;
