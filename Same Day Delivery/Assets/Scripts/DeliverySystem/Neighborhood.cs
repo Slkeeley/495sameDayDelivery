@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Neighborhood : MonoBehaviour
 {
-    public List<GameObject> homes;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<GameObject> homes;//All the possible delivery destinations within this neighborhood
 
-    // Update is called once per frame
+
     void Update()
     {
         
     }
 
-    public void chooseDeliveryDestination()
+    public void chooseDeliveryDestination()//randomly select one house in this neighborhood to deliver a package to. 
     {
         for (int i = 0; i < homes.Count; i++)
         {

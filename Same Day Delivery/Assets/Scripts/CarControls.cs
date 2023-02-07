@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
 {
+
     [Header("Van Speed")]
     public float topSpeed;//the fastest speed that the van can move 
     public float topReverseSpeed;//the fastest speed that the van can move 
@@ -19,7 +20,9 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     [Header("Other Vars")]
     public bool forwards = false;
     public bool backwards = false;
-    public float brakeForce; 
+    public float brakeForce;
+    public float currentTurnAngle; 
+    public float maxTurnAngle; 
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +46,18 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
          void drive()
       {
+        /*  rotationSpeed = currSpeed*0.5f;
 
-          float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-          rotation *= Time.deltaTime;
-          rotation = Mathf.Clamp(rotation, -45, 45);
-          transform.Rotate(0, rotation, 0);
+            float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            rotation *= Time.deltaTime;
+            rotation = Mathf.Clamp(rotation, -45, 45);
 
-          //if the player presses W move forward in the direction they face
-          if (Input.GetKey(KeyCode.W))
+
+          Debug.Log(rotation);
+            transform.Rotate(0, rotation, 0);
+          */
+        //if the player presses W move forward in the direction they face
+        if (Input.GetKey(KeyCode.W))
           {
              //Adjust these booleans when the player begins moving forward again
               decellerating = false;
@@ -67,7 +74,8 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
                   currSpeed += accelerationSpeed; 
                   translation *= Time.deltaTime;
                   transform.Translate(0, 0, translation);
-                  if(currSpeed>=topSpeed)
+
+                if (currSpeed>=topSpeed)
                   {
                       accelerating = false;
                       currSpeed = topSpeed;
@@ -85,7 +93,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
           {
               accelerating = false; 
               decellerating = true;
-          }
+        }
 
 
 

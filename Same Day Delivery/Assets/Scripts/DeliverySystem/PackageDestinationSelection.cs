@@ -5,11 +5,11 @@ using UnityEngine;
 public class PackageDestinationSelection : MonoBehaviour
 {
 
-    public List<GameObject> neighborhoods;
-    public int mostRecentNeighborhood;
-    int chosenN; 
-    public float timeBetweenSelection; 
-    public float activeTime; 
+    public List<GameObject> neighborhoods;//List all of the nieghborhoods that the player may deliver a package to
+    public int mostRecentNeighborhood;//get the most recent one so the player doesn't go ot the same neighborhood back to back times
+    int chosenN; //the integer used to choose a neighborhood for delivery
+   // public float timeBetweenSelection;
+    //public float activeTime; 
     
     // Start is called before the first frame update
     void Start()
