@@ -23,7 +23,7 @@ public class PackageDestinationSelection : MonoBehaviour
         
     }
 
-    public void chooseNeighborhood()
+    public void chooseNeighborhood()//c
     {
         Debug.Log("choosing neighborhood");
         for (int i = 0; i < neighborhoods.Count; i++)
