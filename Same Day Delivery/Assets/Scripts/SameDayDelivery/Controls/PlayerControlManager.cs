@@ -10,10 +10,13 @@ public class PlayerControlManager : MonoBehaviour
     public InputEvent MoveEnd;
     public InputEvent SprintBegin;
     public InputEvent SprintEnd;
+    public InputEvent MountBegin;
+    public InputEvent MountEnd;
     
     public Vector2 move;
     public bool sprinting;
     public bool interacting;
+    public bool mounting;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -59,6 +62,22 @@ public class PlayerControlManager : MonoBehaviour
         {
             interacting = false;
             InteractEnd?.Invoke();
+        }
+    }
+
+    public void OnMount(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Mounting!");
+        if (context.performed)
+        {
+            mounting = true;
+            MountBegin?.Invoke();
+        }
+
+        if (context.canceled)
+        {
+            mounting = false;
+            MountEnd?.Invoke();
         }
     }
 }
