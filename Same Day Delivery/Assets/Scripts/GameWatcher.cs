@@ -9,6 +9,8 @@ public class GameWatcher : MonoBehaviour
 {
     public CarControls van;
     public PlayerControlManager playerControls;
+    public GameObject sheldonCam;
+    public GameObject vanCam;
     public float TimeLeft;
     public bool TimerOn = false;//bool to make sure timer does not go below 0
     public string currControls; 
@@ -24,6 +26,7 @@ public class GameWatcher : MonoBehaviour
         TimerOn = true;
         failNotif.SetActive(false);
         currControls = "Van";
+        sheldonCam.SetActive(false); 
         playerControls.enabled = false; 
 
     }
@@ -67,15 +70,19 @@ public class GameWatcher : MonoBehaviour
     {
         switch(currControls)
         {
-            case "Van": 
+            case "Van": //if the current controls are for the van switch them to the players
             
             van.enabled = false;
             playerControls.enabled = true;
+                vanCam.SetActive(false);
+                sheldonCam.SetActive(true); 
             currControls = "Player";
                 break;
-            case "Player":
+            case "Player": // if the current controls are for the player switch them to the van controls 
              playerControls.enabled = false;
                 van.enabled = true;
+                sheldonCam.SetActive(false);
+                vanCam.SetActive(true); 
                 currControls = "Van";
                 break;
             default:

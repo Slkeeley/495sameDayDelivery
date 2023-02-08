@@ -8,6 +8,7 @@ public class VanDoors : MonoBehaviour
     public bool playerInVan; 
     public GameObject player;
     public GameObject enterText;
+
     public GameWatcher gw; 
     
     public Transform playerExitPos;
