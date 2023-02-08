@@ -7,8 +7,11 @@ using TMPro;
 
 public class GameWatcher : MonoBehaviour
 {
+    public CarControls van;
+    public PlayerControlManager playerControls;
     public float TimeLeft;
     public bool TimerOn = false;//bool to make sure timer does not go below 0
+    public string currControls; 
 
     [Header("UI Elements")]
     public TMP_Text timerText; //how the timer is displayed
@@ -20,6 +23,9 @@ public class GameWatcher : MonoBehaviour
     {
         TimerOn = true;
         failNotif.SetActive(false);
+        currControls = "Van";
+        playerControls.enabled = false; 
+
     }
 
     // Update is called once per frame
@@ -55,5 +61,25 @@ public class GameWatcher : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         StopAllCoroutines(); //stop coroutines so that the faile screen isnt loaded multiple times. 
         SceneManager.LoadScene("TestFailScreen");
+    }
+
+    public void switchControls()
+    {
+        switch(currControls)
+        {
+            case "Van": 
+            
+            van.enabled = false;
+            playerControls.enabled = true;
+            currControls = "Player";
+                break;
+            case "Player":
+             playerControls.enabled = false;
+                van.enabled = true;
+                currControls = "Van";
+                break;
+            default:
+                break; 
+        }
     }
 }

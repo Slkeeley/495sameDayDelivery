@@ -8,8 +8,10 @@ public class VanDoors : MonoBehaviour
     public bool playerInVan; 
     public GameObject player;
     public GameObject enterText;
-    public Transform playerExitPos; 
-    // Start is called before the first frame update
+    public GameWatcher gw; 
+    
+    public Transform playerExitPos;
+
     void Start()
     {
         playerInVan = true;
@@ -65,14 +67,15 @@ public class VanDoors : MonoBehaviour
     {
         player.transform.position = playerExitPos.position;
         player.SetActive(true);
-        playerInVan = false; 
-        //also tell the game watcher script to 
+        playerInVan = false;
+        gw.switchControls(); 
     }
 
     void enterVan()
     {
         player.SetActive(false);
         enterText.SetActive(false);
+        gw.switchControls(); 
         StartCoroutine(exitDelay());
     }
 
@@ -81,4 +84,6 @@ public class VanDoors : MonoBehaviour
         yield return new WaitForSeconds(1);
         playerInVan = true; 
     }
+
+
 }
