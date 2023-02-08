@@ -12,6 +12,8 @@ public class PlayerControlManager : MonoBehaviour
     public InputEvent SprintEnd;
     public InputEvent MountBegin;
     public InputEvent MountEnd;
+    public InputEvent EscapeBegin;
+    public InputEvent EscapeEnd;
     
     public Vector2 move;
     public bool sprinting;
@@ -78,6 +80,20 @@ public class PlayerControlManager : MonoBehaviour
         {
             mounting = false;
             MountEnd?.Invoke();
+        }
+    }
+
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Escape!");
+        if (context.performed)
+        {
+            EscapeBegin?.Invoke();
+        }
+
+        if (context.canceled)
+        {
+            EscapeEnd?.Invoke();
         }
     }
 }
