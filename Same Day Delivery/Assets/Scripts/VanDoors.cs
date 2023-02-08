@@ -9,7 +9,7 @@ public class VanDoors : MonoBehaviour
     public GameObject player;
     public GameObject enterText;
 
-    public GameWatcher gw; 
+    public GameWatcher gw; //used to tell the game when to switch control schemes
     
     public Transform playerExitPos;
 
@@ -58,13 +58,13 @@ public class VanDoors : MonoBehaviour
         }
     }
 
-    void setPlayerObj()
+    void setPlayerObj()//setup the correct connection to the player obj so that we can reference it later
     {
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = playerExitPos.position;
         player.SetActive(false);
     }
-    void exitVan()
+    void exitVan()//upon exit teleport the player to the correct position and switch the controls
     {
         player.transform.position = playerExitPos.position;
         player.SetActive(true);
@@ -72,7 +72,7 @@ public class VanDoors : MonoBehaviour
         gw.switchControls(); 
     }
 
-    void enterVan()
+    void enterVan()//upon entering disable the player and then switch the controls to the van controls
     {
         player.SetActive(false);
         enterText.SetActive(false);
@@ -80,7 +80,7 @@ public class VanDoors : MonoBehaviour
         StartCoroutine(exitDelay());
     }
 
-    IEnumerator exitDelay()
+    IEnumerator exitDelay()//used to stop the player from flickering in and out of reality
     {
         yield return new WaitForSeconds(1);
         playerInVan = true; 
