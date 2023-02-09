@@ -15,7 +15,7 @@ public class VanDoors : MonoBehaviour
 
     void Start()
     {
-        playerInVan = true;
+        playerInVan = true; 
         enterText.SetActive(false); 
         setPlayerObj(); 
     }
