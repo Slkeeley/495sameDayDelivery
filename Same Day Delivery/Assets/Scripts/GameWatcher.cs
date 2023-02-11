@@ -71,7 +71,7 @@ public class GameWatcher : MonoBehaviour
         switch(currControls)
         {
             case "Van": //if the current controls are for the van switch them to the players
-            
+                van.chuteActivation(); 
             van.enabled = false;
             playerControls.enabled = true;
                 vanCam.SetActive(false);
@@ -81,6 +81,7 @@ public class GameWatcher : MonoBehaviour
             case "Player": // if the current controls are for the player switch them to the van controls 
              playerControls.enabled = false;
                 van.enabled = true;
+                van.chuteActivation(); 
                 sheldonCam.SetActive(false);
                 vanCam.SetActive(true); 
                 currControls = "Van";

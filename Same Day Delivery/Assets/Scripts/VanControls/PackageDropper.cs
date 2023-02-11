@@ -27,8 +27,12 @@ public class PackageDropper : MonoBehaviour
         if (other.tag == "Player") playerInRange = true; 
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player") playerInRange = false; 
+    }
     void spawnPackage()
     {
-
+        Instantiate(droppedPackage, packageSpawnPos.position, Quaternion.identity); 
     }
 }

@@ -21,10 +21,14 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     public bool forwards = false;
     public bool backwards = false;
     public float brakeForce;
+    public GameObject packageChute;
+    bool chuteActive;
 
     void Start()
     {
         accelerating = false;
+        chuteActive = false;
+        packageChute.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -156,6 +160,20 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
             forwards = false;
             backwards = true;
             StopCoroutine(decellerate());
+        }
+    }
+
+    public void chuteActivation()
+    {
+        if(!chuteActive)
+        {
+            chuteActive = true;
+            packageChute.SetActive(true); 
+        }
+        else
+        {
+            chuteActive = false;
+            packageChute.SetActive(false); 
         }
     }
     public IEnumerator decellerate()//for the car to continue to move forward once the player has let go of w
