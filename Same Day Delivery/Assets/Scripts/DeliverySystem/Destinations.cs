@@ -32,7 +32,8 @@ public class Destinations : MonoBehaviour
         {
             activeHouse = false;
             customerSatisfied = true; 
-            GameObject.FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood(); 
+            GameObject.FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood();
+            GameObject.FindObjectOfType<GameWatcher>().packageReceived(); 
         }
     }
 }
