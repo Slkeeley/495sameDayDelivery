@@ -10,4 +10,9 @@ public class SceneSelector : MonoBehaviour
         Debug.Log("clicked"); 
         SceneManager.LoadScene("UpgradeScreen"); 
     }
+
+    public void backToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
