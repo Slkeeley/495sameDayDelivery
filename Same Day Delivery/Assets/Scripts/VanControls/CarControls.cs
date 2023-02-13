@@ -8,6 +8,7 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     [Header("Van Speed")]
     public float topSpeed;//the fastest speed that the van can move 
     public float topReverseSpeed;//the fastest speed that the van can move 
+    public float overDriveSpeed; 
     public float currSpeed=0;//the current speed the van is moving
     public float rotationSpeed = 100.0f;
     [Header("Acceleration")]
@@ -20,15 +21,18 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
     [Header("Other Vars")]
     public bool forwards = false;
     public bool backwards = false;
+    public bool overDrive = false; 
     public float brakeForce;
     public GameObject packageChute;
     bool chuteActive;
 
     void Start()
     {
+        overDriveSpeed = topSpeed * 2; 
         accelerating = false;
         chuteActive = false;
         packageChute.SetActive(false); 
+
     }
 
     // Update is called once per frame
@@ -41,6 +45,13 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
             if(backwards) StartCoroutine(decellerateBackwards());
 
         }
+        if(!overDrive)
+        {
+            if (currSpeed > topSpeed)
+            {
+                currSpeed -= decellerationSpeed;
+            }
+         }
     }
 
 
@@ -133,21 +144,20 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
             accelerating = false;
             decellerating = true;
         }
-    }
-  
 
-    /*
-    void checkForBrakes()//check if the plaeyr presses spacebar to forcefully slow the car down
-    {
-        if (Input.GetKey(KeyCode.Space))
+
+        if(Input.GetKey(KeyCode.LeftShift))
         {
-            if (currSpeed > 0)
-            {
-                currSpeed = currSpeed - 0.03f;
-            }
+            shiftGears(); 
         }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            overDrive = false;
+            topSpeed = overDriveSpeed / 2;
+        }
+    }
 
-    }*/
+    
     void applyBrakes()//if the player is moving forward and presses S apply the brakes firs
     {
             if (currSpeed > 0)
@@ -163,7 +173,14 @@ public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE
         }
     }
 
-    public void chuteActivation()
+    void shiftGears()// if the player is holding shift, the van's top speed increases
+    {
+        overDrive = true;
+        topSpeed = overDriveSpeed; 
+    }
+    
+    
+    public void chuteActivation()//If the player is within the correct area to drop the packages turn the shoot on if they leave turn int off. 
     {
         if(!chuteActive)
         {
