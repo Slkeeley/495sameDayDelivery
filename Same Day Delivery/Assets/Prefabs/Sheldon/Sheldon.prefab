@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
+  sprinting: 0
+  interacting: 0
 --- !u!143 &88318539035009682
 CharacterController:
   m_ObjectHideFlags: 0
@@ -459,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5639499080066218938}
   m_Layer: 0
-  m_Name: CameraTarget
+  m_Name: SheldonCameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
