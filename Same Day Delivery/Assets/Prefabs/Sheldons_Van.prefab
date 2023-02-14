@@ -6378,6 +6378,7 @@ GameObject:
   - component: {fileID: 5341395504486211113}
   - component: {fileID: 7909593770961939171}
   - component: {fileID: 955080730519832791}
+  - component: {fileID: 8805337427528424381}
   m_Layer: 0
   m_Name: Sheldons_Van
   m_TagString: Untagged
@@ -6468,6 +6469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topSpeed: 50
   topReverseSpeed: 15
+  overDriveSpeed: 0
   currSpeed: 0
   rotationSpeed: 100
   accelerationSpeed: 0.05
@@ -6477,8 +6479,22 @@ MonoBehaviour:
   decellerating: 0
   forwards: 0
   backwards: 0
+  overDrive: 0
   brakeForce: 0.03
   packageChute: {fileID: 8601662442590763047}
+--- !u!65 &8805337427528424381
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8558099128544627510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 307.28436, y: 343.68048, z: 652.1709}
+  m_Center: {x: 0, y: 206.81271, z: 44.54086}
 --- !u!1 &8601662442590763047
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,19 +7,24 @@ using TMPro;
 
 public class GameWatcher : MonoBehaviour
 {
+    [Header("References")]
     public CarControls van;
     public PlayerControlManager playerControls;
     public GameObject sheldonCam;
     public GameObject vanCam;
-    public float TimeLeft;
+
+    [Header("Gameplay")]
+    public static float currScore;
+    public float TimeLeft; 
     public bool TimerOn = false;//bool to make sure timer does not go below 0
     public string currControls;
-
-    public int packagesDelivered;
-    public int packagesNeeded; 
+    public static int packagesDelivered;
+    public int packagesNeeded;
+    public float timeSinceLastDelivery;
 
     [Header("UI Elements")]
     public TMP_Text timerText; //how the timer is displayed
+    public TMP_Text scoreText;  //how the timer is displayed
     public GameObject failNotif;//appears when the player failes
     public GameObject successNotif;//appears when the player passes
     bool levelFailed; //used to tell if player failed a level 
@@ -32,7 +37,9 @@ public class GameWatcher : MonoBehaviour
         successNotif.SetActive(false);
         currControls = "Van";
         sheldonCam.SetActive(false); 
-        playerControls.enabled = false; 
+        playerControls.enabled = false;
+        currScore = 0;
+        packagesDelivered = 0; 
 
     }
 
@@ -43,7 +50,7 @@ public class GameWatcher : MonoBehaviour
         {
             TimerOn = true; 
             TimeLeft -= Time.deltaTime;
-            updaterTimer(TimeLeft);
+            updaterUI(TimeLeft);
         }
         else
         {
@@ -58,15 +65,18 @@ public class GameWatcher : MonoBehaviour
         {
             StartCoroutine(levelComplete()); 
         }
+
+        timeSinceLastDelivery += Time.deltaTime;
     }
 
-    void updaterTimer(float currentTime)//used to update the timer text on screen to accurately reflect how much time is left 
+    void updaterUI(float currentTime)//used to update the timer text on screen to accurately reflect how much time is left 
     {
         currentTime += 1;
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
         timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+        scoreText.text = "Score:" + currScore.ToString(); 
     }
 
     IEnumerator ggGoNext()//Coroutine to delay loading the next so that the player can process that they failed/
@@ -90,7 +100,8 @@ public class GameWatcher : MonoBehaviour
         switch(currControls)
         {
             case "Van": //if the current controls are for the van switch them to the players
-                van.chuteActivation(); 
+                van.chuteActivation();
+                van.currSpeed = 0; 
             van.enabled = false;
             playerControls.enabled = true;
                 vanCam.SetActive(false);
@@ -112,6 +123,24 @@ public class GameWatcher : MonoBehaviour
 
     public void packageReceived()
     {
-        packagesDelivered++; 
+        packagesDelivered++;
+        if(timeSinceLastDelivery <=20)//speedy delivery bonus
+        {
+            Debug.Log("SPEEDY DELIVERY!"); 
+            currScore = currScore + 150;
+        }
+        else if (timeSinceLastDelivery>= 60)//slow delivery penalty
+        {
+            Debug.Log("SLOW DELIVERY");
+            currScore = currScore + 75; 
+        }
+        else
+        {
+            Debug.Log("Standard Delivery");
+            currScore = currScore + 100; 
+        }
+
+        timeSinceLastDelivery = 0; 
     }
+
 }

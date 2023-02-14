@@ -25,13 +25,11 @@ public class PackageDestinationSelection : MonoBehaviour
 
     public void chooseNeighborhood()//c
     {
-        Debug.Log("choosing neighborhood");
         for (int i = 0; i < neighborhoods.Count; i++)
         {
              chosenN = Random.Range(0, neighborhoods.Count);
             if(chosenN!=mostRecentNeighborhood)
             {
-                Debug.Log("chosen neighborhood is " + chosenN);
                 mostRecentNeighborhood = chosenN;
                 break;
             }            
