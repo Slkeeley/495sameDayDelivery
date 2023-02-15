@@ -32,7 +32,7 @@ public class PlayerControlManager : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        Debug.Log($"Sprinting!");
+        // Debug.Log($"Sprinting!");
         if (context.performed)
         {
             sprinting = true;
@@ -48,7 +48,7 @@ public class PlayerControlManager : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log($"Interacting!");
+        // Debug.Log($"Interacting!");
         if (context.performed)
         {
             interacting = true;

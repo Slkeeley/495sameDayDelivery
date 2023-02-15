@@ -20,12 +20,14 @@ namespace SameDayDelivery.PackageSystem
             _rigidbody.useGravity = false;
         }
 
-        public void Drop()
+        public void Drop(Vector3 direction, float power = 1f)
         {
             Debug.Log($"Dropped up {gameObject.name}");
             _rigidbody.isKinematic = false;
             _rigidbody.detectCollisions = true;
             _rigidbody.useGravity = true;
+            
+            _rigidbody.AddForce(direction * power, ForceMode.Impulse);
         }
     }
 }
