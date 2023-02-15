@@ -20,9 +20,9 @@ namespace SameDayDelivery.PackageSystem
             _rigidbody.useGravity = false;
         }
 
-        public void Drop(Vector3 direction, float power = 1f)
+        public void Throw(Vector3 direction, float power = 1f)
         {
-            Debug.Log($"Dropped up {gameObject.name}");
+            Debug.Log($"Throw {gameObject.name}");
             _rigidbody.isKinematic = false;
             _rigidbody.detectCollisions = true;
             _rigidbody.useGravity = true;
