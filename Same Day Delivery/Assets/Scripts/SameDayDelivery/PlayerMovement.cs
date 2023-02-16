@@ -1,3 +1,4 @@
+using SameDayDelivery.Controls;
 using UnityEngine;
 
 namespace SameDayDelivery
@@ -47,8 +48,9 @@ namespace SameDayDelivery
 
             var speed = (_playerControlManager.sprinting) ? runSpeed : walkSpeed;
 
-            var forward = _cam.transform.forward;
-            var right = _cam.transform.right;
+            var transform1 = _cam.transform;
+            var forward = transform1.forward;
+            var right = transform1.right;
 
             forward.y = 0f;
             right.y = 0f;

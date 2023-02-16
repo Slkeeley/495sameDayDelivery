@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,7 +97,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonUp()
         {
-            Debug.Log($"Button up!");
             _buttonDown = false;
             if (!carryingPackage) return;
             if (_justPickedUp)
@@ -112,7 +112,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonDown()
         {
-            Debug.Log($"Button down!");
             if (carryingPackage)
             {
                 _buttonDown = true;
@@ -128,7 +127,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ThrowPackage()
         {
-            Debug.Log($"Throwing package!");
             Transform localTransform;
             (localTransform = carryingPackage.transform).SetParent(packagesParent);
             localTransform.position = packageMount.position;
@@ -162,7 +160,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void PickupPackage()
         {
-            
             if (_availablePackages.Count <= 0) return;
 
             var targetPackage = _availablePackages[0];

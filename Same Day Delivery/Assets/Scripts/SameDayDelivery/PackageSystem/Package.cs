@@ -14,7 +14,6 @@ namespace SameDayDelivery.PackageSystem
 
         public void Pickup()
         {
-            Debug.Log($"Picked up {gameObject.name}");
             _rigidbody.isKinematic = true;
             _rigidbody.detectCollisions = false;
             _rigidbody.useGravity = false;
@@ -22,7 +21,6 @@ namespace SameDayDelivery.PackageSystem
 
         public void Throw(Vector3 direction, float power = 1f)
         {
-            Debug.Log($"Throw {gameObject.name}");
             _rigidbody.isKinematic = false;
             _rigidbody.detectCollisions = true;
             _rigidbody.useGravity = true;

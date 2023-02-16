@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -7,41 +6,41 @@ public class PauseMenu : MonoBehaviour
 
     //  private float fixedDeltaTime;
     public GameObject pauseMenu;
+
+    private const float Tolerance = 0.01f;
+
     // Start is called before the first frame update
     void Start()
     {
-        //       fixedDeltaTime = Time.fixedDeltaTime;
+        // fixedDeltaTime = Time.fixedDeltaTime;
         pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Time scale is :" + Time.timeScale);
-     if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 1.0f)
+            if (Math.Abs(Time.timeScale - 1.0f) < Tolerance)
             {
-                pauseGame(); 
+                PauseGame(); 
             }
             else
             {
-                resumeGame();  
+                ResumeGame();  
             }
         }
     }
 
-    void pauseGame()
+    public void PauseGame()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0.0f; 
     }
 
-   public void resumeGame()
+   public void ResumeGame()
     {
        pauseMenu.SetActive(false);
         Time.timeScale = 1.0f; 
     }
-
-
 }

@@ -1,64 +1,67 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerControlManager : MonoBehaviour
+namespace SameDayDelivery.Controls
 {
-    public delegate void InputEvent();
-    public InputEvent InteractBegin;
-    public InputEvent InteractEnd;
-    public InputEvent MoveBegin;
-    public InputEvent MoveEnd;
-    public InputEvent SprintBegin;
-    public InputEvent SprintEnd;
+    public class PlayerControlManager : MonoBehaviour
+    {
+        public delegate void InputEvent();
+        public InputEvent InteractBegin;
+        public InputEvent InteractEnd;
+        public InputEvent MoveBegin;
+        public InputEvent MoveEnd;
+        public InputEvent SprintBegin;
+        public InputEvent SprintEnd;
     
-    public Vector2 move;
-    public bool sprinting;
-    public bool interacting;
+        public Vector2 move;
+        public bool sprinting;
+        public bool interacting;
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (context.performed)
+        public void OnMove(InputAction.CallbackContext context)
         {
-            move = context.ReadValue<Vector2>();
-            MoveBegin?.Invoke();
+            if (context.performed)
+            {
+                move = context.ReadValue<Vector2>();
+                MoveBegin?.Invoke();
+            }
+
+            if (context.canceled)
+            {
+                move = Vector2.zero;
+                MoveEnd?.Invoke();
+            }
         }
 
-        if (context.canceled)
+        public void OnSprint(InputAction.CallbackContext context)
         {
-            move = Vector2.zero;
-            MoveEnd?.Invoke();
-        }
-    }
+            // Debug.Log($"Sprinting!");
+            if (context.performed)
+            {
+                sprinting = true;
+                SprintBegin?.Invoke();
+            }
 
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        // Debug.Log($"Sprinting!");
-        if (context.performed)
-        {
-            sprinting = true;
-            SprintBegin?.Invoke();
-        }
-
-        if (context.canceled)
-        {
-            sprinting = false;
-            SprintEnd?.Invoke();
-        }
-    }
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        // Debug.Log($"Interacting!");
-        if (context.performed)
-        {
-            interacting = true;
-            InteractBegin?.Invoke();
+            if (context.canceled)
+            {
+                sprinting = false;
+                SprintEnd?.Invoke();
+            }
         }
 
-        if (context.canceled)
+        public void OnInteract(InputAction.CallbackContext context)
         {
-            interacting = false;
-            InteractEnd?.Invoke();
+            // Debug.Log($"Interacting!");
+            if (context.performed)
+            {
+                interacting = true;
+                InteractBegin?.Invoke();
+            }
+
+            if (context.canceled)
+            {
+                interacting = false;
+                InteractEnd?.Invoke();
+            }
         }
     }
 }
