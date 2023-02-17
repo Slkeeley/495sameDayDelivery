@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneSelector : MonoBehaviour
 {
+
+
+
     public void toUpgradeScreen()
     {
         Debug.Log("clicked"); 
@@ -14,5 +17,12 @@ public class SceneSelector : MonoBehaviour
     public void backToMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void loadCity()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("TestCity");
     }
 }

@@ -22,10 +22,12 @@ public class GameWatcher : MonoBehaviour
     public static int packagesDelivered;
     public int packagesNeeded;
     public float timeSinceLastDelivery;
+    public static int currLevel; 
 
     [Header("UI Elements")]
     public TMP_Text timerText; //how the timer is displayed
-    public TMP_Text scoreText;  //how the timer is displayed
+    public TMP_Text scoreText;  //how the score is displayed
+    public TMP_Text levelText;  //how the current day is displayed
     public GameObject failNotif;//appears when the player failes
     public GameObject successNotif;//appears when the player passes
     bool levelFailed; //used to tell if player failed a level 
@@ -33,14 +35,8 @@ public class GameWatcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TimerOn = true;
-        failNotif.SetActive(false);
-        successNotif.SetActive(false);
-        currControls = "Van";
-        sheldonCam.SetActive(false); 
-        playerControls.enabled = false;
-        currScore = 0;
-        packagesDelivered = 0; 
+        levelSetup(); 
+        //setLevelMap(int correctLevel); 
 
     }
 
@@ -70,6 +66,19 @@ public class GameWatcher : MonoBehaviour
         timeSinceLastDelivery += Time.deltaTime;
     }
 
+    void levelSetup()//resetting values to their correct states upon starting the scene. 
+    {
+        TimerOn = true;//begin the timer 
+        failNotif.SetActive(false);//make sure that the player cannot see the pass or fail notifications 
+        successNotif.SetActive(false);
+        sheldonCam.SetActive(false);//turn off the sheldon cam so that the camera correctly starts with the van        
+        currControls = "Van";//set the control scheme to the van 
+        playerControls.enabled = false;//disable the player controls so that the player can only use the van controls on starts
+        currScore = 0;//reset the current score to 0 
+        packagesDelivered = 0;//reset the packages delivered to 0 
+        levelText.text = "Day: " + currLevel.ToString();
+    }
+
     void updaterUI(float currentTime)//used to update the timer text on screen to accurately reflect how much time is left 
     {
         currentTime += 1;
@@ -92,22 +101,23 @@ public class GameWatcher : MonoBehaviour
         TimerOn = false;
         successNotif.SetActive(true);
         yield return new WaitForSeconds(2);
-        StopAllCoroutines(); 
+        StopAllCoroutines();
+        currLevel++; 
         SceneManager.LoadScene("PassScreen"); 
     }
 
-    public void switchControls()
+    public void switchControls()//handle the control scheme switching here
     {
         switch(currControls)
         {
             case "Van": //if the current controls are for the van switch them to the players
                 van.chuteActivation();
                 van.currSpeed = 0; 
-            van.enabled = false;
-            playerControls.enabled = true;
+                van.enabled = false;
+                playerControls.enabled = true;
                 vanCam.SetActive(false);
                 sheldonCam.SetActive(true); 
-            currControls = "Player";
+                currControls = "Player";
                 break;
             case "Player": // if the current controls are for the player switch them to the van controls 
              playerControls.enabled = false;
@@ -122,7 +132,7 @@ public class GameWatcher : MonoBehaviour
         }
     }
 
-    public void packageReceived()
+    public void packageReceived()//if a package was received the player's score will be updated and saved here
     {
         packagesDelivered++;
         if(timeSinceLastDelivery <=20)//speedy delivery bonus
@@ -141,7 +151,7 @@ public class GameWatcher : MonoBehaviour
             currScore = currScore + 100; 
         }
 
-        timeSinceLastDelivery = 0; 
+        timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
     }
 
 }
