@@ -31,13 +31,14 @@ namespace SameDayDelivery.PackageSystem
         private bool _growPlaying;
         private static readonly int GrowParam = Animator.StringToHash("Grow");
         private static readonly int LockParam = Animator.StringToHash("Lock");
-        private bool _growPlayed;
+        private Vector3 _reticleOriginalScale;
 
         private void Awake()
         {
             _playerControls = GetComponent<PlayerControlManager>();
             _throwReticle.SetActive(false);
             _throwReticleImage = _throwReticle.GetComponent<Image>();
+            _reticleOriginalScale = _throwReticle.transform.localScale;
         }
 
         private void OnEnable()
@@ -60,6 +61,7 @@ namespace SameDayDelivery.PackageSystem
                 _fullChargeAnimator.SetBool(GrowParam, false);
                 _growPlaying = false;
             }
+            
             if (!_buttonDown) return;
             if (!carryingPackage) return;
 
@@ -73,7 +75,7 @@ namespace SameDayDelivery.PackageSystem
             CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
             
             // change scale
-            _throwReticle.transform.localScale = Vector3.one * percentCharge;
+            _throwReticle.transform.localScale = _reticleOriginalScale * percentCharge;
             
             // change color
             percentCharge = (percentCharge < 1f) ? 0f : 1f; 
