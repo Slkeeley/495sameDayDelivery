@@ -9,7 +9,7 @@ public class Neighborhood : MonoBehaviour
 
     void Update()
     {
-        
+        /////
     }
 
     public void chooseDeliveryDestination()//randomly select one house in this neighborhood to deliver a package to. 
