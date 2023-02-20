@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SameDayDelivery.UI
 {
@@ -18,19 +19,17 @@ namespace SameDayDelivery.UI
             pauseMenu.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
+        public void CheckPauseGame(InputAction.CallbackContext context)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!context.performed) return;
+            
+            if (Math.Abs(Time.timeScale - 1.0f) < Tolerance)
             {
-                if (Math.Abs(Time.timeScale - 1.0f) < Tolerance)
-                {
-                    PauseGame();
-                }
-                else
-                {
-                    ResumeGame();
-                }
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
             }
         }
 

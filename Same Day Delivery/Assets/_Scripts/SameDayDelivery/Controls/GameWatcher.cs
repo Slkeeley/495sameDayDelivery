@@ -4,23 +4,19 @@ using SameDayDelivery.VanControls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace SameDayDelivery.Controls
 {
     public class GameWatcher : MonoBehaviour
     {
-        [FormerlySerializedAs("van")]
         [Header("References")]
         public CarControls carControls;
-
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
         public GameObject vanCam;
 
         [Header("Gameplay")]
         public static float currentScore;
-
         public float TimeLeft;
         public bool TimerOn; //bool to make sure timer does not go below 0
         public string currControls;
@@ -31,7 +27,6 @@ namespace SameDayDelivery.Controls
 
         [Header("UI Elements")]
         public TMP_Text timerText; //how the timer is displayed
-
         public TMP_Text scoreText; //how the score is displayed
         public TMP_Text levelText; //how the current day is displayed
         public GameObject failNotification; //appears when the player fails
@@ -74,43 +69,12 @@ namespace SameDayDelivery.Controls
             TimerOn = true; //begin the timer 
             failNotification.SetActive(false); //make sure that the player cannot see the pass or fail notifications 
             successNotification.SetActive(false);
-            sheldonCam.SetActive(false); //turn off the sheldon cam so that the camera correctly starts with the van
+            sheldonCam.SetActive(true); //turn on the sheldon cam so that the camera correctly starts with the sheldon
             currentScore = 0; //reset the current score to 0 
             packagesDelivered = 0; //reset the packages delivered to 0 
             levelText.text = "Day: " + currLevel;
 
             SwitchControlsToPlayer();
-        }
-
-        private void
-            UpdaterUI(float currentTime) //used to update the timer text on screen to accurately reflect how much time is left 
-        {
-            currentTime += 1;
-            var minutes = Mathf.FloorToInt(currentTime / 60).ToString();
-            var seconds = Mathf.FloorToInt(currentTime % 60).ToString();
-            var score = currentScore.ToString(CultureInfo.CurrentCulture);
-
-            timerText.text = $"{minutes:00} : {seconds:00}";
-            scoreText.text = $"Score: {score}";
-        }
-
-        private IEnumerator
-            GgGoNext() //Coroutine to delay loading the next so that the player can process that they failed/
-        {
-            yield return new WaitForSeconds(2.0f);
-            StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
-            SceneManager.LoadScene("FailScreen");
-        }
-
-        private IEnumerator
-            LevelComplete() //delay loading the success screen so that players can process that they passed
-        {
-            TimerOn = false;
-            successNotification.SetActive(true);
-            yield return new WaitForSeconds(2);
-            StopAllCoroutines();
-            currLevel++;
-            SceneManager.LoadScene("PassScreen");
         }
 
         public void SwitchControls() //handle the control scheme switching here
@@ -145,6 +109,35 @@ namespace SameDayDelivery.Controls
             vanCam.SetActive(false);
             sheldonCam.SetActive(true);
             currControls = "Player";
+        }
+
+        private void UpdaterUI(float currentTime) //used to update the timer text on screen to accurately reflect how much time is left 
+        {
+            currentTime += 1;
+            var minutes = Mathf.FloorToInt(currentTime / 60).ToString();
+            var seconds = Mathf.FloorToInt(currentTime % 60).ToString();
+            var score = currentScore.ToString(CultureInfo.CurrentCulture);
+
+            timerText.text = $"{minutes:00} : {seconds:00}";
+            scoreText.text = $"Score: {score}";
+        }
+
+        private IEnumerator GgGoNext() //Coroutine to delay loading the next so that the player can process that they failed/
+        {
+            yield return new WaitForSeconds(2.0f);
+            StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
+            SceneManager.LoadScene("FailScreen");
+        }
+
+        private IEnumerator
+            LevelComplete() //delay loading the success screen so that players can process that they passed
+        {
+            TimerOn = false;
+            successNotification.SetActive(true);
+            yield return new WaitForSeconds(2);
+            StopAllCoroutines();
+            currLevel++;
+            SceneManager.LoadScene("PassScreen");
         }
 
         public void PackageReceived() //if a package was received the player's score will be updated and saved here

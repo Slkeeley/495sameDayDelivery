@@ -8,7 +8,6 @@ namespace SameDayDelivery.VanControls
     {
         [Header("Van Speed")]
         public float topSpeed; //the fastest speed that the van can move 
-
         public float topReverseSpeed; //the fastest speed that the van can move 
         public float overDriveSpeed;
         public float currSpeed; //the current speed the van is moving
@@ -16,7 +15,6 @@ namespace SameDayDelivery.VanControls
 
         [Header("Acceleration")]
         public float accelerationSpeed; //the speed at which the car accelerates
-
         public float reverseAccelerationSpeed; //the speed at which the car accelerates
         public float decelerationSpeed; //the speed at which the car decellerates
         public bool accelerating; //check if the van's speed is increasing 
@@ -24,7 +22,6 @@ namespace SameDayDelivery.VanControls
 
         [Header("Other Vars")]
         public bool forwards;
-
         public bool backwards;
         public bool overDrive;
         public float brakeForce;

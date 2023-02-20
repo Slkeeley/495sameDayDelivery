@@ -1,6 +1,7 @@
 using System.Collections;
 using SameDayDelivery.Controls;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SameDayDelivery.VanControls
 {
@@ -15,40 +16,62 @@ namespace SameDayDelivery.VanControls
 
         public Transform playerExitPos;
 
-        void Start()
+        private void Start()
         {
-            playerInVan = true;
+            playerInVan = false;
             enterText.SetActive(false);
             SetPlayerObj();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void CheckEnterExitVan(InputAction.CallbackContext context)
         {
-            if (nearDoors && !playerInVan) enterText.SetActive(true);
-            else enterText.SetActive(false);
-
-            if (!Input.GetKeyDown(KeyCode.F)) return;
-
-            if (playerInVan) ExitVan();
-            else if (nearDoors) EnterVan();
+            if (!context.performed) return;
+            
+            if (playerInVan)
+            {
+                ExitVan();
+            }
+            else if (nearDoors)
+            {
+                EnterVan();
+            }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
+            {
                 nearDoors = true;
+                UpdateEnterText();
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
+            {
                 nearDoors = false;
+                UpdateEnterText();
+            }
+        }
+
+        private void UpdateEnterText()
+        {
+            if (nearDoors && !playerInVan)
+            {
+                enterText.SetActive(true);
+            }
+            else
+            {
+                enterText.SetActive(false);
+            }
         }
 
         private void SetPlayerObj() //setup the correct connection to the player obj so that we can reference it later
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            if (!player)
+                player = GameObject.FindGameObjectWithTag("Player");
+            
             player.transform.position = playerExitPos.position;
         }
 
@@ -65,6 +88,7 @@ namespace SameDayDelivery.VanControls
             player.SetActive(false);
             enterText.SetActive(false);
             gameWatcher.SwitchControls();
+            playerInVan = false;
             StartCoroutine(ExitDelay());
         }
 
