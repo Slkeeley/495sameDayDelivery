@@ -3,6 +3,13 @@ using UnityEngine.InputSystem;
 
 namespace SameDayDelivery.Controls
 {
+    public enum ButtonState
+    {
+        None,
+        Down,
+        Up,
+    }
+    
     public class PlayerControlManager : MonoBehaviour
     {
         public delegate void InputEvent();
