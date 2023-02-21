@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -9,12 +10,21 @@ namespace SameDayDelivery.Controls
         [Tooltip("Run speed in meters (when activated by player. Unconfirmed feature)")]
         public float runSpeed = 12f;
 
+        [Header("Technical")]
+        [Tooltip("Which layer is considered the 'ground' layer. [Not working]")]
+        public LayerMask groundLayer;
+        [Tooltip("How long between ground checks in seconds. [Not working]")]
+        public float groundCheckInterval = 0.25f;
+        public float yOffset = 0.2f;
+
         [SerializeField]
         private Camera _cam;
         
         private CharacterController _characterController;
         private Rigidbody _rigidBody;
         private PlayerControlManager _playerControlManager;
+        private Ray _ray;
+        private RaycastHit _hit;
 
         private void Awake()
         {
@@ -28,11 +38,25 @@ namespace SameDayDelivery.Controls
         private void OnEnable()
         {
             _playerControlManager.MoveBegin += Movement;
+            // StartCoroutine(UpdateVerticalPosition());
         }
 
         private void OnDisable()
         {
             _playerControlManager.MoveBegin -= Movement;
+            StopCoroutine(UpdateVerticalPosition());
+        }
+
+        private IEnumerator UpdateVerticalPosition()
+        {
+            while (true)
+            {
+                // GroundCharacter();
+                var pos = transform.position;
+                pos.y = 0.15f;
+                transform.position = pos;
+                yield return new WaitForSeconds(groundCheckInterval);
+            }
         }
 
         private void Update()
@@ -69,6 +93,26 @@ namespace SameDayDelivery.Controls
 
             // "rotates" character to always face in direction of camera. We may want to slerp this in the future.
             transform.forward = forward;
+            
+            // emergency ground sticking logic (it's terrible replace it with something that actually works)
+            var pos = transform.position;
+            pos.y = yOffset;
+            transform.position = pos;
+        }
+
+        private void GroundCharacter()
+        {
+            var transform1 = transform;
+            _ray = new Ray();
+            _ray.origin = transform1.position;
+            _ray.direction = Vector3.down;
+
+            if (Physics.Raycast(_ray, out _hit, 100f, groundLayer))
+            {
+                var pos = transform1.position;
+                pos.y = _hit.point.y;
+                transform.position = pos;
+            }
         }
     }
 }

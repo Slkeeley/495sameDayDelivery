@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using SameDayDelivery.Controls;
 using SameDayDelivery.Utility;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SameDayDelivery.PackageSystem
@@ -27,6 +28,8 @@ namespace SameDayDelivery.PackageSystem
         private bool _buttonDown;
         [SerializeField]
         private float _throwCharge;
+        [SerializeField]
+        private UnityEvent onPackageThrow;
         private bool _justPickedUp;
         private Image _throwReticleImage;
         private bool _growPlaying;
@@ -146,6 +149,8 @@ namespace SameDayDelivery.PackageSystem
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
             carryingPackage.Throw(forward, power);
+            
+            onPackageThrow?.Invoke();
             
             carryingPackage = null;
             _justPickedUp = false;
