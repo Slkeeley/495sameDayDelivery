@@ -23,7 +23,7 @@ namespace SameDayDelivery.Utility
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            SceneManager.LoadScene("TestCity");
+            SceneManager.LoadScene("SamTest_NEW");
         }
     }
 }

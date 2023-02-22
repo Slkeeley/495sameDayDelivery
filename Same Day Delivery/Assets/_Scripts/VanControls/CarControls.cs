@@ -7,7 +7,7 @@ namespace SameDayDelivery.VanControls
     public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
     {
         [Header("Van Speed")]
-        public float topSpeed; //the fastest speed that the van can move 
+        public static float topSpeed=25f; //the fastest speed that the van can move 
         public float topReverseSpeed; //the fastest speed that the van can move 
         public float overDriveSpeed;
         public float currSpeed; //the current speed the van is moving
@@ -95,6 +95,7 @@ namespace SameDayDelivery.VanControls
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
+            Debug.Log("The Van's Top Speed is: " + topSpeed);
         }
 
         // Update is called once per frame

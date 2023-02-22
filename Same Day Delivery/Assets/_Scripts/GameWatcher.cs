@@ -16,7 +16,7 @@ namespace SameDayDelivery.Controls
         public GameObject vanCam;
 
         [Header("Gameplay")]
-        public static float currentScore;
+        public static int currentScore;
         public float TimeLeft;
         public bool TimerOn; //bool to make sure timer does not go below 0
         public string currControls;
@@ -24,6 +24,7 @@ namespace SameDayDelivery.Controls
         public int packagesNeeded;
         public float timeSinceLastDelivery;
         public static int currLevel;
+        public static int zergCoinsGained;//How much currency the player currently has 
 
         [Header("UI Elements")]
         public TMP_Text timerText; //how the timer is displayed
@@ -70,8 +71,9 @@ namespace SameDayDelivery.Controls
             failNotification.SetActive(false); //make sure that the player cannot see the pass or fail notifications 
             successNotification.SetActive(false);
             sheldonCam.SetActive(true); //turn on the sheldon cam so that the camera correctly starts with the sheldon
-            currentScore = 0; //reset the current score to 0 
+            currentScore = 2500; //reset the current score to 0 
             packagesDelivered = 0; //reset the packages delivered to 0 
+            zergCoinsGained = 0; 
             levelText.text = "Day: " + currLevel;
 
             SwitchControlsToPlayer();
@@ -126,6 +128,8 @@ namespace SameDayDelivery.Controls
         {
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
+            zergCoinsGained = currentScore / 50;
+            UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             SceneManager.LoadScene("FailScreen");
         }
 
@@ -136,6 +140,8 @@ namespace SameDayDelivery.Controls
             successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
+            zergCoinsGained = currentScore / 50;
+            UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             currLevel++;
             SceneManager.LoadScene("PassScreen");
         }
@@ -159,8 +165,7 @@ namespace SameDayDelivery.Controls
                 currentScore = currentScore + 100;
             }
 
-            timeSinceLastDelivery =
-                0; //make sure to reset time since delivery so that the player may get delivery bonuses 
+            timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
         }
     }
 }

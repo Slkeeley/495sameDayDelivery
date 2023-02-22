@@ -10,11 +10,14 @@ namespace SameDayDelivery.UI
 
         public TMP_Text packagesDelivered;
 
+        public TMP_Text coinsEarned; 
+
         // Start is called before the first frame update
         void Start()
         {
             mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
             packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
+            coinsEarned.text = "Zerg Coins Gained: " + GameWatcher.zergCoinsGained.ToString();
             //put zBucks here
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
