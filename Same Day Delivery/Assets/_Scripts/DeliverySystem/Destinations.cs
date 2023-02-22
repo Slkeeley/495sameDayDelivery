@@ -1,39 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 
-public class Destinations : MonoBehaviour
+namespace SameDayDelivery.DeliverySystem
 {
-    public GameObject destinationLight;//used to visually indicate if this house needs a package delivered
-    public bool activeHouse;
-    public bool packageDelivered;
-    public bool customerSatisfied = false;
-
-
-    void Start()//set the bools and visual feedback to default values before the player begins their day
+    public class Destinations : MonoBehaviour
     {
-        destinationLight.SetActive(false);
-        activeHouse = false;
-        packageDelivered = false; 
-    }
+        public GameObject destinationLight; //used to visually indicate if this house needs a package delivered
+        public bool activeHouse;
+        public bool packageDelivered;
+        public bool customerSatisfied = false;
 
-    void Update()
-    {
-        if(activeHouse)//turn on the delivery beacon if this is the house that needs a package
-        {
-            destinationLight.SetActive(true);
-        }
-        else
-        {
-            destinationLight.SetActive(false); 
-        }
 
-        if(packageDelivered&&!customerSatisfied)//need two booleans so choosing neighborhood does not get called multiple times
+        void Start() //set the bools and visual feedback to default values before the player begins their day
         {
+            destinationLight.SetActive(false);
             activeHouse = false;
-            customerSatisfied = true; 
-            GameObject.FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood();
-            GameObject.FindObjectOfType<GameWatcher>().packageReceived(); 
+            packageDelivered = false;
+        }
+
+        void Update()
+        {
+            if (activeHouse) //turn on the delivery beacon if this is the house that needs a package
+            {
+                destinationLight.SetActive(true);
+            }
+            else
+            {
+                destinationLight.SetActive(false);
+            }
+
+            if (packageDelivered &&
+                !customerSatisfied) //need two booleans so choosing neighborhood does not get called multiple times
+            {
+                activeHouse = false;
+                customerSatisfied = true;
+                FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood();
+                FindObjectOfType<GameWatcher>().PackageReceived();
+            }
         }
     }
+
 }

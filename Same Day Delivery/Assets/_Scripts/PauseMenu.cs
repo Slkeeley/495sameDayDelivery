@@ -1,50 +1,52 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PauseMenu : MonoBehaviour
+namespace SameDayDelivery.UI
 {
-
-    //  private float fixedDeltaTime;
-    public GameObject pauseMenu;
-
-    private const float Tolerance = 0.01f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PauseMenu : MonoBehaviour
     {
-        // fixedDeltaTime = Time.fixedDeltaTime;
-        pauseMenu.SetActive(false);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //  private float fixedDeltaTime;
+        public GameObject pauseMenu;
+
+        private const float Tolerance = 0.01f;
+
+        // Start is called before the first frame update
+        void Start()
         {
+            // fixedDeltaTime = Time.fixedDeltaTime;
+            pauseMenu.SetActive(false);
+        }
+
+        public void CheckPauseGame(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            
             if (Math.Abs(Time.timeScale - 1.0f) < Tolerance)
             {
-                PauseGame(); 
+                PauseGame();
             }
             else
             {
-                ResumeGame();  
+                ResumeGame();
             }
         }
-    }
 
-    public void PauseGame()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0.0f; 
-    }
+        public void PauseGame()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
 
-   public void ResumeGame()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1.0f; 
+        public void ResumeGame()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1.0f;
+        }
     }
 }

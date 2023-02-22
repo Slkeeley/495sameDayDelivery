@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
-public class scoreDisplay : MonoBehaviour// this is used to display the players score, packages and 
+namespace SameDayDelivery.UI
 {
-    public TMP_Text mostRecentScore;
-    public TMP_Text packagesDelivered;  
-    // Start is called before the first frame update
-    void Start()
+    public class scoreDisplay : MonoBehaviour // this is used to display the players score, packages and 
     {
-        mostRecentScore.text = "Your Score: "+ GameWatcher.currScore.ToString(); 
-        packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
-        //put zBucks here
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        public TMP_Text mostRecentScore;
+
+        public TMP_Text packagesDelivered;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
+            packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
+            //put zBucks here
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
-
-
-
-
 }

@@ -1,38 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PackageDropper : MonoBehaviour
+namespace SameDayDelivery.VanControls
 {
-    public Transform packageSpawnPos;
-    public GameObject droppedPackage;
-    public GameObject reminderText;
-    public bool playerInRange; 
-    // Update is called once per frame
-    void Update()
+    public class PackageDropper : MonoBehaviour
     {
-        if (playerInRange)
+        public Transform packageSpawnPos;
+        public GameObject droppedPackage;
+        public GameObject reminderText;
+
+        public bool playerInRange;
+
+        private void Awake()
         {
-            reminderText.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.E))
+            reminderText.SetActive(false);
+        }
+
+        public void CheckSpawnPackage(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (!playerInRange) return;
+            
+            SpawnPackage();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
-                spawnPackage(); 
+                playerInRange = true;
+                reminderText.SetActive(true);
             }
         }
-        else reminderText.SetActive(false); 
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player") playerInRange = true; 
-    }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                playerInRange = false;
+                reminderText.SetActive(false);
+            }
+        }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player") playerInRange = false; 
-    }
-    void spawnPackage()
-    {
-        Instantiate(droppedPackage, packageSpawnPos.position, Quaternion.identity); 
+        void SpawnPackage()
+        {
+            Instantiate(droppedPackage, packageSpawnPos.position, Quaternion.identity);
+        }
     }
 }

@@ -1,212 +1,278 @@
 using System.Collections;
-using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 
-public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
+namespace SameDayDelivery.VanControls
 {
-    
-    [Header("Van Speed")]
-    public float topSpeed;//the fastest speed that the van can move 
-    public float topReverseSpeed;//the fastest speed that the van can move 
-    public float overDriveSpeed; 
-    public float currSpeed=0;//the current speed the van is moving
-    public float rotationSpeed = 100.0f;
-    [Header("Acceleration")]
-    public float accelerationSpeed; //the speed at which the car accelerates
-    public float reverseAccelerationSpeed; //the speed at which the car accelerates
-    public float decellerationSpeed; //the speed at which the car decellerates
-    public bool accelerating = false; //check if the van's speed is increasing 
-    public bool decellerating = false; //check if the van's speed is decreasing 
-
-    [Header("Other Vars")]
-    public bool forwards = false;
-    public bool backwards = false;
-    public bool overDrive = false; 
-    public float brakeForce;
-    public GameObject packageChute;
-    bool chuteActive;
-
-    void Start()
+    public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
     {
-        overDriveSpeed = topSpeed * 2; 
-        accelerating = false;
-        chuteActive = false;
-        packageChute.SetActive(false); 
+        [Header("Van Speed")]
+        public float topSpeed; //the fastest speed that the van can move 
+        public float topReverseSpeed; //the fastest speed that the van can move 
+        public float overDriveSpeed;
+        public float currSpeed; //the current speed the van is moving
+        public float rotationSpeed = 100.0f;
 
-    }
+        [Header("Acceleration")]
+        public float accelerationSpeed; //the speed at which the car accelerates
+        public float reverseAccelerationSpeed; //the speed at which the car accelerates
+        public float decelerationSpeed; //the speed at which the car decellerates
+        public bool accelerating; //check if the van's speed is increasing 
+        public bool decelerating; //check if the van's speed is decreasing 
 
-    // Update is called once per frame
-    void Update()
-    {
-        drive();
-        if(decellerating)
+        [Header("Other Vars")]
+        public bool forwards;
+        public bool backwards;
+        public bool overDrive;
+        public float brakeForce;
+        public GameObject packageChute;
+
+        // private variables
+        private bool chuteActive;
+        private Vector2 _movement;
+        private PlayerControlManager _playerControlManager;
+
+        /*
+        #region Input Events and Button State Control
+
+        private ButtonState _interactButton;
+        private bool _interactHeld;
+        private ButtonState _sprintButton;
+        private bool _sprintHeld;
+
+        // This may not be necessary, but if you need fine control over when the interact and sprinting buttons are pressed
+        // you can use these variables and functions.
+
+        private void OnEnable()
         {
-            if(forwards) StartCoroutine(decellerate());
-            if(backwards) StartCoroutine(decellerateBackwards());
-
+            _playerControlManager.InteractBegin += InteractBegin;
+            _playerControlManager.InteractEnd += InteractEnd;
+            _playerControlManager.SprintBegin += SprintBegin;
+            _playerControlManager.SprintEnd += SprintEnd;
         }
-        if(!overDrive)
+
+        private void OnDisable()
         {
-            if (currSpeed > topSpeed)
+            _playerControlManager.InteractBegin -= InteractBegin;
+            _playerControlManager.InteractEnd -= InteractEnd;
+            _playerControlManager.SprintBegin -= SprintBegin;
+            _playerControlManager.SprintEnd -= SprintEnd;
+        }
+
+        private void InteractBegin()
+        {
+            _interactButton = ButtonState.Down;
+            _interactHeld = true;
+        }
+
+        private void InteractEnd()
+        {
+            _interactButton = ButtonState.Up;
+            _interactHeld = false;
+        }
+
+        private void SprintBegin()
+        {
+            _sprintButton = ButtonState.Down;
+            _sprintHeld = true;
+        }
+
+        private void SprintEnd()
+        {
+            _sprintButton = ButtonState.Up;
+            _sprintHeld = false;
+        }
+
+        #endregion
+        */
+        private void Awake()
+        {
+            _playerControlManager = GetComponent<PlayerControlManager>();
+
+            overDriveSpeed = topSpeed * 2;
+            accelerating = false;
+            chuteActive = false;
+            packageChute.SetActive(false);
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            _movement = _playerControlManager.move;
+
+            Drive();
+            if (decelerating)
             {
-                currSpeed -= decellerationSpeed;
+                if (forwards) StartCoroutine(Decelerate());
+                if (backwards) StartCoroutine(DecelerateBackwards());
             }
-         }
-    }
+            else return; 
+
+            if (overDrive) return;
+            if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
+        }
 
 
-    //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
-         void drive()
-      {
+        //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
+        private void Drive()
+        {
             rotationSpeed = currSpeed;
 
-            float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            var rotation = _movement.x * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
             transform.Rotate(0, rotation, 0);
-          
-        //if the player presses W move forward in the direction they face
-        if (Input.GetKey(KeyCode.W))
-          {
-             //Adjust these booleans when the player begins moving forward again
-              decellerating = false;
-              forwards = true;
-              backwards = false; 
-              StopCoroutine(decellerate());
 
-
-              if (currSpeed < topSpeed) accelerating = true; 
-
-              if (accelerating)//if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
-              { 
-                  float translation = Input.GetAxis("Vertical") * currSpeed;
-                  currSpeed += accelerationSpeed; 
-                  translation *= Time.deltaTime;
-                  transform.Translate(0, 0, translation);
-
-                if (currSpeed>=topSpeed)
-                  {
-                      accelerating = false;
-                      currSpeed = topSpeed;
-                  }
-              }
-              else// if the van reaches top speed it is no longer accelerating and have it move at top speed 
-              { 
-                  float translation = Input.GetAxis("Vertical") * topSpeed;
-                  translation *= Time.deltaTime;
-                  transform.Translate(0, 0, translation);
-              }
-          }
-
-          if (Input.GetKeyUp(KeyCode.W))  //if the player lets go of W begin decellerating 
-          {
-              accelerating = false; 
-              decellerating = true;
-        }
-
-
-
-        //If the player presess S move backward on their relative z axis
-        if (Input.GetKey(KeyCode.S))
-        {
-            //Adjust these booleans when the player begins moving forward again
-            if (forwards)
+            //if the player presses W move forward in the direction they face
+            if (_movement.y > 0f)
             {
-                applyBrakes();
-            }
-            else
-            {
-                if (currSpeed < topReverseSpeed) accelerating = true;
+                //Adjust these booleans when the player begins moving forward again
+                decelerating = false;
+                forwards = true;
+                backwards = false;
+                StopCoroutine(Decelerate());
 
-                if (accelerating)//if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
+
+                if (currSpeed < topSpeed) accelerating = true;
+
+                // if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
+                if (accelerating)
                 {
-                    float translation = Input.GetAxis("Vertical") * currSpeed;
-                    currSpeed += reverseAccelerationSpeed;
+                    var translation = _movement.y * currSpeed;
+                    currSpeed += accelerationSpeed;
                     translation *= Time.deltaTime;
                     transform.Translate(0, 0, translation);
-                    if (currSpeed >= topReverseSpeed)
+
+                    if (currSpeed >= topSpeed)
                     {
                         accelerating = false;
-                        currSpeed = topReverseSpeed;
+                        currSpeed = topSpeed;
                     }
                 }
-                else// if the van reaches top speed it is no longer accelerating and have it move at top speed 
+                else
                 {
-                    float translation = Input.GetAxis("Vertical") * topReverseSpeed;
+                    // if the van reaches top speed it is no longer accelerating and have it move at top speed.
+                    var translation = _movement.y * topSpeed;
                     translation *= Time.deltaTime;
                     transform.Translate(0, 0, translation);
                 }
             }
 
-        }
-        if (Input.GetKeyUp(KeyCode.S))  //if the player lets go of S begin decellerating Backwards
-        {
-            accelerating = false;
-            decellerating = true;
+            if (Input.GetKeyUp(KeyCode.W))//(Mathf.Approximately(_movement.y, 0f)) // if the player lets go of W begin decelerating. 
+            {
+                accelerating = false;
+                decelerating = true;
+            }
+
+            // If the player presses S move backward on their relative z axis
+            if (_movement.y < 0f)//REVERSE
+            {
+                StopCoroutine(Decelerate());
+                //Adjust these booleans when the player begins moving forward again
+                if (forwards)
+                {
+                    ApplyBrakes();
+                }
+                else
+                {
+                    if (currSpeed < topReverseSpeed) accelerating = true;
+
+                    if (accelerating) //if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
+                    {
+                        var translation = _movement.y * currSpeed;
+                        currSpeed += reverseAccelerationSpeed;
+                        translation *= Time.deltaTime;
+                        transform.Translate(0, 0, translation);
+                        if (currSpeed >= topReverseSpeed)
+                        {
+                            accelerating = false;
+                            currSpeed = topReverseSpeed;
+                        }
+                    }
+                    else // if the van reaches top speed it is no longer accelerating and have it move at top speed 
+                    {
+                        var translation = _movement.y * topReverseSpeed;
+                        translation *= Time.deltaTime;
+                        transform.Translate(0, 0, translation);
+                    }
+                }
+            }
+            
+            if (Input.GetKeyUp(KeyCode.S))//(_movement.y < 0f) //if the player lets go of S begin decelerating Backwards
+            {
+                accelerating = false;
+                decelerating = true;
+            }
+            
+            if (_playerControlManager.sprinting)
+            {
+                ShiftGears();
+                overDrive = false;
+                topSpeed = overDriveSpeed / 2;
+            }
         }
 
-
-        if(Input.GetKey(KeyCode.LeftShift))
+        private void ApplyBrakes() //if the player is moving forward and presses S apply the brakes firs
         {
-            shiftGears(); 
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            overDrive = false;
-            topSpeed = overDriveSpeed / 2;
-        }
-    }
-
-    
-    void applyBrakes()//if the player is moving forward and presses S apply the brakes firs
-    {
             if (currSpeed > 0)
             {
                 currSpeed -= brakeForce; //speed is reduced by the set brake force
             }
             else
             {
-            decellerating = false;
-            forwards = false;
-            backwards = true;
-            StopCoroutine(decellerate());
+                decelerating = false;
+                forwards = false;
+                backwards = true;
+                StopCoroutine(Decelerate());
+            }
         }
-    }
 
-    void shiftGears()// if the player is holding shift, the van's top speed increases
-    {
-        overDrive = true;
-        topSpeed = overDriveSpeed; 
-    }
-    
-    
-    public void chuteActivation()//If the player is within the correct area to drop the packages turn the shoot on if they leave turn int off. 
-    {
-        if(!chuteActive)
+        private void ShiftGears() // if the player is holding shift, the van's top speed increases
         {
-            chuteActive = true;
-            packageChute.SetActive(true); 
+            overDrive = true;
+            topSpeed = overDriveSpeed;
         }
-        else
-        {
-            chuteActive = false;
-            packageChute.SetActive(false); 
-        }
-    }
-    public IEnumerator decellerate()//for the car to continue to move forward once the player has let go of w
-    {       
-        transform.Translate(Vector3.forward *currSpeed*  Time.deltaTime);
-        currSpeed -= decellerationSpeed;
-        yield return new WaitForEndOfFrame();
-        if (currSpeed <= 0) decellerating = false;
-    }
-  
 
-    public IEnumerator decellerateBackwards()//for the car to continue to move backward once the player has let go of s
-    {
-        transform.Translate(Vector3.back * currSpeed * Time.deltaTime);
-        currSpeed -= (decellerationSpeed*2);
-        yield return new WaitForEndOfFrame();
-        if (currSpeed <= 0) decellerating = false;
+
+        public void
+            ChuteActivation() //If the player is within the correct area to drop the packages turn the shoot on if they leave turn int off. 
+        {
+            if (!chuteActive)
+            {
+                chuteActive = true;
+                packageChute.SetActive(true);
+            }
+            else
+            {
+                chuteActive = false;
+                packageChute.SetActive(false);
+            }
+        }
+
+        private IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
+        {
+            transform.Translate(Vector3.forward * (currSpeed * Time.deltaTime));
+            currSpeed -= decelerationSpeed;
+            yield return new WaitForEndOfFrame();
+            if (currSpeed <= 0)
+            {
+                decelerating = false;
+                Debug.Log(decelerating);
+            }
+        }
+
+
+        private IEnumerator
+            DecelerateBackwards() //for the car to continue to move backward once the player has let go of s
+        {
+            transform.Translate(Vector3.back * (currSpeed * Time.deltaTime));
+            currSpeed -= decelerationSpeed * 2;
+            yield return new WaitForEndOfFrame();
+            if (currSpeed <= 0)
+            {             
+                decelerating = false;
+                Debug.Log(decelerating);
+            }
+           }
     }
 }

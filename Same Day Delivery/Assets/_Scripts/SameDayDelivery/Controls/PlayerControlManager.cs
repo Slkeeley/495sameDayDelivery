@@ -3,6 +3,13 @@ using UnityEngine.InputSystem;
 
 namespace SameDayDelivery.Controls
 {
+    public enum ButtonState
+    {
+        None,
+        Down,
+        Up,
+    }
+    
     public class PlayerControlManager : MonoBehaviour
     {
         public delegate void InputEvent();
@@ -12,10 +19,13 @@ namespace SameDayDelivery.Controls
         public InputEvent MoveEnd;
         public InputEvent SprintBegin;
         public InputEvent SprintEnd;
+        public InputEvent DriveBegin;
+        public InputEvent DriveEnd;
     
         public Vector2 move;
         public bool sprinting;
         public bool interacting;
+        public bool driving;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -61,6 +71,22 @@ namespace SameDayDelivery.Controls
             {
                 interacting = false;
                 InteractEnd?.Invoke();
+            }
+        }
+
+        public void OnDrive(InputAction.CallbackContext context)
+        {
+            // Debug.Log($"Interacting!");
+            if (context.performed)
+            {
+                driving = true;
+                DriveBegin?.Invoke();
+            }
+
+            if (context.canceled)
+            {
+                driving = false;
+                DriveEnd?.Invoke();
             }
         }
     }

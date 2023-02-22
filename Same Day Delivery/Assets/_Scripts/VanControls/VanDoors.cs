@@ -1,90 +1,104 @@
 using System.Collections;
-using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class VanDoors : MonoBehaviour
+namespace SameDayDelivery.VanControls
 {
-    public bool nearDoors;
-    public bool playerInVan; 
-    public GameObject player;
-    public GameObject enterText;
-
-    public GameWatcher gw; //used to tell the game when to switch control schemes
-    
-    public Transform playerExitPos;
-
-    void Start()
+    public class VanDoors : MonoBehaviour
     {
-        playerInVan = true; 
-        enterText.SetActive(false); 
-        setPlayerObj(); 
-    }
+        public bool nearDoors;
+        public bool playerInVan;
+        public GameObject player;
+        public GameObject enterText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (nearDoors&&!playerInVan) enterText.SetActive(true);
-        else enterText.SetActive(false); 
+        public GameWatcher gameWatcher; //used to tell the game when to switch control schemes
 
-        if(Input.GetKeyDown(KeyCode.F))
+        public Transform playerExitPos;
+
+        private void Start()
         {
-            if(playerInVan)
+            playerInVan = false;
+            enterText.SetActive(false);
+            SetPlayerObj();
+        }
+
+        public void CheckEnterExitVan(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            
+            if (playerInVan)
             {
-                exitVan();
+                ExitVan();
+            }
+            else if (nearDoors)
+            {
+                EnterVan();
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                nearDoors = true;
+                UpdateEnterText();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                nearDoors = false;
+                UpdateEnterText();
+            }
+        }
+
+        private void UpdateEnterText()
+        {
+            if (nearDoors && !playerInVan)
+            {
+                enterText.SetActive(true);
             }
             else
             {
-                if(nearDoors)
-                {
-                  enterVan(); 
-                }
+                enterText.SetActive(false);
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.tag=="Player")
+        private void SetPlayerObj() //setup the correct connection to the player obj so that we can reference it later
         {
-            nearDoors = true; 
+            if (!player)
+                player = GameObject.FindGameObjectWithTag("Player");
+            
+            player.transform.position = playerExitPos.position;
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        private void ExitVan() //upon exit teleport the player to the correct position and switch the controls
         {
-            nearDoors = false;
+            player.transform.position = playerExitPos.position;
+            player.SetActive(true);
+            playerInVan = false;
+            gameWatcher.SwitchControls();
         }
-    }
 
-    void setPlayerObj()//setup the correct connection to the player obj so that we can reference it later
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = playerExitPos.position;
-        player.SetActive(false);
-    }
-    void exitVan()//upon exit teleport the player to the correct position and switch the controls
-    {
-        player.transform.position = playerExitPos.position;
-        player.SetActive(true);
-        playerInVan = false;
-        gw.switchControls(); 
-    }
+        private void EnterVan() //upon entering disable the player and then switch the controls to the van controls
+        {
+            player.SetActive(false);
+            enterText.SetActive(false);
+            gameWatcher.SwitchControls();
+            playerInVan = false;
+            StartCoroutine(ExitDelay());
+        }
 
-    void enterVan()//upon entering disable the player and then switch the controls to the van controls
-    {
-        player.SetActive(false);
-        enterText.SetActive(false);
-        gw.switchControls(); 
-        StartCoroutine(exitDelay());
-    }
+        private IEnumerator ExitDelay() //used to stop the player from flickering in and out of reality
+        {
+            yield return new WaitForSeconds(1);
+            playerInVan = true;
+        }
 
-    IEnumerator exitDelay()//used to stop the player from flickering in and out of reality
-    {
-        yield return new WaitForSeconds(1);
-        playerInVan = true; 
-    }
 
+    }
 
 }
