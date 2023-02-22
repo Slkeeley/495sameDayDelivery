@@ -27,6 +27,10 @@ namespace SameDayDelivery.VanControls
         public float brakeForce;
         public GameObject packageChute;
 
+        [Header("Sounds")]
+        public AudioClip[] clips;
+        private AudioSource source; 
+
         // private variables
         private float defaultBrakeForce; 
         private bool chuteActive;
@@ -89,7 +93,7 @@ namespace SameDayDelivery.VanControls
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
-
+            source = GetComponent<AudioSource>(); 
             overDriveSpeed = topSpeed * 2;
             defaultBrakeForce = brakeForce; 
             accelerating = false;
@@ -131,7 +135,8 @@ namespace SameDayDelivery.VanControls
                 forwards = true;
                 backwards = false;
                 StopCoroutine(Decelerate());
-
+                source.clip = clips[1];
+                if (!source.isPlaying) source.Play();
 
                 if (currSpeed < topSpeed) accelerating = true;
 
@@ -177,6 +182,8 @@ namespace SameDayDelivery.VanControls
                 }
                 else
                 {
+                    backwards = true;
+                    source.clip = clips[2]; 
                     if (currSpeed < topReverseSpeed) accelerating = true;
 
                     if (accelerating) //if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
@@ -265,9 +272,10 @@ namespace SameDayDelivery.VanControls
             yield return new WaitForEndOfFrame();
             if (currSpeed <= 0)
             {
+                source.Stop();
                 decelerating = false;
-                Debug.Log(decelerating);
             }
+            
         }
 
 
@@ -278,10 +286,12 @@ namespace SameDayDelivery.VanControls
             currSpeed -= decelerationSpeed * 2;
             yield return new WaitForEndOfFrame();
             if (currSpeed <= 0)
-            {             
+            {
+                source.Stop();
                 decelerating = false;
-                Debug.Log(decelerating);
             }
-           }
+
+
+        }
     }
 }
