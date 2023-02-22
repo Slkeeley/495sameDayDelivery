@@ -28,6 +28,7 @@ namespace SameDayDelivery.VanControls
         public GameObject packageChute;
 
         // private variables
+        private float defaultBrakeForce; 
         private bool chuteActive;
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
@@ -90,6 +91,7 @@ namespace SameDayDelivery.VanControls
             _playerControlManager = GetComponent<PlayerControlManager>();
 
             overDriveSpeed = topSpeed * 2;
+            defaultBrakeForce = brakeForce; 
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
@@ -106,18 +108,15 @@ namespace SameDayDelivery.VanControls
                 if (forwards) StartCoroutine(Decelerate());
                 if (backwards) StartCoroutine(DecelerateBackwards());
             }
-            else return; 
+            else return;
 
-            if (overDrive) return;
-            if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
         }
 
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
         private void Drive()
         {
-            rotationSpeed = currSpeed;
-
+            rotationSpeed = currSpeed*2;
             var rotation = _movement.x * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
@@ -156,6 +155,8 @@ namespace SameDayDelivery.VanControls
                     translation *= Time.deltaTime;
                     transform.Translate(0, 0, translation);
                 }
+
+                if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
             }
 
             if (Input.GetKeyUp(KeyCode.W))//(Mathf.Approximately(_movement.y, 0f)) // if the player lets go of W begin decelerating. 
@@ -203,13 +204,10 @@ namespace SameDayDelivery.VanControls
                 accelerating = false;
                 decelerating = true;
             }
-            
-            if (_playerControlManager.sprinting)
-            {
-                ShiftGears();
-                overDrive = false;
-                topSpeed = overDriveSpeed / 2;
-            }
+
+            if (_playerControlManager.sprinting) increaseGear();
+
+            if (Input.GetKeyUp(KeyCode.LeftShift)) decreaseGear(); 
         }
 
         private void ApplyBrakes() //if the player is moving forward and presses S apply the brakes firs
@@ -227,10 +225,20 @@ namespace SameDayDelivery.VanControls
             }
         }
 
-        private void ShiftGears() // if the player is holding shift, the van's top speed increases
+        private void increaseGear() // if the player is holding shift, the van's top speed increases
         {
             overDrive = true;
             topSpeed = overDriveSpeed;
+            rotationSpeed = currSpeed / 8;
+            brakeForce = 0; 
+        }
+
+        private void decreaseGear() // if the player lets go of shift the top speed, rotation speed, and brake force return to normal 
+        {
+            overDrive = false;
+            topSpeed = overDriveSpeed/2;
+            rotationSpeed = currSpeed*2;
+            brakeForce = defaultBrakeForce; 
         }
 
 
