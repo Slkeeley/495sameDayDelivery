@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+// ReSharper disable once CheckNamespace
 namespace SameDayDelivery.PackageSystem
 {
     public class PackagePickup : MonoBehaviour
@@ -30,6 +31,8 @@ namespace SameDayDelivery.PackageSystem
         private float _throwCharge;
         [SerializeField]
         private UnityEvent onPackageThrow;
+        [SerializeField]
+        private UnityEvent onPickup;
         private bool _justPickedUp;
         private Image _throwReticleImage;
         private bool _growPlaying;
@@ -186,6 +189,7 @@ namespace SameDayDelivery.PackageSystem
             carryingPackage.transform.position = packageMount.position;
             carryingPackage.transform.SetParent(packageMount);
             _justPickedUp = true;
+            onPickup?.Invoke();
         }
 
         private void OnTriggerEnter(Collider other)
