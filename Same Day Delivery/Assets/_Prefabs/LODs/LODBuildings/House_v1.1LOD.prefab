@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 6074554372896922621}
   - component: {fileID: 6074554372896922620}
   - component: {fileID: 6074554372896922619}
-  - component: {fileID: 6074554372896922618}
-  - component: {fileID: 6074554372896922616}
   m_Layer: 0
   m_Name: House_v1.1LOD
   m_TagString: Untagged
@@ -80,32 +78,6 @@ MonoBehaviour:
   activeHouse: 0
   packageDelivered: 0
   customerSatisfied: 0
---- !u!65 &6074554372896922618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6074554372896922623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12.917651, y: 5.245535, z: 8.106245}
-  m_Center: {x: -3.5102048, y: 2.5632381, z: -0.813987}
---- !u!65 &6074554372896922616
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6074554372896922623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.098011, y: 4.41642, z: 3.5316768}
-  m_Center: {x: 4.2477665, y: 2.1328216, z: 1.6605766}
 --- !u!1 &6074554372905224678
 GameObject:
   m_ObjectHideFlags: 0
