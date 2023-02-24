@@ -30,6 +30,8 @@ namespace SameDayDelivery.Controls
         public TMP_Text timerText; //how the timer is displayed
         public TMP_Text scoreText; //how the score is displayed
         public TMP_Text levelText; //how the current day is displayed
+        public TMP_Text deliveryText;
+        private Color dtColor; 
         public GameObject failNotification; //appears when the player fails
         public GameObject successNotification; //appears when the player passes
         private bool levelFailed; //used to tell if player failed a level 
@@ -71,11 +73,12 @@ namespace SameDayDelivery.Controls
             failNotification.SetActive(false); //make sure that the player cannot see the pass or fail notifications 
             successNotification.SetActive(false);
             sheldonCam.SetActive(true); //turn on the sheldon cam so that the camera correctly starts with the sheldon
-            currentScore = 2500; //reset the current score to 0 
+            currentScore = 0; //reset the current score to 0 
             packagesDelivered = 0; //reset the packages delivered to 0 
             zergCoinsGained = 0; 
             levelText.text = "Day: " + currLevel;
-
+            dtColor = new Color(1f, 1f, 1f, 1f);
+            deliveryText.text = ""; 
             SwitchControlsToPlayer();
         }
 
@@ -153,21 +156,34 @@ namespace SameDayDelivery.Controls
             packagesDelivered++;
             if (timeSinceLastDelivery <= 20) //speedy delivery bonus
             {
-                Debug.Log("SPEEDY DELIVERY!");
+                dtColor = dtColor = new Color(0.04669785f, 1f, 1f, 1f);
+                deliveryText.text = "Speedy Delivery! +150";
                 currentScore = currentScore + 150;
             }
             else if (timeSinceLastDelivery >= 60) //slow delivery penalty
             {
-                Debug.Log("SLOW DELIVERY");
+                dtColor = dtColor = new Color(1f, 0f, 0.1349077f, 1f);
+                deliveryText.text = "Slow Delivery +75";
                 currentScore = currentScore + 75;
             }
             else
             {
-                Debug.Log("Standard Delivery");
+                dtColor = dtColor = new Color(0.6f, 0.6f,0.6f, 1f);
+                deliveryText.text = "Standard Delivery! +100";
                 currentScore = currentScore + 100;
             }
 
             timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
         }
+        
+        
+        IEnumerator displayDeliveryMessage()
+        {
+            yield return new WaitForSeconds(2.0f);
+            deliveryText.text = ""; 
+        }
+
     }
+
+
 }
