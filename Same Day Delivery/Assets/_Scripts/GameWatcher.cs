@@ -99,8 +99,8 @@ namespace SameDayDelivery.Controls
         {
             playerControls.enabled = false;
             carControls.enabled = true;
-            carControls.ChuteActivation();
-            carControls.GetComponent<AudioSource>().PlayOneShot(carControls.clips[0]);//play the sound effect for the van starting when the player enters. 
+            carControls.ChuteActivation();           
+            carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
             sheldonCam.SetActive(false);
             vanCam.SetActive(true);
             currControls = "Van";
@@ -110,7 +110,7 @@ namespace SameDayDelivery.Controls
         {
             carControls.ChuteActivation();
             carControls.currSpeed = 0;
-            carControls.GetComponent<AudioSource>().Stop(); //stop playing car audio when sheldon exits the van 
+            carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
             vanCam.SetActive(false);

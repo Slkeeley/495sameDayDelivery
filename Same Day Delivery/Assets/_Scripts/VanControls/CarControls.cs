@@ -1,6 +1,7 @@
 using System.Collections;
 using SameDayDelivery.Controls;
 using UnityEngine;
+using UnityEngine.Events; 
 
 namespace SameDayDelivery.VanControls
 {
@@ -27,9 +28,11 @@ namespace SameDayDelivery.VanControls
         public float brakeForce;
         public GameObject packageChute;
 
-        [Header("Sounds")]
-        public AudioClip[] clips;
-        private AudioSource source; 
+        [Header("Events")]
+        public UnityEvent motorStart; 
+        public UnityEvent driving; 
+        public UnityEvent reverse;
+        public UnityEvent stopNoises;
 
         // private variables
         private float defaultBrakeForce; 
@@ -93,7 +96,6 @@ namespace SameDayDelivery.VanControls
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
-            source = GetComponent<AudioSource>(); 
             overDriveSpeed = topSpeed * 2;
             defaultBrakeForce = brakeForce; 
             accelerating = false;
@@ -135,8 +137,7 @@ namespace SameDayDelivery.VanControls
                 forwards = true;
                 backwards = false;
                 StopCoroutine(Decelerate());
-                source.clip = clips[1];
-                if (!source.isPlaying) source.Play();
+                driving?.Invoke(); 
 
                 if (currSpeed < topSpeed) accelerating = true;
 
@@ -183,7 +184,7 @@ namespace SameDayDelivery.VanControls
                 else
                 {
                     backwards = true;
-                    source.clip = clips[2]; 
+                    reverse?.Invoke(); 
                     if (currSpeed < topReverseSpeed) accelerating = true;
 
                     if (accelerating) //if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
@@ -272,7 +273,7 @@ namespace SameDayDelivery.VanControls
             yield return new WaitForEndOfFrame();
             if (currSpeed <= 0)
             {
-                source.Stop();
+                stopNoises?.Invoke(); 
                 decelerating = false;
             }
             
@@ -287,7 +288,7 @@ namespace SameDayDelivery.VanControls
             yield return new WaitForEndOfFrame();
             if (currSpeed <= 0)
             {
-                source.Stop();
+                stopNoises?.Invoke();
                 decelerating = false;
             }
 

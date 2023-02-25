@@ -11,9 +11,7 @@ namespace SameDayDelivery.VanControls
         public bool playerInVan;
         public GameObject player;
         public GameObject enterText;
-
         public GameWatcher gameWatcher; //used to tell the game when to switch control schemes
-
         public Transform playerExitPos;
 
         private void Start()
@@ -60,6 +58,7 @@ namespace SameDayDelivery.VanControls
             if (nearDoors && !playerInVan)
             {
                 enterText.SetActive(true);
+              
             }
             else
             {
