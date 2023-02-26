@@ -78,7 +78,6 @@ MonoBehaviour:
   destinationLight: {fileID: 6074554373307309563}
   activeHouse: 0
   packageDelivered: 0
-  customerSatisfied: 0
 --- !u!1 &6074554372905224678
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +691,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6074554372896922621}
     m_Modifications:
+    - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
+      propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6074554372896922619}
+    - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
+      propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: packageReceived
+      objectReference: {fileID: 0}
     - target: {fileID: 662331003044168048, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_Name
       value: FauxPackageSetup
@@ -702,7 +709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.1139684
+      value: -5.3639684
       objectReference: {fileID: 0}
     - target: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -710,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.2691503
+      value: 4.5191503
       objectReference: {fileID: 0}
     - target: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -740,7 +747,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1367443831336453964, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
 --- !u!4 &9030911767808938638 stripped
 Transform:

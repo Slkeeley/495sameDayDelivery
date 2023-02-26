@@ -4,6 +4,7 @@ using SameDayDelivery.VanControls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events; 
 
 namespace SameDayDelivery.Controls
 {
@@ -156,21 +157,27 @@ namespace SameDayDelivery.Controls
             packagesDelivered++;
             if (timeSinceLastDelivery <= 20) //speedy delivery bonus
             {
-                dtColor = dtColor = new Color(0.04669785f, 1f, 1f, 1f);
+                dtColor =  new Color(0.04669785f, 1f, 1f, 1f);
+                deliveryText.color = dtColor;
                 deliveryText.text = "Speedy Delivery! +150";
                 currentScore = currentScore + 150;
+                StartCoroutine(displayDeliveryMessage()); 
             }
             else if (timeSinceLastDelivery >= 60) //slow delivery penalty
             {
-                dtColor = dtColor = new Color(1f, 0f, 0.1349077f, 1f);
+                dtColor = new Color(1f, 0f, 0.1349077f, 1f);
+                deliveryText.color = dtColor;
                 deliveryText.text = "Slow Delivery +75";
                 currentScore = currentScore + 75;
+                StartCoroutine(displayDeliveryMessage());
             }
             else
             {
-                dtColor = dtColor = new Color(0.6f, 0.6f,0.6f, 1f);
+                dtColor = new Color(0.6f, 0.6f,0.6f, 1f);
+                deliveryText.color = dtColor;
                 deliveryText.text = "Standard Delivery! +100";
                 currentScore = currentScore + 100;
+                StartCoroutine(displayDeliveryMessage());
             }
 
             timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
