@@ -37,6 +37,10 @@ namespace SameDayDelivery.Controls
         public GameObject successNotification; //appears when the player passes
         private bool levelFailed; //used to tell if player failed a level 
 
+        [Header("Events")]
+        public UnityEvent goToFailScreen; 
+        public UnityEvent goToPassScreen; 
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -136,7 +140,7 @@ namespace SameDayDelivery.Controls
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
             zergCoinsGained = currentScore / 50;
             UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
-            SceneManager.LoadScene("FailScreen");
+            goToFailScreen?.Invoke(); 
         }
 
         private IEnumerator
@@ -149,7 +153,7 @@ namespace SameDayDelivery.Controls
             zergCoinsGained = currentScore / 50;
             UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             currLevel++;
-            SceneManager.LoadScene("PassScreen");
+            goToPassScreen?.Invoke();
         }
 
         public void PackageReceived() //if a package was received the player's score will be updated and saved here
