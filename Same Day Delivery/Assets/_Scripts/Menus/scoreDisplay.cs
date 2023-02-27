@@ -17,7 +17,7 @@ namespace SameDayDelivery.UI
         {
             mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
             packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
-            coinsEarned.text = "Zerg Coins Gained: " + GameWatcher.zergCoinsGained.ToString();
+            coinsEarned.text = "Zerg Coins Earned: " + GameWatcher.zergCoinsGained.ToString();
             //put zBucks here
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
