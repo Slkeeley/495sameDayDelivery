@@ -31,11 +31,12 @@ namespace SameDayDelivery.Controls
         public TMP_Text timerText; //how the timer is displayed
         public TMP_Text scoreText; //how the score is displayed
         public TMP_Text levelText; //how the current day is displayed
+        public TMP_Text zergCoinsText; //how the current day is displayed
         public TMP_Text deliveryText;
         private Color dtColor; 
         public GameObject failNotification; //appears when the player fails
         public GameObject successNotification; //appears when the player passes
-        private bool levelFailed; //used to tell if player failed a level 
+        private bool levelFailed=false; //used to tell if player failed a level 
 
         [Header("Events")]
         public UnityEvent goToFailScreen; 
@@ -70,6 +71,8 @@ namespace SameDayDelivery.Controls
                 StartCoroutine(LevelComplete());
 
             timeSinceLastDelivery += Time.deltaTime;
+
+            updateUI(); 
         }
 
         private void LevelSetup() //resetting values to their correct states upon starting the scene. 
@@ -87,6 +90,10 @@ namespace SameDayDelivery.Controls
             SwitchControlsToPlayer();
         }
 
+        void updateUI()
+        {
+           zergCoinsText.text= zergCoinsGained.ToString();
+        }
         public void SwitchControls() //handle the control scheme switching here
         {
             switch (currControls)
@@ -150,7 +157,6 @@ namespace SameDayDelivery.Controls
             successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
-            zergCoinsGained = currentScore / 50;
             UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             currLevel++;
             goToPassScreen?.Invoke();
@@ -165,6 +171,8 @@ namespace SameDayDelivery.Controls
                 deliveryText.color = dtColor;
                 deliveryText.text = "Speedy Delivery! +150";
                 currentScore = currentScore + 150;
+                zergCoinsGained = zergCoinsGained + 3;
+                Debug.Log(zergCoinsGained + " Zerg Coins Gained So Far");
                 StartCoroutine(displayDeliveryMessage()); 
             }
             else if (timeSinceLastDelivery >= 60) //slow delivery penalty
@@ -173,6 +181,8 @@ namespace SameDayDelivery.Controls
                 deliveryText.color = dtColor;
                 deliveryText.text = "Slow Delivery +75";
                 currentScore = currentScore + 75;
+                zergCoinsGained = zergCoinsGained + 1;
+                Debug.Log(zergCoinsGained + " Zerg Coins Gained So Far");
                 StartCoroutine(displayDeliveryMessage());
             }
             else
@@ -181,6 +191,8 @@ namespace SameDayDelivery.Controls
                 deliveryText.color = dtColor;
                 deliveryText.text = "Standard Delivery! +100";
                 currentScore = currentScore + 100;
+                zergCoinsGained = zergCoinsGained + 2;
+                Debug.Log(zergCoinsGained + " Zerg Coins Gained So Far");
                 StartCoroutine(displayDeliveryMessage());
             }
 
