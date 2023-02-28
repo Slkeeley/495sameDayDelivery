@@ -33,6 +33,7 @@ namespace SameDayDelivery.Controls
         public TMP_Text levelText; //how the current day is displayed
         public TMP_Text zergCoinsText; //how the current day is displayed
         public TMP_Text deliveryText;
+        public TMP_Text packagesText; //display how many packages the player still needs to deliver
         private Color dtColor; 
         public GameObject failNotification; //appears when the player fails
         public GameObject successNotification; //appears when the player passes
@@ -92,7 +93,8 @@ namespace SameDayDelivery.Controls
 
         void updateUI()
         {
-           zergCoinsText.text= zergCoinsGained.ToString();
+            zergCoinsText.text = zergCoinsGained.ToString();
+            packagesText.text = (packagesNeeded - packagesDelivered).ToString(); 
         }
         public void SwitchControls() //handle the control scheme switching here
         {
