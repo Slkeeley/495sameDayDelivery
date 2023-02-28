@@ -152,15 +152,10 @@ namespace SameDayDelivery.PackageSystem
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
             carryingPackage.Throw(forward, power);
-<<<<<<< HEAD
 
             onPackageThrow?.Invoke();
-
-=======
             
             onPackageThrow?.Invoke();
-            
->>>>>>> WestonBranch
             carryingPackage = null;
             _justPickedUp = false;
 

@@ -1,7 +1,4 @@
-<<<<<<< HEAD:Same Day Delivery/Assets/_Scripts/SameDayDelivery/PlayerMovement.cs
 using System.Collections;
-=======
->>>>>>> WestonBranch:Same Day Delivery/Assets/_Scripts/SameDayDelivery/Controls/PlayerMovement.cs
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -28,11 +25,8 @@ namespace SameDayDelivery.Controls
         private PlayerControlManager _playerControlManager;
         private Ray _ray;
         private RaycastHit _hit;
-<<<<<<< HEAD:Same Day Delivery/Assets/_Scripts/SameDayDelivery/PlayerMovement.cs
-=======
         [SerializeField]
         private bool _isGrounded;
->>>>>>> WestonBranch:Same Day Delivery/Assets/_Scripts/SameDayDelivery/Controls/PlayerMovement.cs
 
         private void Awake()
         {
@@ -53,7 +47,6 @@ namespace SameDayDelivery.Controls
         {
             _playerControlManager.MoveBegin -= Movement;
             // StopCoroutine(UpdateVerticalPosition());
-<<<<<<< HEAD:Same Day Delivery/Assets/_Scripts/SameDayDelivery/PlayerMovement.cs
         }
 
         private IEnumerator UpdateVerticalPosition()
@@ -66,8 +59,6 @@ namespace SameDayDelivery.Controls
                 transform.position = pos;
                 yield return new WaitForSeconds(groundCheckInterval);
             }
-=======
->>>>>>> WestonBranch:Same Day Delivery/Assets/_Scripts/SameDayDelivery/Controls/PlayerMovement.cs
         }
 
         private void Update()
@@ -110,7 +101,6 @@ namespace SameDayDelivery.Controls
             transform.forward = forward;
             
             // emergency ground sticking logic (it's terrible replace it with something that actually works)
-<<<<<<< HEAD:Same Day Delivery/Assets/_Scripts/SameDayDelivery/PlayerMovement.cs
             var pos = transform.position;
             pos.y = yOffset;
             transform.position = pos;
@@ -129,11 +119,9 @@ namespace SameDayDelivery.Controls
                 pos.y = _hit.point.y;
                 transform.position = pos;
             }
-=======
             // var pos = transform.position;
             // pos.y = yOffset;
             // transform.position = pos;
->>>>>>> WestonBranch:Same Day Delivery/Assets/_Scripts/SameDayDelivery/Controls/PlayerMovement.cs
         }
     }
 }
