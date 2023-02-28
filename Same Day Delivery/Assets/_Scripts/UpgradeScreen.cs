@@ -23,5 +23,8 @@ public class UpgradeScreen : MonoBehaviour
         coinsText.text = "Zerg Coins: " + zergCoins.ToString();
     }
 
-
+    public void buyPremiumGas()
+    {
+        premiumGas.interactable = false;  
+    }
 }

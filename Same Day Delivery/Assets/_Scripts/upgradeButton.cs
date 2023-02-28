@@ -2,11 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/upgradeButton", order = 1)]
-public class upgradeButton : ScriptableObject
+
+public class upgradeButton : MonoBehaviour
 {
     public string upgradeName;
-    public int price;
-    public bool purchased; 
+    private TMP_Text upgradeNameText;
+
+    private Button button; 
+
+    private void Awake()
+    {
+        upgradeNameText = GetComponentInChildren<TextMeshProUGUI>();
+        upgradeNameText.text = upgradeName;
+
+        button = GetComponent<Button>(); 
+    }
+
+    public void clicked()
+    {
+        Debug.Log("Clicked");
+        button.interactable = false; 
+    }
 }
