@@ -27,13 +27,13 @@ public class UpgradeScreen : MonoBehaviour
     {
         coinsText.text = "Zerg Coins: " + zergCoins.ToString();
 
-        checkHighlightedButton(); 
-      
+        checkHighlightedButton();
+        checkSelectedButton(); 
     }
 
-    void checkHighlightedButton()
+    void checkHighlightedButton()//if there is a highlighted button put its description in the text box 
     {
-        if (!upgradeSelected)
+        if (!upgradeSelected)//first check if a button was clicked prior, a selected button takes priority over the highlighted one
         {
             if (highlightedButton != null)
             {
@@ -59,16 +59,25 @@ public class UpgradeScreen : MonoBehaviour
         else
         {
             buyButton.SetActive(false);
-            upgradeSelected = false;
-            descText.text = ""; 
+            upgradeSelected = false;          
         }
+    }
+
+    public void deselectButton()
+    {
+        selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
+        selectedButton = null;
     }
 
     public void buyUpgrade()
     {
         Debug.Log("Pretended to Buy Upgrade");
-        selectedButton = null;
+
+        upgradeSelected = false; 
         selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
+        selectedButton.GetComponent<Button>().interactable = false; 
+        selectedButton = null;
+        descText.text = ""; 
     }
 
 }

@@ -29,18 +29,27 @@ public class upgradeButton : MonoBehaviour
         glow.SetActive(false); 
     }
 
-    public void clicked()//display if the  button was clicked
+    public void clicked()//if the button was clicked highlight the button; 
     {
-        upgradeScreen.GetComponent<UpgradeScreen>().selectedButton = button;
-        upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = button;
+        if (upgradeScreen.GetComponent<UpgradeScreen>().selectedButton != null)//if there was already a button selected deselect it and then select this button; 
+        {
+            upgradeScreen.GetComponent<UpgradeScreen>().deselectButton(); 
+            upgradeScreen.GetComponent<UpgradeScreen>().selectedButton = button;
+            upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = button;
+        }
+        else
+        {
+            upgradeScreen.GetComponent<UpgradeScreen>().selectedButton = button;
+            upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = button;
+        }
     }
 
-    public void onHighlight()
+    public void onHighlight()//if the button is being hovered over tell the upgrade screen to use this button
     {
         upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = button; 
     }
 
-    public void offHighlight()
+    public void offHighlight()//if the cursor is removed, the screen no longer has a highlighted 
     {
         upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = null; 
     }
