@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+// ReSharper disable once CheckNamespace
 namespace SameDayDelivery.PackageSystem
 {
     public class PackagePickup : MonoBehaviour
@@ -30,6 +31,8 @@ namespace SameDayDelivery.PackageSystem
         private float _throwCharge;
         [SerializeField]
         private UnityEvent onPackageThrow;
+        [SerializeField]
+        private UnityEvent onPickup;
         private bool _justPickedUp;
         private Image _throwReticleImage;
         private bool _growPlaying;
@@ -65,26 +68,26 @@ namespace SameDayDelivery.PackageSystem
                 _fullChargeAnimator.SetBool(GrowParam, false);
                 _growPlaying = false;
             }
-            
+
             if (!_buttonDown) return;
             if (!carryingPackage) return;
 
             _throwCharge += Time.deltaTime;
             _throwCharge = Mathf.Clamp(_throwCharge, 0f, maxChargeTime);
             var percentCharge = Mathf.InverseLerp(0f, maxChargeTime, _throwCharge);
-            
+
             var frequency = Mathf.Lerp(0.25f, 0.5f, percentCharge);
             var amplitude = Mathf.Lerp(0.15f, 1f, percentCharge);
             var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
             CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
-            
+
             // change scale
             _throwReticle.transform.localScale = _reticleOriginalScale * percentCharge;
-            
+
             // change color
-            percentCharge = (percentCharge < 1f) ? 0f : 1f; 
+            percentCharge = (percentCharge < 1f) ? 0f : 1f;
             _throwReticleImage.color = Color.Lerp(_reticleStartColor, _reticleEndColor, percentCharge);
-            
+
             if (!(percentCharge >= 1f)) return;
 
             // charge is full and animation not playing
@@ -95,9 +98,9 @@ namespace SameDayDelivery.PackageSystem
                 _growPlaying = false;
                 return;
             }
-            
+
             _growPlaying = true;
-            
+
             _fullChargeAnimator.SetBool(GrowParam, true);
         }
 
@@ -111,9 +114,9 @@ namespace SameDayDelivery.PackageSystem
                 _fullChargeAnimator.SetBool(LockParam, true);
                 return;
             }
-            
+
             ThrowPackage();
-            
+
         }
 
         private void ButtonDown()
@@ -142,21 +145,22 @@ namespace SameDayDelivery.PackageSystem
             // gets ratio of chargeTime to maxChargeTime
             var percentCharge = Mathf.InverseLerp(0f, maxChargeTime, _throwCharge);
             var chargeTimeRatio = percentCharge;
-            
+
             // Interpolated value from 0 to maxThrowForce based on ratio of chargeTime to maxChargeTime
             var power = Mathf.Lerp(0f, maxThrowForce, chargeTimeRatio);
-            
+
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
             carryingPackage.Throw(forward, power);
-            
+
             onPackageThrow?.Invoke();
             
+            onPackageThrow?.Invoke();
             carryingPackage = null;
             _justPickedUp = false;
-            
+
             _throwReticle.SetActive(false);
-            
+
             _fullChargeAnimator.SetBool(LockParam, false);
 
             var frequency = Mathf.Lerp(0.5f, 2.5f, percentCharge);
@@ -186,6 +190,7 @@ namespace SameDayDelivery.PackageSystem
             carryingPackage.transform.position = packageMount.position;
             carryingPackage.transform.SetParent(packageMount);
             _justPickedUp = true;
+            onPickup?.Invoke();
         }
 
         private void OnTriggerEnter(Collider other)

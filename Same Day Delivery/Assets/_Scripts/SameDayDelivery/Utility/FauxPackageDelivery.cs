@@ -9,6 +9,7 @@ namespace SameDayDelivery.Utility
         public GameObject deliveredPrefab;
         public Transform spawnLocation;
         public UnityEvent onSpawnEvent;
+        public UnityEvent packageRecieved;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -20,6 +21,7 @@ namespace SameDayDelivery.Utility
             var fx = Instantiate(deliveredPrefab);
             fx.transform.position = spawnLocation.position;
             onSpawnEvent?.Invoke();
+            packageRecieved?.Invoke(); 
             gameObject.SetActive(false);
         }
     }
