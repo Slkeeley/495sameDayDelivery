@@ -12,31 +12,63 @@ public class UpgradeScreen : MonoBehaviour
 
     [Header("Buttons")]
     public Button highlightedButton; 
-    public Button[] upgradeButtons; 
+    public Button selectedButton; 
+    public Button[] upgradeButtons;
+    public GameObject buyButton;
+    private bool upgradeSelected = false; 
     // Start is called before the first frame update
     private void Start()
     {
-
+        buyButton.SetActive(false); 
     }
 
     // Update is called once per frame
     void Update()
     {
         coinsText.text = "Zerg Coins: " + zergCoins.ToString();
-        if(highlightedButton!=null)
+
+        checkHighlightedButton(); 
+      
+    }
+
+    void checkHighlightedButton()
+    {
+        if (!upgradeSelected)
         {
-            descText.text = highlightedButton.GetComponent<upgradeButton>().desc; 
+            if (highlightedButton != null)
+            {
+                descText.text = highlightedButton.GetComponent<upgradeButton>().desc;
+            }
+            else
+            {
+                descText.text = "";
+            }
+        }
+    }
+
+    void checkSelectedButton()
+    {
+        if (selectedButton!= null)
+        {
+            buyButton.SetActive(true);
+            upgradeSelected = true; 
+            descText.text = selectedButton.GetComponent<upgradeButton>().desc;
+            selectedButton.GetComponent<upgradeButton>().glow.SetActive(true); 
+
         }
         else
         {
+            buyButton.SetActive(false);
+            upgradeSelected = false;
             descText.text = ""; 
         }
     }
 
-    public void buyPremiumGas()
+    public void buyUpgrade()
     {
-      //  premiumGas.interactable = false;  
+        Debug.Log("Pretended to Buy Upgrade");
+        selectedButton = null;
+        selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
     }
-
 
 }

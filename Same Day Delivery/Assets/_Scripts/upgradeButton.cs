@@ -17,20 +17,22 @@ public class upgradeButton : MonoBehaviour
 
     public string desc; 
     private Button button;
-    private GameObject upgradeScreen; 
+    private GameObject upgradeScreen;
+    public GameObject glow;
 
     private void Awake()
     {
         upgradeNameText.text = upgradeName;
         priceText.text = price.ToString();
         button = GetComponent<Button>();
-        upgradeScreen = GameObject.Find("UpgradeCanvas"); 
+        upgradeScreen = GameObject.Find("UpgradeCanvas");
+        glow.SetActive(false); 
     }
 
     public void clicked()//display if the  button was clicked
     {
-        Debug.Log("Clicked");
-        button.interactable = false; 
+        upgradeScreen.GetComponent<UpgradeScreen>().selectedButton = button;
+        upgradeScreen.GetComponent<UpgradeScreen>().highlightedButton = button;
     }
 
     public void onHighlight()
