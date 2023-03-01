@@ -8,9 +8,11 @@ public class UpgradeScreen : MonoBehaviour
 {
     public static int zergCoins;
     public TMP_Text coinsText;
+    public TMP_Text descText;
 
     [Header("Buttons")]
-    public Button premiumGas;
+    public Button highlightedButton; 
+    public Button[] upgradeButtons; 
     // Start is called before the first frame update
     private void Start()
     {
@@ -21,10 +23,20 @@ public class UpgradeScreen : MonoBehaviour
     void Update()
     {
         coinsText.text = "Zerg Coins: " + zergCoins.ToString();
+        if(highlightedButton!=null)
+        {
+            descText.text = highlightedButton.GetComponent<upgradeButton>().desc; 
+        }
+        else
+        {
+            descText.text = ""; 
+        }
     }
 
     public void buyPremiumGas()
     {
-        premiumGas.interactable = false;  
+      //  premiumGas.interactable = false;  
     }
+
+
 }
