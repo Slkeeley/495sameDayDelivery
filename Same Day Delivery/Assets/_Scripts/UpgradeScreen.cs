@@ -6,7 +6,7 @@ using TMPro;
 
 public class UpgradeScreen : MonoBehaviour
 {
-    public static int zergCoins;
+    public static int zergCoins=1000;
     public TMP_Text coinsText;
     public TMP_Text descText;
 
@@ -15,7 +15,8 @@ public class UpgradeScreen : MonoBehaviour
     public Button selectedButton; 
     public Button[] upgradeButtons;
     public GameObject buyButton;
-    private bool upgradeSelected = false; 
+    private bool upgradeSelected = false;
+    private bool sheldonIsBroke = false; 
     // Start is called before the first frame update
     private void Start()
     {
@@ -26,9 +27,17 @@ public class UpgradeScreen : MonoBehaviour
     void Update()
     {
         coinsText.text = "Zerg Coins: " + zergCoins.ToString();
+    
+
 
         checkHighlightedButton();
-        checkSelectedButton(); 
+        checkSelectedButton();
+        if (sheldonIsBroke)//if sheldon does not have the required amount of money then have the text say not enough zerg
+        {
+            descText.fontSize = 24;
+            descText.text = "NOT ENOUGH ZERG!";
+            descText.color = new Color(1, 0, 0, 1);
+        }
     }
 
     void checkHighlightedButton()//if there is a highlighted button put its description in the text box 
@@ -48,7 +57,7 @@ public class UpgradeScreen : MonoBehaviour
 
     void checkSelectedButton()
     {
-        if (selectedButton!= null)
+        if (selectedButton!= null)//if the selected button is not null, have it glow, show the buy button and fill 
         {
             buyButton.SetActive(true);
             upgradeSelected = true; 
@@ -71,13 +80,27 @@ public class UpgradeScreen : MonoBehaviour
 
     public void buyUpgrade()
     {
-        Debug.Log("Pretended to Buy Upgrade");
 
-        upgradeSelected = false; 
-        selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
-        selectedButton.GetComponent<Button>().interactable = false; 
-        selectedButton = null;
-        descText.text = ""; 
+        if (selectedButton.GetComponent<upgradeButton>().price <= zergCoins)//if the player has enough zerg coins
+        {
+            upgradeSelected = false;
+            selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
+            selectedButton.GetComponent<Button>().interactable = false;
+            descText.text = "";
+            zergCoins = zergCoins - selectedButton.GetComponent<upgradeButton>().price;
+            selectedButton = null;
+
+        }
+        else StartCoroutine(cannotAfford());
     }
 
+    IEnumerator cannotAfford()
+    {
+        sheldonIsBroke = true;
+        yield return new WaitForSeconds(2.0f);
+        sheldonIsBroke = false;
+        descText.text = "";
+        descText.color = new Color(0, 0, 0, 1);
+        descText.fontSize = 10; 
+    }
 }
