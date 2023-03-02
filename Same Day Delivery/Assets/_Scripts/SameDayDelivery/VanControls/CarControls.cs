@@ -1,13 +1,14 @@
 using System.Collections;
 using SameDayDelivery.Controls;
 using UnityEngine;
+using UnityEngine.Events; 
 
 namespace SameDayDelivery.VanControls
 {
     public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
     {
         [Header("Van Speed")]
-        public float topSpeed; //the fastest speed that the van can move 
+        public static float topSpeed=25f; //the fastest speed that the van can move 
         public float topReverseSpeed; //the fastest speed that the van can move 
         public float overDriveSpeed;
         public float currSpeed; //the current speed the van is moving
@@ -27,12 +28,19 @@ namespace SameDayDelivery.VanControls
         public float brakeForce;
         public GameObject packageChute;
 
+        [Header("Events")]
+        public UnityEvent motorStart; 
+        public UnityEvent driving; 
+        public UnityEvent reverse;
+        public UnityEvent stopNoises;
+
         // private variables
+        private float defaultBrakeForce; 
         private bool chuteActive;
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
 
-
+        /*
         #region Input Events and Button State Control
 
         private ButtonState _interactButton;
@@ -84,15 +92,16 @@ namespace SameDayDelivery.VanControls
         }
 
         #endregion
-
+        */
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
-
             overDriveSpeed = topSpeed * 2;
+            defaultBrakeForce = brakeForce; 
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
+            Debug.Log("The Van's Top Speed is: " + topSpeed);
         }
 
         // Update is called once per frame
@@ -106,17 +115,15 @@ namespace SameDayDelivery.VanControls
                 if (forwards) StartCoroutine(Decelerate());
                 if (backwards) StartCoroutine(DecelerateBackwards());
             }
+            else return;
 
-            if (overDrive) return;
-            if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
         }
 
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
         private void Drive()
         {
-            rotationSpeed = currSpeed;
-
+            rotationSpeed = currSpeed*2;
             var rotation = _movement.x * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
@@ -130,7 +137,7 @@ namespace SameDayDelivery.VanControls
                 forwards = true;
                 backwards = false;
                 StopCoroutine(Decelerate());
-
+                driving?.Invoke(); 
 
                 if (currSpeed < topSpeed) accelerating = true;
 
@@ -155,17 +162,20 @@ namespace SameDayDelivery.VanControls
                     translation *= Time.deltaTime;
                     transform.Translate(0, 0, translation);
                 }
+
+                if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
             }
 
-            if (Mathf.Approximately(_movement.y, 0f)) // if the player lets go of W begin decelerating. 
+            if (Input.GetKeyUp(KeyCode.W))//(Mathf.Approximately(_movement.y, 0f)) // if the player lets go of W begin decelerating. 
             {
                 accelerating = false;
                 decelerating = true;
             }
 
             // If the player presses S move backward on their relative z axis
-            if (_movement.y < 0f)
+            if (_movement.y < 0f)//REVERSE
             {
+                StopCoroutine(Decelerate());
                 //Adjust these booleans when the player begins moving forward again
                 if (forwards)
                 {
@@ -173,6 +183,8 @@ namespace SameDayDelivery.VanControls
                 }
                 else
                 {
+                    backwards = true;
+                    reverse?.Invoke(); 
                     if (currSpeed < topReverseSpeed) accelerating = true;
 
                     if (accelerating) //if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
@@ -195,18 +207,16 @@ namespace SameDayDelivery.VanControls
                     }
                 }
             }
-
-            if (_movement.y < 0f) //if the player lets go of S begin decelerating Backwards
+            
+            if (Input.GetKeyUp(KeyCode.S))//(_movement.y < 0f) //if the player lets go of S begin decelerating Backwards
             {
                 accelerating = false;
                 decelerating = true;
             }
 
-            if (!_playerControlManager.sprinting) return;
+            if (_playerControlManager.sprinting) increaseGear();
 
-            ShiftGears();
-            overDrive = false;
-            topSpeed = overDriveSpeed / 2;
+            if (Input.GetKeyUp(KeyCode.LeftShift)) decreaseGear(); 
         }
 
         private void ApplyBrakes() //if the player is moving forward and presses S apply the brakes firs
@@ -224,10 +234,20 @@ namespace SameDayDelivery.VanControls
             }
         }
 
-        private void ShiftGears() // if the player is holding shift, the van's top speed increases
+        private void increaseGear() // if the player is holding shift, the van's top speed increases
         {
             overDrive = true;
             topSpeed = overDriveSpeed;
+            rotationSpeed = currSpeed / 8;
+            brakeForce = 0; 
+        }
+
+        private void decreaseGear() // if the player lets go of shift the top speed, rotation speed, and brake force return to normal 
+        {
+            overDrive = false;
+            topSpeed = overDriveSpeed/2;
+            rotationSpeed = currSpeed*2;
+            brakeForce = defaultBrakeForce; 
         }
 
 
@@ -251,7 +271,12 @@ namespace SameDayDelivery.VanControls
             transform.Translate(Vector3.forward * (currSpeed * Time.deltaTime));
             currSpeed -= decelerationSpeed;
             yield return new WaitForEndOfFrame();
-            if (currSpeed <= 0) decelerating = false;
+            if (currSpeed <= 0)
+            {
+                stopNoises?.Invoke(); 
+                decelerating = false;
+            }
+            
         }
 
 
@@ -261,7 +286,13 @@ namespace SameDayDelivery.VanControls
             transform.Translate(Vector3.back * (currSpeed * Time.deltaTime));
             currSpeed -= decelerationSpeed * 2;
             yield return new WaitForEndOfFrame();
-            if (currSpeed <= 0) decelerating = false;
+            if (currSpeed <= 0)
+            {
+                stopNoises?.Invoke();
+                decelerating = false;
+            }
+
+
         }
     }
 }
