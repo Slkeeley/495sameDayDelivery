@@ -38,6 +38,8 @@ namespace SameDayDelivery.ScriptableObjects
         public int score;
         [Tooltip("Current amount of money.")]
         public int money;
+        [Tooltip("Current day the player is on.")]
+        public int day;
         [Header("Packages")]
         [Tooltip("How many packages have been delivered.")]
         public int delivered;
