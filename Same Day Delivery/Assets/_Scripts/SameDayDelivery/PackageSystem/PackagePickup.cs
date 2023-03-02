@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using SameDayDelivery.Controls;
+using SameDayDelivery.ScriptableObjects;
 using SameDayDelivery.Utility;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 // ReSharper disable once CheckNamespace
@@ -10,6 +12,7 @@ namespace SameDayDelivery.PackageSystem
 {
     public class PackagePickup : MonoBehaviour
     {
+        [SerializeField] private GameData gameData;
         [Tooltip("Time in seconds until throw charge is at maximum force.")]
         public float maxChargeTime = 1f;
         [Tooltip("Maximum throw force after 'Max Charge Time' seconds.")]
@@ -23,16 +26,14 @@ namespace SameDayDelivery.PackageSystem
         [SerializeField] private Color _reticleStartColor = new Color(0f, 1f, 1f, 0.25f);
         [SerializeField] private Color _reticleEndColor = new Color(0f, 1f, 1f, 0.9f);
         [SerializeField] private Animator _fullChargeAnimator;
+        [SerializeField] private bool _buttonDown;
+        [SerializeField] private float _throwCharge;
+        [SerializeField] private UpgradeItem _upgradeWorkGloves;
+        [SerializeField] private UnityEvent onPackageThrow;
+        [SerializeField] private UnityEvent onPickup;
+        
         private readonly List<Package> _availablePackages = new List<Package>();
         private PlayerControlManager _playerControls;
-        [SerializeField]
-        private bool _buttonDown;
-        [SerializeField]
-        private float _throwCharge;
-        [SerializeField]
-        private UnityEvent onPackageThrow;
-        [SerializeField]
-        private UnityEvent onPickup;
         private bool _justPickedUp;
         private Image _throwReticleImage;
         private bool _growPlaying;
@@ -146,8 +147,12 @@ namespace SameDayDelivery.PackageSystem
             var percentCharge = Mathf.InverseLerp(0f, maxChargeTime, _throwCharge);
             var chargeTimeRatio = percentCharge;
 
+            // modifies throw force by a ValueA of the upgrade gloves which should be a percentage
+            var modMaxThrowForce = (_upgradeWorkGloves != null && _upgradeWorkGloves.purchased) ? 
+                (maxThrowForce * _upgradeWorkGloves.valueA.uValue) : maxThrowForce;
+            
             // Interpolated value from 0 to maxThrowForce based on ratio of chargeTime to maxChargeTime
-            var power = Mathf.Lerp(0f, maxThrowForce, chargeTimeRatio);
+            var power = Mathf.Lerp(0f, modMaxThrowForce, chargeTimeRatio);
 
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
@@ -213,5 +218,9 @@ namespace SameDayDelivery.PackageSystem
             _fullChargeAnimator.SetBool(GrowParam, false);
             _growPlaying = false;
         }
+
+        public bool CarryingPackage() => carryingPackage != null;
+
+        public Package GetCarryingPackage() => carryingPackage;
     }
 }

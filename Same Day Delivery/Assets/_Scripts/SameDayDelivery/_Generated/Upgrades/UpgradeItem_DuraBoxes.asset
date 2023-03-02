@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8cb165e7874b838e205415636e41b1, type: 3}
-  m_Name: UpgradeItem_Cardio
+  m_Name: UpgradeItem_DuraBoxes
   m_EditorClassIdentifier: 
-  upgradeName: Cardio
-  description: Increases character speed.
-  cost: 25
+  upgradeName: Dura-Boxes
+  description: Packages can't be damaged.
+  cost: 50
   icon: {fileID: 0}
-  purchased: 1
+  purchased: 0
   valueA:
-    uName: Character Speed while NOT carrying packages
-    uValue: 2
+    uName: Character Speed
+    uValue: 0.5
   valueB:
     uName: 
     uValue: 0

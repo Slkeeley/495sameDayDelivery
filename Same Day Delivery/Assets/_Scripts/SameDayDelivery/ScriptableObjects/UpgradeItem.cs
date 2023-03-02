@@ -14,9 +14,10 @@ namespace SameDayDelivery.ScriptableObjects
     public class UpgradeItem : ScriptableObject
     {
         public string upgradeName = "zUnknown zUpgrade";
-        [Multiline]
+        [TextArea]
         public string description = "zotally zawesome zupgrade!";
         public int cost;
+        public Sprite icon;
         public bool purchased;
         [Header("Value")]
         public UpgradeValue valueA;

@@ -1,4 +1,6 @@
 using System.Collections;
+using SameDayDelivery.PackageSystem;
+using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -19,6 +21,11 @@ namespace SameDayDelivery.Controls
 
         [SerializeField]
         private Camera _cam;
+
+        [SerializeField]
+        private UpgradeItem _upgradeCardio;
+        [SerializeField]
+        private UpgradeItem _upgradeWeightlifting;
         
         private CharacterController _characterController;
         private Rigidbody _rigidBody;
@@ -28,11 +35,14 @@ namespace SameDayDelivery.Controls
         [SerializeField]
         private bool _isGrounded;
 
+        private PackagePickup _packagePickup;
+
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
             _rigidBody = GetComponent<Rigidbody>();
             _playerControlManager = GetComponent<PlayerControlManager>();
+            _packagePickup = GetComponent<PackagePickup>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -72,6 +82,18 @@ namespace SameDayDelivery.Controls
             var verticalInput = _playerControlManager.move.y;
 
             var speed = (_playerControlManager.sprinting) ? runSpeed : walkSpeed;
+
+            var upgradeSpeedMod = 1f;
+            
+            if (_upgradeCardio && _upgradeCardio.purchased && !_packagePickup.CarryingPackage()) 
+                upgradeSpeedMod = _upgradeCardio.valueA.uValue;
+
+            if (_upgradeWeightlifting && _upgradeWeightlifting.purchased && _packagePickup.CarryingPackage())
+                upgradeSpeedMod = _upgradeWeightlifting.valueA.uValue;
+
+            speed *= upgradeSpeedMod;
+            
+            Debug.Log($"speed = {speed} speedMod = {upgradeSpeedMod}");
 
             var transform1 = _cam.transform;
             var forward = transform1.forward;
