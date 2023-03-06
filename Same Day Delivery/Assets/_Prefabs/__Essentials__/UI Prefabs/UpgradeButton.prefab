@@ -71,9 +71,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5711a3765da7ff14ab91c0654ac67a10, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -194,11 +194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cae83c5ed8ce146a591158640403b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgrade: {fileID: 0}
   upgradeName: Premium Gas
   upgradeNameText: {fileID: 5544088781996732}
-  price: 0
   priceText: {fileID: 7540834730872600777}
+  image: {fileID: 1460870948547385022}
   desc: 
+  price: 0
   glow: {fileID: 7913289325138165781}
 --- !u!1 &2905035036240900576
 GameObject:

@@ -6,7 +6,8 @@ using TMPro;
 
 public class UpgradeScreen : MonoBehaviour
 {
-    public static int zergCoins=1000;
+    [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data; 
+    [Header("Text")]
     public TMP_Text coinsText;
     public TMP_Text descText;
 
@@ -26,7 +27,7 @@ public class UpgradeScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinsText.text = "Zerg Coins: " + zergCoins.ToString();
+        coinsText.text = "Zerg Coins: " + data.money.ToString();
     
 
 
@@ -81,13 +82,13 @@ public class UpgradeScreen : MonoBehaviour
     public void buyUpgrade()
     {
 
-        if (selectedButton.GetComponent<upgradeButton>().price <= zergCoins)//if the player has enough zerg coins
+        if (selectedButton.GetComponent<upgradeButton>().price <= data.money)//if the player has enough zerg coins
         {
             upgradeSelected = false;
             selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
-            selectedButton.GetComponent<Button>().interactable = false;
+            selectedButton.GetComponent<upgradeButton>().upgrade.purchased = true; 
             descText.text = "";
-            zergCoins = zergCoins - selectedButton.GetComponent<upgradeButton>().price;
+            data.money = data.money- selectedButton.GetComponent<upgradeButton>().price;
             selectedButton = null;
 
         }

@@ -1698,6 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4976fc273e5565c48a0d392a227eb198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 6ef12dae925019547af385ef10ffaa44, type: 2}
   coinsText: {fileID: 653309777}
   descText: {fileID: 24244780}
   highlightedButton: {fileID: 0}
@@ -3282,7 +3283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1460870948547384962, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
       propertyPath: m_Name
-      value: UpgradeButton
+      value: Cardio_Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 1460870948547384963, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
       propertyPath: m_Pivot.x
@@ -3368,13 +3369,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1460870948547385022, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460870948547385022, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2317851620152218250, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
       propertyPath: desc
-      value: Increases van speed.
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2317851620152218250, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
       propertyPath: price
-      value: 40
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317851620152218250, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
+      propertyPath: upgrade
+      value: 
+      objectReference: {fileID: 11400000, guid: d410194614c4c8549a75176495c9d7fc, type: 2}
+    - target: {fileID: 2317851620152218250, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
+      propertyPath: upgradeName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6666184235001091370, guid: 828dd0db7a5dc6d4ea060de3395409af, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -7,26 +7,39 @@ using TMPro;
 
 public class upgradeButton : MonoBehaviour
 {
-   [Header("Upgrade Name")]
-    public string upgradeName;
-    public TMP_Text upgradeNameText;
-  
-    [Header("Price")]
+    [Header("Upgrade Data")]
+    public SameDayDelivery.ScriptableObjects.UpgradeItem upgrade;
+    [SerializeField] private string upgradeName;
+    [SerializeField] private TMP_Text upgradeNameText;
+    [SerializeField] private TMP_Text priceText;
+    [SerializeField] private Image image;
+    [SerializeField] public string desc;
     public int price;
-    public TMP_Text priceText;
-
-    public string desc; 
+    
+    
+    [Header ("References")]
     private Button button;
     private GameObject upgradeScreen;
     public GameObject glow;
 
     private void Awake()
     {
+        //Attach scriptable object values to this upgrade button to reflect what it does
+        upgradeName = upgrade.upgradeName;
+        image.sprite = upgrade.icon;
+        desc = upgrade.description;
+        price = upgrade.cost; 
+        //Create the UI based off of the values for each upgrade
         upgradeNameText.text = upgradeName;
         priceText.text = price.ToString();
         button = GetComponent<Button>();
         upgradeScreen = GameObject.Find("UpgradeCanvas");
         glow.SetActive(false); 
+    }
+
+    public void Update()
+    {
+        if (upgrade.purchased) button.interactable = false; 
     }
 
     public void clicked()//if the button was clicked highlight the button; 

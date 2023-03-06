@@ -11,6 +11,7 @@ namespace SameDayDelivery.Controls
     public class GameWatcher : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data; 
         public CarControls carControls;
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
@@ -21,11 +22,11 @@ namespace SameDayDelivery.Controls
         public float TimeLeft;
         public bool TimerOn; //bool to make sure timer does not go below 0
         public string currControls;
-        public static int packagesDelivered;
+        public int packagesDelivered;
         public int packagesNeeded;
         public float timeSinceLastDelivery;
         public static int currLevel;
-        public static int zergCoinsGained;//How much currency the player currently has 
+        public int zergCoinsGained;//How much currency the player currently has 
 
         [Header("UI Elements")]
         public TMP_Text timerText; //how the timer is displayed
@@ -37,7 +38,6 @@ namespace SameDayDelivery.Controls
         private Color dtColor; 
         public GameObject failNotification; //appears when the player fails
         public GameObject successNotification; //appears when the player passes
-        private bool levelFailed=false; //used to tell if player failed a level 
 
         [Header("Events")]
         public UnityEvent goToFailScreen; 
@@ -58,11 +58,10 @@ namespace SameDayDelivery.Controls
                 TimeLeft -= Time.deltaTime;
                 UpdaterUI(TimeLeft);
             }
-            else
+            else//player runs out of time and has failed the level 
             {
                 TimeLeft = 0;
                 TimerOn = false;
-                levelFailed = true;
                 failNotification.SetActive(true);
                 StartCoroutine(GgGoNext());
             }
@@ -148,7 +147,7 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
             zergCoinsGained = currentScore / 50;
-            UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             goToFailScreen?.Invoke(); 
         }
 
@@ -159,7 +158,7 @@ namespace SameDayDelivery.Controls
             successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
-            UpgradeScreen.zergCoins = UpgradeScreen.zergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             currLevel++;
             goToPassScreen?.Invoke();
         }
