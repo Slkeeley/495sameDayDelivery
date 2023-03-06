@@ -101,7 +101,7 @@ namespace SameDayDelivery.VanControls
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
-            Debug.Log("The Van's Top Speed is: " + topSpeed);
+            // Debug.Log("The Van's Top Speed is: " + topSpeed);
         }
 
         // Update is called once per frame

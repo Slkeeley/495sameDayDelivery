@@ -1,4 +1,5 @@
 ﻿using SameDayDelivery.PackageSystem;
+using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +7,7 @@ namespace SameDayDelivery.Utility
 {
     public class FauxPackageDelivery : MonoBehaviour
     {
+        public GameData gameData;
         public GameObject deliveredPrefab;
         public Transform spawnLocation;
         public UnityEvent onSpawnEvent;
@@ -15,6 +17,7 @@ namespace SameDayDelivery.Utility
         {
             var package = other.GetComponentInChildren<Package>();
             if (!package) return;
+            if (gameData.carryingPackage == package) return;
             
             package.gameObject.SetActive(false);
 
