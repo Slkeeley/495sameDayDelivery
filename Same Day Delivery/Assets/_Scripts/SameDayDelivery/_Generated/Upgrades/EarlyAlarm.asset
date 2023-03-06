@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8cb165e7874b838e205415636e41b1, type: 3}
-  m_Name: UpgradeItem_DuraBoxes
+  m_Name: EarlyAlarm
   m_EditorClassIdentifier: 
-  upgradeName: Dura-Boxes
-  description: Packages can't be damaged.
-  cost: 50
-  icon: {fileID: 0}
+  upgradeName: Early Alarm
+  description: 'Adds 30 seconds to each day''s timer.
+
+'
+  cost: 30
+  icon: {fileID: 21300000, guid: da3e6c655a1a0fb4c9f955194c79461d, type: 3}
   purchased: 0
   valueA:
-    uName: Character Speed
-    uValue: 0.5
+    uName: Time
+    uValue: 30
   valueB:
     uName: 
     uValue: 0
