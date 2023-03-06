@@ -124,6 +124,7 @@ namespace SameDayDelivery.PackageSystem
         {
             if (carryingPackage)
             {
+                gameData.carryingPackage = carryingPackage;
                 _buttonDown = true;
                 _throwCharge = 0f;
                 _throwReticle.SetActive(true);
@@ -162,6 +163,7 @@ namespace SameDayDelivery.PackageSystem
             
             onPackageThrow?.Invoke();
             carryingPackage = null;
+            gameData.carryingPackage = null;
             _justPickedUp = false;
 
             _throwReticle.SetActive(false);
@@ -191,6 +193,7 @@ namespace SameDayDelivery.PackageSystem
             }
 
             carryingPackage = targetPackage;
+            gameData.carryingPackage = carryingPackage;
             carryingPackage.Pickup();
             carryingPackage.transform.position = packageMount.position;
             carryingPackage.transform.SetParent(packageMount);

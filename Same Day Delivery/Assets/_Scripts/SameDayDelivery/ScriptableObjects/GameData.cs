@@ -45,6 +45,8 @@ namespace SameDayDelivery.ScriptableObjects
         public int delivered;
         [Tooltip("How many packages have not been delivered.")]
         public int undelivered;
+        [Tooltip("Indicate to other objects which package Sheldon is carrying")]
+        public Package carryingPackage;
         
         [Header("Upgrades")]
         public UpgradeLookupTable upgradeLookupTable;

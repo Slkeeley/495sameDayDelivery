@@ -93,7 +93,7 @@ namespace SameDayDelivery.Controls
 
             speed *= upgradeSpeedMod;
             
-            Debug.Log($"speed = {speed} speedMod = {upgradeSpeedMod}");
+            // Debug.Log($"speed = {speed} speedMod = {upgradeSpeedMod}");
 
             var transform1 = _cam.transform;
             var forward = transform1.forward;
