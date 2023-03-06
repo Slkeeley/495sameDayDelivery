@@ -1,6 +1,7 @@
 using SameDayDelivery.Controls;
 using UnityEngine;
 
+
 namespace SameDayDelivery.DeliverySystem
 {
     public class Destinations : MonoBehaviour
@@ -8,7 +9,7 @@ namespace SameDayDelivery.DeliverySystem
         public GameObject destinationLight; //used to visually indicate if this house needs a package delivered
         public bool activeHouse;
         public bool packageDelivered;
-        public bool customerSatisfied = false;
+
 
 
         void Start() //set the bools and visual feedback to default values before the player begins their day
@@ -29,15 +30,15 @@ namespace SameDayDelivery.DeliverySystem
                 destinationLight.SetActive(false);
             }
 
-            if (packageDelivered &&
-                !customerSatisfied) //need two booleans so choosing neighborhood does not get called multiple times
-            {
-                activeHouse = false;
-                customerSatisfied = true;
-                FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood();
-                FindObjectOfType<GameWatcher>().PackageReceived();
-            }
+        }
+
+
+        public void packageReceived()
+        {
+            activeHouse = false;
+            packageDelivered = true; 
+            FindObjectOfType<PackageDestinationSelection>().chooseNeighborhood();
+            FindObjectOfType<GameWatcher>().PackageReceived();
         }
     }
-
 }
