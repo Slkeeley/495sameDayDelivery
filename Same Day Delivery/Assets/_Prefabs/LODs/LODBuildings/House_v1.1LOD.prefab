@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationLight: {fileID: 8120712612462645153}
-  activeHouse: 0
+  active: 0
   packageDelivered: 0
 --- !u!1 &6074554372905224678
 GameObject:
@@ -603,6 +603,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6074554372896922621}
     m_Modifications:
+    - target: {fileID: 656037196234924499, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -677,6 +681,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100212208561084749, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationLight: {fileID: 642715920675730727}
-  activeHouse: 0
+  active: 0
   packageDelivered: 0
 --- !u!1 &6023066580004201482
 GameObject:
@@ -1464,6 +1464,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6023066579618366823}
     m_Modifications:
+    - target: {fileID: 656037196234924499, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.size
       value: 1
