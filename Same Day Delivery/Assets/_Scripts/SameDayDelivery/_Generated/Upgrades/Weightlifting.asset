@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8cb165e7874b838e205415636e41b1, type: 3}
-  m_Name: UpgradeItem_StrengthSyringe
+  m_Name: Weightlifting
   m_EditorClassIdentifier: 
-  upgradeName: Strength Syringe
-  description: Allows Sheldon to throw Heavy Packages.
-  cost: 30
-  icon: {fileID: 0}
+  upgradeName: PremiumGas
+  description: Speed while carrying packages increases.
+  cost: 20
+  icon: {fileID: 21300000, guid: 0d49c1270e5ef5c488ad824d093e7f95, type: 3}
   purchased: 0
   valueA:
-    uName: Character Speed
-    uValue: 0.5
+    uName: Character Speed while carrying packages
+    uValue: 2
   valueB:
     uName: 
     uValue: 0

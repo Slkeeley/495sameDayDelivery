@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8cb165e7874b838e205415636e41b1, type: 3}
-  m_Name: UpgradeItem_PremiumGas
+  m_Name: WorkGloves
   m_EditorClassIdentifier: 
-  upgradeName: Premium Gas
-  description: Increases van speed.
-  cost: 40
-  icon: {fileID: 21300000, guid: 3b7208525b283c245927064d21b58143, type: 3}
+  upgradeName: Work Gloves
+  description: <color=#FFF>Throw</color> packages further.
+  cost: 20
+  icon: {fileID: 21300000, guid: db1edf602c0e7c1458fa19b2621d593f, type: 3}
   purchased: 0
   valueA:
-    uName: Character Speed
-    uValue: 0.5
+    uName: Modified throw force (percentage)
+    uValue: 1.25
   valueB:
     uName: 
     uValue: 0
