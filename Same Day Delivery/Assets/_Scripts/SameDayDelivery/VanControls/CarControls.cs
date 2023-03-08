@@ -31,6 +31,7 @@ namespace SameDayDelivery.VanControls
         [Header("Collisions")]
         RaycastHit hit;
         [SerializeField] private Transform frontBumper;
+        [SerializeField] private Transform backBumper;
 
         [Header("Events")]
         public UnityEvent motorStart; 
@@ -107,15 +108,23 @@ namespace SameDayDelivery.VanControls
             packageChute.SetActive(false);
         }
 
-        private void FixedUpdate()
+        private void FixedUpdate()//send out raycasts from the front and back of the van, if the van collides with a house then stop the car 
         {
            if(Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
             {
-                Debug.Log("Hit");
                 SameDayDelivery.DeliverySystem.Destinations  house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
                 if (house != null)
                 {
                     currSpeed = 0; 
+                }
+            }
+
+            if (Physics.Raycast(backBumper.position, -transform.forward, out hit, 1f))
+            {
+                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                if (house != null)
+                {
+                    currSpeed = 0;
                 }
             }
         }
