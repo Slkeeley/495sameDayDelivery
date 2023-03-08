@@ -270,6 +270,36 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+--- !u!1 &625850353606079925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387968143528180400}
+  m_Layer: 0
+  m_Name: CarFront
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387968143528180400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625850353606079925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 60, z: 380}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9047636526850888076}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &659982087334966201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5778,7 +5808,7 @@ GameObject:
   - component: {fileID: 4415998007655854090}
   - component: {fileID: 1783309157385718847}
   m_Layer: 0
-  m_Name: DoorCollider
+  m_Name: Doors
   m_TagString: VanDoors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6546,6 +6576,7 @@ Transform:
   - {fileID: 3971459674697108543}
   - {fileID: 6467031013898157052}
   - {fileID: 121653082584627644}
+  - {fileID: 1387968143528180400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6625,6 +6656,7 @@ MonoBehaviour:
   overDrive: 0
   brakeForce: 0.03
   packageChute: {fileID: 8601662442590763047}
+  frontBumper: {fileID: 1387968143528180400}
   motorStart:
     m_PersistentCalls:
       m_Calls:

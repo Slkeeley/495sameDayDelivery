@@ -28,6 +28,10 @@ namespace SameDayDelivery.VanControls
         public float brakeForce;
         public GameObject packageChute;
 
+        [Header("Collisions")]
+        RaycastHit hit;
+        [SerializeField] private Transform frontBumper;
+
         [Header("Events")]
         public UnityEvent motorStart; 
         public UnityEvent driving; 
@@ -101,7 +105,19 @@ namespace SameDayDelivery.VanControls
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
-            // Debug.Log("The Van's Top Speed is: " + topSpeed);
+        }
+
+        private void FixedUpdate()
+        {
+           if(Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
+            {
+                Debug.Log("Hit");
+                SameDayDelivery.DeliverySystem.Destinations  house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                if (house != null)
+                {
+                    currSpeed = 0; 
+                }
+            }
         }
 
         // Update is called once per frame
@@ -266,7 +282,7 @@ namespace SameDayDelivery.VanControls
             }
         }
 
-        private IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
+        public IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
         {
             transform.Translate(Vector3.forward * (currSpeed * Time.deltaTime));
             currSpeed -= decelerationSpeed;

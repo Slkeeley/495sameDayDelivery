@@ -11,11 +11,9 @@ GameObject:
   - component: {fileID: 6074554372896922621}
   - component: {fileID: 6074554372896922620}
   - component: {fileID: 6074554372896922619}
-  - component: {fileID: 6074554372896922618}
-  - component: {fileID: 6074554372896922616}
   m_Layer: 0
   m_Name: House_v1.0LOD
-  m_TagString: Untagged
+  m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,32 +77,6 @@ MonoBehaviour:
   destinationLight: {fileID: 9030911767808938639}
   active: 0
   packageDelivered: 0
---- !u!65 &6074554372896922618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6074554372896922623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12.917651, y: 5.245535, z: 8.106245}
-  m_Center: {x: -3.5102048, y: 2.5632381, z: -0.813987}
---- !u!65 &6074554372896922616
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6074554372896922623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.098011, y: 4.41642, z: 3.5316768}
-  m_Center: {x: 4.2477665, y: 2.1328216, z: 1.6605766}
 --- !u!1 &6074554372905224678
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,14 +578,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15a0e6fa09fa2604992d942bd758debf, type: 3}
---- !u!23 &8920609576223781922 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3423149278665915708, guid: 15a0e6fa09fa2604992d942bd758debf, type: 3}
-  m_PrefabInstance: {fileID: 6074554372853860638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7748289200534572877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4596579816565360211, guid: 15a0e6fa09fa2604992d942bd758debf, type: 3}
+  m_PrefabInstance: {fileID: 6074554372853860638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8920609576223781922 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3423149278665915708, guid: 15a0e6fa09fa2604992d942bd758debf, type: 3}
   m_PrefabInstance: {fileID: 6074554372853860638}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8387159283607311359

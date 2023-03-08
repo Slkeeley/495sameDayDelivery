@@ -122,7 +122,7 @@ namespace SameDayDelivery.Controls
         private void SwitchControlsToPlayer()
         {
             carControls.ChuteActivation();
-            carControls.currSpeed = 0;
+            carControls.Decelerate(); 
             carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
@@ -206,7 +206,6 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             deliveryText.text = ""; 
         }
-
     }
 
 
