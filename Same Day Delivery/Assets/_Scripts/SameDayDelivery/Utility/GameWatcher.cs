@@ -16,6 +16,7 @@ namespace SameDayDelivery.Controls
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
         public GameObject vanCam;
+        [SerializeField] private GameObject van;
 
         [Header("Gameplay")]
         public static int currentScore;
@@ -41,8 +42,10 @@ namespace SameDayDelivery.Controls
 
         [Header("Events")]
         public UnityEvent goToFailScreen; 
-        public UnityEvent goToPassScreen; 
+        public UnityEvent goToPassScreen;
 
+        private bool driftingForward = false;
+        private float currSpeed; 
         // Start is called before the first frame update
         private void Start()
         {
@@ -50,12 +53,12 @@ namespace SameDayDelivery.Controls
         }
 
         // Update is called once per frame
-        private void Update()
+        private void  FixedUpdate()
         {
             if (TimeLeft > 0) //if the player still has time decrease the remaining time then update the UI 
             {
                 TimerOn = true;
-                TimeLeft -= Time.deltaTime;
+                TimeLeft -= Time.fixedDeltaTime;
                 UpdaterUI(TimeLeft);
             }
             else//player runs out of time and has failed the level 
@@ -70,7 +73,20 @@ namespace SameDayDelivery.Controls
             if (packagesDelivered >= packagesNeeded)
                 StartCoroutine(LevelComplete());
 
-            timeSinceLastDelivery += Time.deltaTime;
+            timeSinceLastDelivery += Time.fixedDeltaTime;
+
+            if(driftingForward)
+            {
+                Debug.Log("Drift Update");
+                if (currSpeed > 0)
+                {
+                    van.transform.Translate(Vector3.forward * currSpeed * Time.fixedDeltaTime);
+                    currSpeed -= 0.05f;
+                }
+                else driftingForward = false; 
+
+            }
+
 
             updateUI(); 
         }
@@ -101,6 +117,7 @@ namespace SameDayDelivery.Controls
             {
                 case "Van":
                     SwitchControlsToPlayer();
+                  //  StartCoroutine(driftToStop()); 
                     break;
                 case "Player":
                     SwitchControlsToVan();
@@ -122,13 +139,19 @@ namespace SameDayDelivery.Controls
         private void SwitchControlsToPlayer()
         {
             carControls.ChuteActivation();
-            carControls.Decelerate(); 
+            if (carControls.currSpeed > 5)
+            {
+                currSpeed = 10;
+                driftingForward = true;
+            }
+            carControls.currSpeed = 0;      
             carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
             vanCam.SetActive(false);
             sheldonCam.SetActive(true);
             currControls = "Player";
+
         }
 
         private void UpdaterUI(float currentTime) //used to update the timer text on screen to accurately reflect how much time is left 
@@ -206,6 +229,7 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             deliveryText.text = ""; 
         }
+
     }
 
 

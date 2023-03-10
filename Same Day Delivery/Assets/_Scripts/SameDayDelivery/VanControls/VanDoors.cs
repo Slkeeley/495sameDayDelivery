@@ -80,7 +80,9 @@ namespace SameDayDelivery.VanControls
             player.transform.position = playerExitPos.position;
             player.SetActive(true);
             playerInVan = false;
+            
             gameWatcher.SwitchControls();
+
         }
 
         private void EnterVan() //upon entering disable the player and then switch the controls to the van controls
