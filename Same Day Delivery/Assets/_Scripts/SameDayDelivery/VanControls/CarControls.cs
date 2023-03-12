@@ -10,6 +10,7 @@ namespace SameDayDelivery.VanControls
         [Header("References")]
         [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem premiumGas;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem freshTires;
         [Header("Van Speed")]
         public float topSpeed=25f; //the fastest speed that the van can move 
         public float topReverseSpeed; //the fastest speed that the van can move 
@@ -100,17 +101,24 @@ namespace SameDayDelivery.VanControls
         void upgradeAttachment()
         {
             premiumGas = data.upgradeLookupTable.upgrades[9];
+            freshTires= data.upgradeLookupTable.upgrades[6];
         }
 
         void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
         {
-            if (premiumGas.purchased) topSpeed = topSpeed+100;
+            if (premiumGas.purchased) topSpeed = topSpeed+25;
+
         }
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
         private void Drive()
         {
-            rotationSpeed = currSpeed*2;
+            if (!overDrive) 
+            {
+                if (freshTires.purchased) rotationSpeed = currSpeed * 2;
+                else rotationSpeed = currSpeed;
+            }
+
             var rotation = _movement.x * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
@@ -225,7 +233,8 @@ namespace SameDayDelivery.VanControls
         {
             overDrive = true;
             topSpeed = overDriveSpeed;
-            rotationSpeed = currSpeed / 8;
+            if (freshTires.purchased) rotationSpeed = currSpeed/5;
+            else rotationSpeed = currSpeed/10;
             brakeForce = 0; 
         }
 
@@ -233,7 +242,8 @@ namespace SameDayDelivery.VanControls
         {
             overDrive = false;
             topSpeed = overDriveSpeed/2;
-            rotationSpeed = currSpeed*2;
+            if (freshTires.purchased) rotationSpeed = currSpeed * 2;
+            else rotationSpeed = currSpeed;
             brakeForce = defaultBrakeForce; 
         }
 
