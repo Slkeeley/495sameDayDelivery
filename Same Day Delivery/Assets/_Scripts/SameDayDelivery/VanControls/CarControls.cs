@@ -7,8 +7,11 @@ namespace SameDayDelivery.VanControls
 {
     public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
     {
+        [Header("References")]
+        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem premiumGas;
         [Header("Van Speed")]
-        public static float topSpeed=25f; //the fastest speed that the van can move 
+        public float topSpeed=25f; //the fastest speed that the van can move 
         public float topReverseSpeed; //the fastest speed that the van can move 
         public float overDriveSpeed;
         public float currSpeed; //the current speed the van is moving
@@ -45,59 +48,7 @@ namespace SameDayDelivery.VanControls
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
 
-        /*
-        #region Input Events and Button State Control
 
-        private ButtonState _interactButton;
-        private bool _interactHeld;
-        private ButtonState _sprintButton;
-        private bool _sprintHeld;
-
-        // This may not be necessary, but if you need fine control over when the interact and sprinting buttons are pressed
-        // you can use these variables and functions.
-
-        private void OnEnable()
-        {
-            _playerControlManager.InteractBegin += InteractBegin;
-            _playerControlManager.InteractEnd += InteractEnd;
-            _playerControlManager.SprintBegin += SprintBegin;
-            _playerControlManager.SprintEnd += SprintEnd;
-        }
-
-        private void OnDisable()
-        {
-            _playerControlManager.InteractBegin -= InteractBegin;
-            _playerControlManager.InteractEnd -= InteractEnd;
-            _playerControlManager.SprintBegin -= SprintBegin;
-            _playerControlManager.SprintEnd -= SprintEnd;
-        }
-
-        private void InteractBegin()
-        {
-            _interactButton = ButtonState.Down;
-            _interactHeld = true;
-        }
-
-        private void InteractEnd()
-        {
-            _interactButton = ButtonState.Up;
-            _interactHeld = false;
-        }
-
-        private void SprintBegin()
-        {
-            _sprintButton = ButtonState.Down;
-            _sprintHeld = true;
-        }
-
-        private void SprintEnd()
-        {
-            _sprintButton = ButtonState.Up;
-            _sprintHeld = false;
-        }
-
-        #endregion
-        */
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
@@ -106,6 +57,8 @@ namespace SameDayDelivery.VanControls
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
+            upgradeAttachment();
+            checkUpgradePurchaseValues();
         }
 
         private void FixedUpdate()//send out raycasts from the front and back of the van, if the van collides with a house then stop the car 
@@ -144,6 +97,15 @@ namespace SameDayDelivery.VanControls
 
         }
 
+        void upgradeAttachment()
+        {
+            premiumGas = data.upgradeLookupTable.upgrades[9];
+        }
+
+        void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
+        {
+            if (premiumGas.purchased) topSpeed = topSpeed+100;
+        }
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
         private void Drive()

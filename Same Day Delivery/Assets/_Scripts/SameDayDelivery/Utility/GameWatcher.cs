@@ -11,8 +11,9 @@ namespace SameDayDelivery.Controls
     public class GameWatcher : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data; 
-        public CarControls carControls;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem earlyAlarm; 
+       public CarControls carControls;
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
         public GameObject vanCam;
@@ -45,11 +46,18 @@ namespace SameDayDelivery.Controls
         public UnityEvent goToPassScreen;
 
         private bool driftingForward = false;
-        private float currSpeed; 
+        private float currSpeed;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            //attach upgrade scriptabl objects
+            earlyAlarm = data.upgradeLookupTable.upgrades[3];
+        }
         private void Start()
         {
+
             LevelSetup();
+            checkUpgradePurchaseValues(); 
         }
 
         // Update is called once per frame
@@ -75,18 +83,7 @@ namespace SameDayDelivery.Controls
 
             timeSinceLastDelivery += Time.fixedDeltaTime;
 
-            if(driftingForward)
-            {
-                Debug.Log("Drift Update");
-                if (currSpeed > 0)
-                {
-                    van.transform.Translate(Vector3.forward * currSpeed * Time.fixedDeltaTime);
-                    currSpeed -= 0.05f;
-                }
-                else driftingForward = false; 
-
-            }
-
+            if(driftingForward)  driftToStop();
 
             updateUI(); 
         }
@@ -104,6 +101,11 @@ namespace SameDayDelivery.Controls
             dtColor = new Color(1f, 1f, 1f, 1f);
             deliveryText.text = ""; 
             SwitchControlsToPlayer();
+        }
+
+        void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
+        {
+            if (earlyAlarm.purchased) TimeLeft = TimeLeft + 10; 
         }
 
         void updateUI()
@@ -164,6 +166,17 @@ namespace SameDayDelivery.Controls
             timerText.text = $"{minutes:00} : {seconds:00}";
             scoreText.text = $"Score: {score}";
         }
+
+        void driftToStop()
+        {
+            if (currSpeed > 0)
+            {
+                van.transform.Translate(Vector3.forward * currSpeed * Time.fixedDeltaTime);
+                currSpeed -= 0.05f;
+            }
+            else driftingForward = false;
+        }
+
 
         private IEnumerator GgGoNext() //Coroutine to delay loading the next so that the player can process that they failed/
         {
