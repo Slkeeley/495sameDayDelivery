@@ -36,18 +36,22 @@ namespace SameDayDelivery.VanControls
         RaycastHit hit;
         [SerializeField] private Transform frontBumper;
         [SerializeField] private Transform backBumper;
+        public bool crashed;
 
         [Header("Events")]
         public UnityEvent motorStart; 
         public UnityEvent driving; 
         public UnityEvent reverse;
         public UnityEvent stopNoises;
+        public UnityEvent crash; 
+
 
         // private variables
         private float defaultBrakeForce; 
         private bool chuteActive;
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
+        
 
 
         private void Awake()
@@ -64,14 +68,22 @@ namespace SameDayDelivery.VanControls
 
         private void FixedUpdate()//send out raycasts from the front and back of the van, if the van collides with a house then stop the car 
         {
-           if(Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
+            if (Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
             {
-                SameDayDelivery.DeliverySystem.Destinations  house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
                 if (house != null)
                 {
-                    currSpeed = 0; 
+                    currSpeed = 0;
+                    if (!crashed)
+                    {
+                        crashed = true;
+                        crash?.Invoke();
+                    }
                 }
+                else crashed = false;
             }
+            else crashed = false; 
+           
 
             if (Physics.Raycast(backBumper.position, -transform.forward, out hit, 1f))
             {
@@ -79,8 +91,15 @@ namespace SameDayDelivery.VanControls
                 if (house != null)
                 {
                     currSpeed = 0;
+                    if (!crashed)
+                    {
+                        crashed = true;
+                        crash?.Invoke();
+                    }
                 }
+                else crashed = false;
             }
+            
         }
 
         // Update is called once per frame
@@ -95,7 +114,6 @@ namespace SameDayDelivery.VanControls
                 if (backwards) StartCoroutine(DecelerateBackwards());
             }
             else return;
-
         }
 
         void upgradeAttachment()

@@ -837,6 +837,8 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: f27a2c8742e4f1349ad3461a304e3b3b, type: 3}
   - {fileID: 8300000, guid: a113734463777ea429d903beb2ab8575, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 37895ff3237a1164289a4ebdf03e3b99, type: 3}
 --- !u!82 &6110657812294521746
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6675,6 +6677,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6ef12dae925019547af385ef10ffaa44, type: 2}
   premiumGas: {fileID: 0}
+  freshTires: {fileID: 0}
+  topSpeed: 25
   topReverseSpeed: 15
   overDriveSpeed: 0
   currSpeed: 0
@@ -6730,6 +6734,21 @@ MonoBehaviour:
       - m_Target: {fileID: 6110657812294521746}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crash:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1376506283823953891}
+        m_TargetAssemblyTypeName: VanSounds, Assembly-CSharp
+        m_MethodName: crashNoise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
