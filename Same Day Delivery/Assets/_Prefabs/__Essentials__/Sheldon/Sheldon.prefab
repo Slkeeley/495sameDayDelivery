@@ -62,6 +62,8 @@ MonoBehaviour:
   groundCheckInterval: 0.25
   yOffset: 0.2
   _cam: {fileID: 0}
+  _upgradeCardio: {fileID: 0}
+  _upgradeWeightlifting: {fileID: 0}
   _isGrounded: 0
 --- !u!114 &4024928757392704784
 MonoBehaviour:
@@ -75,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81003026efa6cfd4c8238db8b25d1a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 0}
   maxChargeTime: 1
   maxThrowForce: 40
   packageMount: {fileID: 5161023617940579251}
@@ -87,12 +90,28 @@ MonoBehaviour:
   _fullChargeAnimator: {fileID: 6294673283072884039}
   _buttonDown: 0
   _throwCharge: 0
+  _upgradeWorkGloves: {fileID: 0}
   onPackageThrow:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4730945224806557179}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPickup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3925165997010140235}
+        m_TargetAssemblyTypeName: SheldonSounds, Assembly-CSharp
+        m_MethodName: pickupSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -451,6 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466726025171911990}
   - component: {fileID: 4730945224806557179}
+  - component: {fileID: 3925165997010140235}
   - component: {fileID: 7937028936479407556}
   m_Layer: 0
   m_Name: Playlist - Throw Package
@@ -494,6 +514,20 @@ MonoBehaviour:
   playOnAwake: 0
   _paused: 0
   _nextTrackClock: 0
+--- !u!114 &3925165997010140235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470991123442073164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360e32610aefea84187ff0e1fcde6478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: fc84fc0a39d5e7a49a474a90f7306623, type: 3}
 --- !u!82 &7937028936479407556
 AudioSource:
   m_ObjectHideFlags: 0
