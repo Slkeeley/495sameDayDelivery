@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5144841230815554566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3667541541548913145}
+  m_Layer: 0
+  m_Name: AlienNPC_v3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3667541541548913145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144841230815554566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4959127870838207230}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4852881466296734997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3667541541548913145}
+    m_Modifications:
+    - target: {fileID: -8842495709487729477, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.9573054
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6880441467096100936, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: -5909758475740406736, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: 919132149155446097, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Name
+      value: Alien Lady 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086483816215498301, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: 5659946957649055719, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: 6931098759241734206, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    - target: {fileID: 7791638017845282020, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09693e8d9972229418afea0dbc8385fc, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+--- !u!4 &4959127870838207230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dded5956ce6ac2f4b98b6b2643eae389, type: 3}
+  m_PrefabInstance: {fileID: 4852881466296734997}
+  m_PrefabAsset: {fileID: 0}
