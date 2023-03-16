@@ -124,7 +124,7 @@ namespace SameDayDelivery.VanControls
 
         void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
         {
-            if (premiumGas.purchased) topSpeed = topSpeed+100;
+            if (premiumGas.purchased) topSpeed = topSpeed+20;
 
         }
 
