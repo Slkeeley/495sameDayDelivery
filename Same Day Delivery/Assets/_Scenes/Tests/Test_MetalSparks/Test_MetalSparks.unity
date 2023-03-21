@@ -187,12 +187,28 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
+      propertyPath: TrailModule.textureMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
+      propertyPath: TrailModule.lifetime.scalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
       propertyPath: LightsModule.rangeCurve.scalar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
       propertyPath: LightsModule.intensityCurve.scalar
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724663287810294741, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.ctime1
+      value: 17540
       objectReference: {fileID: 0}
     - target: {fileID: 6724663288657893502, guid: 5ea73710982141e4e92ffb551977af54, type: 3}
       propertyPath: m_Name

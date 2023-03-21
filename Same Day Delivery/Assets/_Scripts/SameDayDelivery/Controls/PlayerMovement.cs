@@ -34,8 +34,11 @@ namespace SameDayDelivery.Controls
         private RaycastHit _hit;
         [SerializeField]
         private bool _isGrounded;
+        [SerializeField]
+        private Animator _animator;
 
         private PackagePickup _packagePickup;
+        private static readonly int SpeedAnim = Animator.StringToHash("Speed");
 
         private void Awake()
         {
@@ -61,12 +64,13 @@ namespace SameDayDelivery.Controls
 
         private IEnumerator UpdateVerticalPosition()
         {
+            var transform1 = transform;
             while (true)
             {
                 // GroundCharacter();
-                var pos = transform.position;
+                var pos = transform1.position;
                 pos.y = 0.15f;
-                transform.position = pos;
+                transform1.position = pos;
                 yield return new WaitForSeconds(groundCheckInterval);
             }
         }
@@ -111,6 +115,13 @@ namespace SameDayDelivery.Controls
 
             // direction, speed, and time coefficient, and we're done!
             var motionWithSpeed = motion * (speed * Time.deltaTime);
+            if (_animator)
+            {
+                var horizontalSpeed = new Vector3(motion.x, 0f, motion.z).magnitude;
+                Debug.Log($"speed = {horizontalSpeed}");
+                _animator.SetFloat(SpeedAnim, horizontalSpeed);
+                Debug.Log($"ACK = {_animator.GetFloat(SpeedAnim)}");
+            }
 
             _isGrounded = _characterController.isGrounded;
             if (!_isGrounded)
