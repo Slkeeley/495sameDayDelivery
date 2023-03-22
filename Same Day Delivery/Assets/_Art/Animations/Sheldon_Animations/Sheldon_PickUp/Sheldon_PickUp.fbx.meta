@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 899407fe1b8889e409cc07b5c3b206ab
+guid: 7123896266e969e42ac23cca90320157
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Sheldon_Sprinting
+    second: PickUp
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sheldon_Sprinting
+      name: PickUp
       takeName: Take 001
       internalID: 0
-      firstFrame: 40
-      lastFrame: 55
+      firstFrame: 1
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -62,7 +62,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 40
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []

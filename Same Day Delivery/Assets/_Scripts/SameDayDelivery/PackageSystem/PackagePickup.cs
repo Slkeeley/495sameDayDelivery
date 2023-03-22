@@ -28,6 +28,7 @@ namespace SameDayDelivery.PackageSystem
         [SerializeField] private Animator _fullChargeAnimator;
         [SerializeField] private bool _buttonDown;
         [SerializeField] private float _throwCharge;
+        [SerializeField] private Animator _sheldonAnimator;
         [SerializeField] private UpgradeItem _upgradeWorkGloves;
         [SerializeField] private UnityEvent onPackageThrow;
         [SerializeField] private UnityEvent onPickup;
@@ -40,6 +41,7 @@ namespace SameDayDelivery.PackageSystem
         private static readonly int GrowParam = Animator.StringToHash("Grow");
         private static readonly int LockParam = Animator.StringToHash("Lock");
         private Vector3 _reticleOriginalScale;
+        private static readonly int PickupAnim = Animator.StringToHash("Pickup");
 
         private void Awake()
         {
@@ -198,6 +200,8 @@ namespace SameDayDelivery.PackageSystem
             carryingPackage.transform.position = packageMount.position;
             carryingPackage.transform.SetParent(packageMount);
             _justPickedUp = true;
+            _sheldonAnimator.SetBool(PickupAnim, true);
+            Debug.Log($"Pickup");
             onPickup?.Invoke();
         }
 
@@ -225,5 +229,10 @@ namespace SameDayDelivery.PackageSystem
         public bool CarryingPackage() => carryingPackage != null;
 
         public Package GetCarryingPackage() => carryingPackage;
+
+        public void PickupAnimationCompleted()
+        {
+            _sheldonAnimator.SetBool(PickupAnim, false);
+        }
     }
 }
