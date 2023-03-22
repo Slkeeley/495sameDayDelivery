@@ -1,6 +1,7 @@
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -37,6 +38,8 @@ namespace SameDayDelivery.Controls
         [SerializeField]
         private Animator _animator;
 
+        private float _speedRampTimer;
+
         private PackagePickup _packagePickup;
         private static readonly int SpeedAnim = Animator.StringToHash("Speed");
 
@@ -46,6 +49,7 @@ namespace SameDayDelivery.Controls
             _rigidBody = GetComponent<Rigidbody>();
             _playerControlManager = GetComponent<PlayerControlManager>();
             _packagePickup = GetComponent<PackagePickup>();
+            _speedRampTimer = 0f;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -77,7 +81,17 @@ namespace SameDayDelivery.Controls
 
         private void Update()
         {
+            SpeedRamp();
             Movement();
+        }
+
+        private void SpeedRamp()
+        {
+            var horizontalInput = _playerControlManager.move.x;
+            var verticalInput = _playerControlManager.move.y;
+
+            _speedRampTimer += ((horizontalInput != 0f || verticalInput != 0f)) ? Time.deltaTime : -Time.deltaTime;
+            _speedRampTimer = Mathf.Clamp01(_speedRampTimer);
         }
 
         private void Movement()
@@ -115,12 +129,14 @@ namespace SameDayDelivery.Controls
 
             // direction, speed, and time coefficient, and we're done!
             var motionWithSpeed = motion * (speed * Time.deltaTime);
+
+            motionWithSpeed = Vector3.Slerp(Vector3.zero, motionWithSpeed, _speedRampTimer);
+            
+            // trigger animation with speed
             if (_animator)
             {
-                var horizontalSpeed = new Vector3(motion.x, 0f, motion.z).magnitude;
-                Debug.Log($"speed = {horizontalSpeed}");
+                var horizontalSpeed = motionWithSpeed.magnitude;
                 _animator.SetFloat(SpeedAnim, horizontalSpeed);
-                Debug.Log($"ACK = {_animator.GetFloat(SpeedAnim)}");
             }
 
             _isGrounded = _characterController.isGrounded;
