@@ -140,9 +140,12 @@ namespace SameDayDelivery.PackageSystem
 
         private void ThrowPackage()
         {
-            Transform localTransform;
-            (localTransform = carryingPackage.transform).SetParent(packagesParent);
-            localTransform.position = packageMount.position;
+            Transform packageTransform = carryingPackage.transform;
+            packageTransform.localRotation = Quaternion.identity;
+            packageTransform.rotation = Quaternion.identity;
+            packageTransform.SetParent(packagesParent);
+            packageTransform.position = packageMount.position;
+            
 
             var forward = _camera.transform.forward;
 
@@ -197,11 +200,14 @@ namespace SameDayDelivery.PackageSystem
             carryingPackage = targetPackage;
             gameData.carryingPackage = carryingPackage;
             carryingPackage.Pickup();
-            carryingPackage.transform.position = packageMount.position;
-            carryingPackage.transform.SetParent(packageMount);
+            var carryingPackageTransform = carryingPackage.transform;
+            carryingPackageTransform.position = packageMount.position;
+            carryingPackageTransform.rotation = Quaternion.identity;
+            carryingPackageTransform.SetParent(packageMount);
+            carryingPackageTransform.localPosition = Vector3.zero;
+            carryingPackageTransform.localRotation = Quaternion.identity;
             _justPickedUp = true;
             _sheldonAnimator.SetBool(PickupAnim, true);
-            Debug.Log($"Pickup");
             onPickup?.Invoke();
         }
 
