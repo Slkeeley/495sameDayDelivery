@@ -42,6 +42,7 @@ namespace SameDayDelivery.PackageSystem
         private static readonly int LockParam = Animator.StringToHash("Lock");
         private Vector3 _reticleOriginalScale;
         private static readonly int PickupAnim = Animator.StringToHash("Pickup");
+        private static readonly int ThrowAnim = Animator.StringToHash("Throw");
 
         private void Awake()
         {
@@ -117,9 +118,8 @@ namespace SameDayDelivery.PackageSystem
                 _fullChargeAnimator.SetBool(LockParam, true);
                 return;
             }
-
+            
             ThrowPackage();
-
         }
 
         private void ButtonDown()
@@ -163,6 +163,7 @@ namespace SameDayDelivery.PackageSystem
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
             carryingPackage.Throw(forward, power);
+            _sheldonAnimator.SetBool(ThrowAnim, true);
 
             onPackageThrow?.Invoke();
             
@@ -239,6 +240,7 @@ namespace SameDayDelivery.PackageSystem
         public void PickupAnimationCompleted()
         {
             _sheldonAnimator.SetBool(PickupAnim, false);
+            _sheldonAnimator.SetBool(ThrowAnim, false);
         }
     }
 }
