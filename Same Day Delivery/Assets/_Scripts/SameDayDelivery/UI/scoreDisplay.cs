@@ -14,7 +14,9 @@ namespace SameDayDelivery.UI
         void Start()
         {
             mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
-            packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
+           // packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
+            
+            
             //put zBucks here
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

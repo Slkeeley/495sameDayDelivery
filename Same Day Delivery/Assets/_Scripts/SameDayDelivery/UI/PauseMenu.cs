@@ -16,7 +16,8 @@ namespace SameDayDelivery.UI
         void Start()
         {
             // fixedDeltaTime = Time.fixedDeltaTime;
-            pauseMenu.SetActive(false);
+            // pauseMenu.SetActive(false);
+            ResumeGame();
         }
 
         public void CheckPauseGame(InputAction.CallbackContext context)
