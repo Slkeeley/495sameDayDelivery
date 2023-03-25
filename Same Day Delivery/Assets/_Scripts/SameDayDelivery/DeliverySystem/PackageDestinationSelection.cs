@@ -21,12 +21,6 @@ namespace SameDayDelivery.DeliverySystem
             chooseNeighborhood();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void chooseNeighborhood() //c
         {
             for (int i = 0; i < neighborhoods.Count; i++)
@@ -35,6 +29,7 @@ namespace SameDayDelivery.DeliverySystem
                 if (chosenN != mostRecentNeighborhood)
                 {
                     mostRecentNeighborhood = chosenN;
+                    Debug.Log("A neighborhood has been shosen");
                     break;
                 }
                 else

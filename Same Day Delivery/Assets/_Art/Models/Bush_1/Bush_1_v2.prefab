@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5105015025220900597}
   - component: {fileID: 1936034594208642864}
   - component: {fileID: 4645203754008967039}
+  - component: {fileID: 3695072041868244450}
   m_Layer: 0
   m_Name: Bush_1_v2_top
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3695072041868244450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866728941141553538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7170336, y: 1.3503596, z: 0.69296014}
+  m_Center: {x: -0.047934353, y: 0.66629297, z: -0.04957235}
 --- !u!1 &6089906943434319932
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6901874962570031750}
+  - component: {fileID: 8897832559771327920}
   m_Layer: 0
   m_Name: Bush_1_v2
   m_TagString: Untagged
@@ -106,13 +121,33 @@ Transform:
   m_GameObject: {fileID: 6089906943434319932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5105015025220900597}
   - {fileID: 3363724724586635114}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &8897832559771327920
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6089906943434319932}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.03488493, y: 0.6565403, z: -0.011196256}
+  m_Size: 1.3130808
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.01511969
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4645203754008967039}
+    - renderer: {fileID: 746098311581732939}
+  m_Enabled: 1
 --- !u!1 &7241408438088322575
 GameObject:
   m_ObjectHideFlags: 0
