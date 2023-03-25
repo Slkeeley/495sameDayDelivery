@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -34,8 +36,19 @@ namespace SameDayDelivery.Controls
         private RaycastHit _hit;
         [SerializeField]
         private bool _isGrounded;
+        [SerializeField]
+        private Animator _animator;
+
+        private float _horizontalRampTimer;
+        private float _verticalRampTimer;
 
         private PackagePickup _packagePickup;
+        private static readonly int SpeedAnim = Animator.StringToHash("Speed");
+        private static readonly int SprintingAnim = Animator.StringToHash("Sprinting");
+        private float _oldHorizontalInput;
+        private float _oldVerticalInput;
+
+        private const float TOLERANCE = 0.01f;
 
         private void Awake()
         {
@@ -43,6 +56,8 @@ namespace SameDayDelivery.Controls
             _rigidBody = GetComponent<Rigidbody>();
             _playerControlManager = GetComponent<PlayerControlManager>();
             _packagePickup = GetComponent<PackagePickup>();
+            _horizontalRampTimer = 0f;
+            _verticalRampTimer = 0f;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -61,19 +76,43 @@ namespace SameDayDelivery.Controls
 
         private IEnumerator UpdateVerticalPosition()
         {
+            var transform1 = transform;
             while (true)
             {
                 // GroundCharacter();
-                var pos = transform.position;
+                var pos = transform1.position;
                 pos.y = 0.15f;
-                transform.position = pos;
+                transform1.position = pos;
                 yield return new WaitForSeconds(groundCheckInterval);
             }
         }
 
         private void Update()
         {
+            SpeedRamp();
             Movement();
+        }
+
+        private void SpeedRamp()
+        {
+            var horizontalInput = _playerControlManager.move.x;
+            var verticalInput = _playerControlManager.move.y;
+
+            if (horizontalInput != 0f)
+                _horizontalRampTimer += Time.deltaTime;
+            else
+                _horizontalRampTimer = 0f;
+
+            if (verticalInput != 0f)
+                _verticalRampTimer += Time.deltaTime;
+            else
+                _verticalRampTimer = 0f;
+
+            _horizontalRampTimer = Mathf.Clamp01(_horizontalRampTimer);
+            _verticalRampTimer = Mathf.Clamp01(_verticalRampTimer);
+            
+            _oldHorizontalInput = horizontalInput;
+            _oldVerticalInput = verticalInput;
         }
 
         private void Movement()
@@ -82,6 +121,8 @@ namespace SameDayDelivery.Controls
             var verticalInput = _playerControlManager.move.y;
 
             var speed = (_playerControlManager.sprinting) ? runSpeed : walkSpeed;
+
+            _animator.SetBool(SprintingAnim, _playerControlManager.sprinting);
 
             var upgradeSpeedMod = 1f;
             
@@ -106,11 +147,27 @@ namespace SameDayDelivery.Controls
             forward.Normalize();
             right.Normalize();
 
+            
             // combine the vertical and horizontal vectors, and once again normalize them so we don't move faster diagonally
-            var motion = (forward * verticalInput + right * horizontalInput).normalized;
+            var horizontalRampedInput = Mathf.Lerp(0f, horizontalInput, _horizontalRampTimer);
+            var verticalRampedInput = Mathf.Lerp(0f, verticalInput, _verticalRampTimer);
+            
+            var motion = (forward * verticalRampedInput + right * horizontalRampedInput);
+
+            // motion = Vector3.Slerp(Vector3.zero, motion, _speedRampTimer);
 
             // direction, speed, and time coefficient, and we're done!
             var motionWithSpeed = motion * (speed * Time.deltaTime);
+
+            // motionWithSpeed = Vector3.Slerp(Vector3.zero, motionWithSpeed, _speedRampTimer);
+            
+            // trigger animation with speed
+            if (_animator)
+            {
+                var horizontalSpeed = motionWithSpeed.magnitude;
+                // Debug.Log($"horizontalSpeed = {horizontalSpeed.ToString()}");
+                _animator.SetFloat(SpeedAnim, horizontalSpeed);
+            }
 
             _isGrounded = _characterController.isGrounded;
             if (!_isGrounded)
@@ -126,6 +183,9 @@ namespace SameDayDelivery.Controls
             var pos = transform.position;
             pos.y = yOffset;
             transform.position = pos;
+
+            // _movedRight = (horizontalInput > 0f);
+            // _movedForward = (verticalInput > 0f);
         }
 
         private void GroundCharacter()

@@ -28,6 +28,7 @@ namespace SameDayDelivery.PackageSystem
         [SerializeField] private Animator _fullChargeAnimator;
         [SerializeField] private bool _buttonDown;
         [SerializeField] private float _throwCharge;
+        [SerializeField] private Animator _sheldonAnimator;
         [SerializeField] private UpgradeItem _upgradeWorkGloves;
         [SerializeField] private UnityEvent onPackageThrow;
         [SerializeField] private UnityEvent onPickup;
@@ -40,6 +41,7 @@ namespace SameDayDelivery.PackageSystem
         private static readonly int GrowParam = Animator.StringToHash("Grow");
         private static readonly int LockParam = Animator.StringToHash("Lock");
         private Vector3 _reticleOriginalScale;
+        private static readonly int PickupAnim = Animator.StringToHash("Pickup");
 
         private void Awake()
         {
@@ -138,9 +140,12 @@ namespace SameDayDelivery.PackageSystem
 
         private void ThrowPackage()
         {
-            Transform localTransform;
-            (localTransform = carryingPackage.transform).SetParent(packagesParent);
-            localTransform.position = packageMount.position;
+            Transform packageTransform = carryingPackage.transform;
+            packageTransform.localRotation = Quaternion.identity;
+            packageTransform.rotation = Quaternion.identity;
+            packageTransform.SetParent(packagesParent);
+            packageTransform.position = packageMount.position;
+            
 
             var forward = _camera.transform.forward;
 
@@ -195,9 +200,14 @@ namespace SameDayDelivery.PackageSystem
             carryingPackage = targetPackage;
             gameData.carryingPackage = carryingPackage;
             carryingPackage.Pickup();
-            carryingPackage.transform.position = packageMount.position;
-            carryingPackage.transform.SetParent(packageMount);
+            var carryingPackageTransform = carryingPackage.transform;
+            carryingPackageTransform.position = packageMount.position;
+            carryingPackageTransform.rotation = Quaternion.identity;
+            carryingPackageTransform.SetParent(packageMount);
+            carryingPackageTransform.localPosition = Vector3.zero;
+            carryingPackageTransform.localRotation = Quaternion.identity;
             _justPickedUp = true;
+            _sheldonAnimator.SetBool(PickupAnim, true);
             onPickup?.Invoke();
         }
 
@@ -225,5 +235,10 @@ namespace SameDayDelivery.PackageSystem
         public bool CarryingPackage() => carryingPackage != null;
 
         public Package GetCarryingPackage() => carryingPackage;
+
+        public void PickupAnimationCompleted()
+        {
+            _sheldonAnimator.SetBool(PickupAnim, false);
+        }
     }
 }

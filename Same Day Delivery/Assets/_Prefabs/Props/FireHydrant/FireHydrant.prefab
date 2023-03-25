@@ -5007,6 +5007,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4561597383088564820}
+  - component: {fileID: 7229013847408126755}
+  - component: {fileID: 5449211886676448768}
   m_Layer: 0
   m_Name: FireHydrant
   m_TagString: Untagged
@@ -5023,14 +5025,56 @@ Transform:
   m_GameObject: {fileID: 4561597383088564821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4561597382980749291}
   - {fileID: 4561597383117732076}
   - {fileID: 4561597382489916526}
+  - {fileID: 8827794109665533493}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7229013847408126755
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561597383088564821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.4594529
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0571407, z: 0}
+--- !u!205 &5449211886676448768
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561597383088564821}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 1.1250587, z: 0}
+  m_Size: 2.2501183
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.10042399
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4561597381935657733}
+    - renderer: {fileID: 4561597381977160317}
+    - renderer: {fileID: 4561597383117732074}
+    - renderer: {fileID: 4561597382489916524}
+  - screenRelativeHeight: 0.024355998
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6976659956628990668}
+    - renderer: {fileID: 3386945707947223760}
+  m_Enabled: 1
 --- !u!1 &4561597383117732075
 GameObject:
   m_ObjectHideFlags: 0
@@ -9835,3 +9879,83 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1001 &9009493411091921374
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4561597383088564820}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7072281158971878638, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 674536a154fcf7542ab80c6655a386a5, type: 2}
+    - target: {fileID: -3312116425323097330, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f156dcfcd7ae7d0429bb0af8c2a597da, type: 2}
+    - target: {fileID: 919132149155446097, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+      propertyPath: m_Name
+      value: Fire_Hydrant_LOD
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+--- !u!4 &8827794109665533493 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+  m_PrefabInstance: {fileID: 9009493411091921374}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6976659956628990668 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7072281158971878638, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+  m_PrefabInstance: {fileID: 9009493411091921374}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3386945707947223760 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3312116425323097330, guid: b878bf8c8cf4b9d4fb18142f2c980119, type: 3}
+  m_PrefabInstance: {fileID: 9009493411091921374}
+  m_PrefabAsset: {fileID: 0}
