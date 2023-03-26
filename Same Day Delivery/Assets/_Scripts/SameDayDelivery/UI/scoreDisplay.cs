@@ -13,7 +13,7 @@ namespace SameDayDelivery.UI
         // Start is called before the first frame update
         void Start()
         {
-            mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
+          //  mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
            // packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
             
             

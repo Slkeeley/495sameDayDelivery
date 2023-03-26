@@ -13,6 +13,9 @@ namespace SameDayDelivery.Controls
         [Header("References")]
         [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem earlyAlarm;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem payRaise;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem employeeOfTheMonth;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
         [SerializeField] private SameDayDelivery.UI.gameplayUI UI; 
         public CarControls carControls;
         public PlayerControlManager playerControls;
@@ -21,7 +24,7 @@ namespace SameDayDelivery.Controls
         [SerializeField] private GameObject van;
 
         [Header("Gameplay Values")]
-        public static int currentScore;
+        public int currentScore;
         public float TimeLeft;
         public bool TimerOn; //bool to make sure timer does not go below 0
         public string currControls;
@@ -38,11 +41,13 @@ namespace SameDayDelivery.Controls
         //Privaye vars 
         private bool driftingForward = false;
         private float currSpeed;
+        private bool payRaised; 
 
         private void Awake()
         {
             //attach upgrade scriptable objects here 
             earlyAlarm = data.upgradeLookupTable.upgrades[3];
+            payRaise= data.upgradeLookupTable.upgrades[8];
         }
         private void Start()
         {
@@ -89,7 +94,10 @@ namespace SameDayDelivery.Controls
 
         void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
         {
-            if (earlyAlarm.purchased) TimeLeft = TimeLeft + 10; 
+            if (earlyAlarm.purchased) TimeLeft = TimeLeft + 10;
+            if (payRaise.purchased) payRaised = true;
+
+            if (payRaised) Debug.Log("pay raised");
         }
 
         void updateUI()//update these values in the UI 
@@ -167,7 +175,8 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
             zergCoinsGained = currentScore / 50;
-            data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised) data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
+            else data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             goToFailScreen?.Invoke(); 
         }
 
@@ -177,7 +186,8 @@ namespace SameDayDelivery.Controls
             UI.successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
-            data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised) data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
+            else data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
             currLevel++;
             goToPassScreen?.Invoke();//invoke the event that moves to the success screen 
         }
