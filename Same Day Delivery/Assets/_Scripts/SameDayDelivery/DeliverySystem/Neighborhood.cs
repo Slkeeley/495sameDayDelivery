@@ -5,13 +5,9 @@ namespace SameDayDelivery.DeliverySystem
 {
     public class Neighborhood : MonoBehaviour
     {
+        [SerializeField] private GameObject chosenHouse; 
         public List<GameObject> homes; //All the possible delivery destinations within this neighborhood
 
-
-        void Update()
-        {
-
-        }
 
         public void
             chooseDeliveryDestination() //randomly select one house in this neighborhood to deliver a package to. 
@@ -22,7 +18,13 @@ namespace SameDayDelivery.DeliverySystem
 
                 if (homes[houseSelected].GetComponent<Destinations>().packageDelivered == false)
                 {
-                    homes[houseSelected].GetComponent<Destinations>().activeHouse = true;
+                  //  homes[houseSelected].GetComponent<Destinations>().activeHouse = true;
+                    chosenHouse = homes[houseSelected];
+                    if (chosenHouse.GetComponent<Destinations>().active == false) 
+                    {  
+                        chosenHouse.GetComponent<Destinations>().active = true; 
+                    }
+                  
                     break;
                 }
                 else

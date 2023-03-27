@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -183,27 +181,21 @@ namespace SameDayDelivery.Controls
             var pos = transform.position;
             pos.y = yOffset;
             transform.position = pos;
-
-            // _movedRight = (horizontalInput > 0f);
-            // _movedForward = (verticalInput > 0f);
         }
 
         private void GroundCharacter()
         {
-            var transform1 = transform;
-            _ray = new Ray();
-            _ray.origin = transform1.position;
-            _ray.direction = Vector3.down;
-
-            if (Physics.Raycast(_ray, out _hit, 100f, groundLayer))
-            {
-                var pos = transform1.position;
-                pos.y = _hit.point.y;
-                transform.position = pos;
-            }
-            // var pos = transform.position;
-            // pos.y = yOffset;
+            // var transform1 = transform;
+            // _ray = new Ray();
+            // _ray.origin = transform1.position;
+            // _ray.direction = Vector3.down;
+            //
+            // if (!Physics.Raycast(_ray, out _hit, 100f, groundLayer)) return;
+            //
+            // var pos = transform1.position;
+            // pos.y = _hit.point.y;
             // transform.position = pos;
+            _isGrounded = _characterController.isGrounded;
         }
     }
 }

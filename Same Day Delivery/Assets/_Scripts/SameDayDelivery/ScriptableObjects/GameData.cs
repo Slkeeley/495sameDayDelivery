@@ -1,5 +1,9 @@
-﻿using SameDayDelivery.PackageSystem;
+﻿using System.Collections.Generic;
+using SameDayDelivery.Controls;
+using SameDayDelivery.PackageSystem;
+using SameDayDelivery.Utility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace SameDayDelivery.ScriptableObjects
@@ -18,6 +22,7 @@ namespace SameDayDelivery.ScriptableObjects
         public GameEvent OnScore;
         public GameEvent OnMoneyGain;
         public GameEvent OnMoneyLoss;
+        public GameEvent OnGenericPackageDelivered;
 
         public delegate void UpgradeEvent(UpgradeItem upgradeItem);
 
@@ -32,7 +37,10 @@ namespace SameDayDelivery.ScriptableObjects
         public PackageEvent OnPackageTrigger;
         
         #endregion
-        
+
+        [Header("Meta")]
+        public ScoreData scoreData;
+        public GameWatcher gameWatcher;
         [Header("Resources")]
         [Tooltip("Current score.")]
         public int score;
@@ -51,6 +59,58 @@ namespace SameDayDelivery.ScriptableObjects
         [Header("Upgrades")]
         public UpgradeLookupTable upgradeLookupTable;
 
+        [Header("Delivery Locations")]
+        public FauxPackageDelivery activeDelivery;
+        public List<FauxPackageDelivery> availableDeliveriesList = new List<FauxPackageDelivery>();
+        public List<FauxPackageDelivery> deliveredLocationsList = new List<FauxPackageDelivery>();
+        public Transform playerTransform;
+        public float packageDeliveryRange = 30f;
+
+        public void PackageDelivered(FauxPackageDelivery fauxPackageDelivery, Package package)
+        {
+            availableDeliveriesList.Remove(fauxPackageDelivery);
+            deliveredLocationsList.Add(fauxPackageDelivery);
+            
+            NextDelivery();
+        }
+
+        public void NextDelivery()
+        {
+            if (availableDeliveriesList.Count <= 0)
+            {
+                Debug.LogError($"No more available delivery locations left.");
+                activeDelivery = null;
+                return;
+            }
+
+            var offset = 0;
+
+            List<FauxPackageDelivery> tempList = new List<FauxPackageDelivery>();
+            
+            while (tempList.Count <= 0)
+            {
+                foreach (FauxPackageDelivery fauxPackageDelivery in availableDeliveriesList)
+                {
+                    if (Vector3.Distance(fauxPackageDelivery.transform.position, playerTransform.position) <= packageDeliveryRange + offset)
+                    {
+                        tempList.Add(fauxPackageDelivery);
+                    }
+                }
+
+                offset += 10;
+            }
+
+            if (tempList.Count <= 0)
+            {
+                Debug.LogError($"No more available delivery locations left.");
+                activeDelivery = null;
+                return;
+            }
+            
+            activeDelivery = tempList[Random.Range(0, tempList.Count)];
+            activeDelivery.Activate();
+        }
+
         public void ResetData()
         {
             score = 0;
@@ -60,6 +120,10 @@ namespace SameDayDelivery.ScriptableObjects
             {
                 upgradeItem.purchased = false;
             }
+
+            activeDelivery = null;
+            availableDeliveriesList.Clear();
+            deliveredLocationsList.Clear();
         }
     }
 }
