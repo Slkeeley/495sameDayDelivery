@@ -71,10 +71,10 @@ namespace SameDayDelivery.ScriptableObjects
             availableDeliveriesList.Remove(fauxPackageDelivery);
             deliveredLocationsList.Add(fauxPackageDelivery);
             
-            ActivateNextDelivery();
+            NextDelivery();
         }
 
-        public void ActivateNextDelivery()
+        public void NextDelivery()
         {
             if (availableDeliveriesList.Count <= 0)
             {

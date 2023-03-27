@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using SameDayDelivery.Controls;
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
@@ -15,7 +16,10 @@ namespace SameDayDelivery.Utility
 
         [SerializeField]
         private GameWatcher _gameWatcher;
-        
+
+        [SerializeField]
+        private float _delay = 1f;
+
         private void Awake()
         {
             _gameData.ResetData();
@@ -33,6 +37,15 @@ namespace SameDayDelivery.Utility
 
         private void Start()
         {
+            StartCoroutine(ShortDelay());
+            
+            
+        }
+
+        private IEnumerator ShortDelay()
+        {
+            yield return new WaitForSeconds(_delay);
+            
             if (!_playerTransform)
             {
                 var playerMovement = FindObjectOfType<PlayerMovement>();
@@ -43,7 +56,7 @@ namespace SameDayDelivery.Utility
             }
 
             _gameData.playerTransform = _playerTransform;
-            _gameData.ActivateNextDelivery();
+            _gameData.NextDelivery();
         }
     }
 }
