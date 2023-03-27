@@ -2,7 +2,6 @@
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace SameDayDelivery.Utility
 {
@@ -51,10 +50,11 @@ namespace SameDayDelivery.Utility
             onSpawnEvent?.Invoke();
             packageReceived?.Invoke(); //invoke the destination package received
             
-            Destroy(package.gameObject, 0.05f);
+            // Destroy(package.gameObject, 0.05f);
             package.gameObject.SetActive(false);
             
             Deactivate();
+            gameData.OnGenericPackageDelivered?.Invoke();
             PackageDelivered(package);
         }
     }

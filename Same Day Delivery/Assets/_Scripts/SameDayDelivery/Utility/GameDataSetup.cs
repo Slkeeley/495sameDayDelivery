@@ -1,4 +1,5 @@
-﻿using SameDayDelivery.Controls;
+﻿using System;
+using SameDayDelivery.Controls;
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 
@@ -11,10 +12,23 @@ namespace SameDayDelivery.Utility
 
         [SerializeField]
         private Transform _playerTransform;
+
+        [SerializeField]
+        private GameWatcher _gameWatcher;
         
         private void Awake()
         {
             _gameData.ResetData();
+        }
+
+        private void OnEnable()
+        {
+            _gameData.OnGenericPackageDelivered += _gameWatcher.PackageReceived;
+        }
+
+        private void OnDisable()
+        {
+            _gameData.OnGenericPackageDelivered -= _gameWatcher.PackageReceived;
         }
 
         private void Start()

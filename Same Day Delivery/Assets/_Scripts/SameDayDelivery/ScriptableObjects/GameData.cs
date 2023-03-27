@@ -22,6 +22,7 @@ namespace SameDayDelivery.ScriptableObjects
         public GameEvent OnScore;
         public GameEvent OnMoneyGain;
         public GameEvent OnMoneyLoss;
+        public GameEvent OnGenericPackageDelivered;
 
         public delegate void UpgradeEvent(UpgradeItem upgradeItem);
 
@@ -70,8 +71,6 @@ namespace SameDayDelivery.ScriptableObjects
             availableDeliveriesList.Remove(fauxPackageDelivery);
             deliveredLocationsList.Add(fauxPackageDelivery);
             
-            // add score
-            
             ActivateNextDelivery();
         }
 
@@ -84,13 +83,28 @@ namespace SameDayDelivery.ScriptableObjects
                 return;
             }
 
+            var offset = 0;
+
             List<FauxPackageDelivery> tempList = new List<FauxPackageDelivery>();
-            foreach (FauxPackageDelivery fauxPackageDelivery in availableDeliveriesList)
+            
+            while (tempList.Count <= 0)
             {
-                if (Vector3.Distance(fauxPackageDelivery.transform.position, playerTransform.position) <= packageDeliveryRange)
+                foreach (FauxPackageDelivery fauxPackageDelivery in availableDeliveriesList)
                 {
-                    tempList.Add(fauxPackageDelivery);
+                    if (Vector3.Distance(fauxPackageDelivery.transform.position, playerTransform.position) <= packageDeliveryRange + offset)
+                    {
+                        tempList.Add(fauxPackageDelivery);
+                    }
                 }
+
+                offset += 10;
+            }
+
+            if (tempList.Count <= 0)
+            {
+                Debug.LogError($"No more available delivery locations left.");
+                activeDelivery = null;
+                return;
             }
             
             activeDelivery = tempList[Random.Range(0, tempList.Count)];
