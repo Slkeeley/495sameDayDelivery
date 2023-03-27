@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 199fc043f0364be8b4285e44a2a2d5b2, type: 3}
+  m_Name: ScoreData
+  m_EditorClassIdentifier: 
+  baseDeliveryScore: 100
+  speedyBonus: 50
+  slowPenalty: 25
+  damagedPackagePenalty: 25
+  styleBonus: 25
+  normalDeliveryColor: {r: 1, g: 1, b: 1, a: 1}
+  speedyDeliveryColor: {r: 0, g: 1, b: 1, a: 1}
+  slowDeliveryColor: {r: 1, g: 0, b: 0, a: 1}
+  coinScoreReward: 50
+  sideJobScoreBonus: 5
+  sideJobCoinBonus: 1

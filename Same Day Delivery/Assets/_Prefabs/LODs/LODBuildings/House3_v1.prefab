@@ -1254,7 +1254,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8030791298139124051}
   - component: {fileID: 8030791298139124044}
-  - component: {fileID: 3707561230652554851}
   m_Layer: 0
   m_Name: House3_v1
   m_TagString: Untagged
@@ -1317,21 +1316,6 @@ LODGroup:
     - renderer: {fileID: 8030791297322635843}
     - renderer: {fileID: 8030791297185261115}
   m_Enabled: 1
---- !u!114 &3707561230652554851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8030791298139124055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea066d7b2a2880c4eb277cd2f2e9236f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationLight: {fileID: 6718505795301094692}
-  active: 0
-  packageDelivered: 0
 --- !u!1001 &6056778434883761236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1354,7 +1338,7 @@ PrefabInstance:
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3707561230652554851}
+      objectReference: {fileID: 0}
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1426,11 +1410,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1367443831336453964, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
---- !u!1 &6718505795301094692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 662331003044168048, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
-  m_PrefabInstance: {fileID: 6056778434883761236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6718505795301094693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}

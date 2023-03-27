@@ -91,8 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: 6ef12dae925019547af385ef10ffaa44, type: 2}
-  deliveredPrefab: {fileID: 3493993332067715826, guid: 963cf3ccb4fb6964289c95532f79630f, type: 3}
-  spawnLocation: {fileID: 662331002059253213}
+  deliveredFXPrefab: {fileID: 3493993332067715826, guid: 963cf3ccb4fb6964289c95532f79630f, type: 3}
+  spawnFXLocation: {fileID: 662331002059253213}
+  deliveryArea: {fileID: 662331003649785318}
+  houseBeam: {fileID: 656037196234924499}
   onSpawnEvent:
     m_PersistentCalls:
       m_Calls:
@@ -108,7 +110,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  packageRecieved:
+  packageReceived:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &662331002238831632
@@ -735,6 +737,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d154157b3dbacd94a93652be3ca21efe, type: 3}
+--- !u!1 &656037196234924499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2215491864933846603, guid: d154157b3dbacd94a93652be3ca21efe, type: 3}
+  m_PrefabInstance: {fileID: 1703966247930097560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &656037196234924498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2215491864933846602, guid: d154157b3dbacd94a93652be3ca21efe, type: 3}

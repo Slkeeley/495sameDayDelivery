@@ -551,7 +551,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6023066579618366823}
   - component: {fileID: 6023066579618366843}
-  - component: {fileID: 5263735603883107999}
   m_Layer: 0
   m_Name: House4_v1
   m_TagString: Untagged
@@ -612,21 +611,6 @@ LODGroup:
     - renderer: {fileID: 8723341716477918969}
     - renderer: {fileID: 3261554264045840475}
   m_Enabled: 1
---- !u!114 &5263735603883107999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6023066579618366819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea066d7b2a2880c4eb277cd2f2e9236f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationLight: {fileID: 642715920675730727}
-  active: 0
-  packageDelivered: 0
 --- !u!1 &6023066580004201482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1463,7 @@ PrefabInstance:
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5263735603883107999}
+      objectReference: {fileID: 0}
     - target: {fileID: 662331002238831639, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
       propertyPath: packageRecieved.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1546,11 +1530,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
---- !u!1 &642715920675730727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 662331003044168048, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}
-  m_PrefabInstance: {fileID: 133542493633410135}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &642715920675730726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 662331003044168049, guid: f519b514a7d600e4e9ad74189b8ce29d, type: 3}

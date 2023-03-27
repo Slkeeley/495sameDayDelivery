@@ -5,6 +5,7 @@ namespace SameDayDelivery.PackageSystem
 {
     public class Package : MonoBehaviour
     {
+        public bool damaged;
         private Rigidbody _rigidbody;
 
         private void Awake()
