@@ -43,6 +43,11 @@ namespace SameDayDelivery.Controls
         private float currSpeed;
         private bool payRaised; 
 
+        //temporary statics 
+        //REPLACE THESE WHEN WE HAVE A MORE FORMAL SAVE SYSTEM 
+        public static int scoreEarned; 
+        public static int successFullDeliveries; 
+
         private void Awake()
         {
             //attach upgrade scriptable objects here 
@@ -88,7 +93,10 @@ namespace SameDayDelivery.Controls
             packagesDelivered = 0; //reset the packages delivered to 0 
             zergCoinsGained = 0; 
             UI.levelText.text = "Day: " + currLevel;
-            UI.deliveryText.text = ""; 
+            UI.deliveryText.text = "";
+            scoreEarned = 0; //STATIC INT TO BE REPLACED
+            successFullDeliveries = 0; //STATIC INT TO BE REPLACED
+            zergCoinsGained = 0; 
             SwitchControlsToPlayer();
         }
 
@@ -177,8 +185,9 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
             zergCoinsGained = currentScore / 50;
-            if (payRaised) data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
-            else data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised) UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins; //replace the static int with a formal system later
+            else UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            successFullDeliveries = packagesDelivered; 
             goToFailScreen?.Invoke(); 
         }
 
@@ -188,8 +197,10 @@ namespace SameDayDelivery.Controls
             UI.successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
-            if (payRaised) data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
-            else data.money = data.money + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised) UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins; //replace the static int with a formal system later
+            else UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            Debug.Log(UpgradeScreen.totalZergCoins);
+            successFullDeliveries = packagesDelivered; 
             currLevel++;
             goToPassScreen?.Invoke();//invoke the event that moves to the success screen 
         }

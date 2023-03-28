@@ -23,7 +23,7 @@ namespace SameDayDelivery.Utility
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            SceneManager.LoadScene("SamTest_NEW");
+            SceneManager.LoadScene("Stage00");
         }
 
         public void toFailScreen()//go to the fail screen 
