@@ -7,8 +7,12 @@ namespace SameDayDelivery.VanControls
 {
     public class CarControls : MonoBehaviour //THIS SCRIPT IS FOR THE CONTROLS WHILE THE PLAYER IS INSIDE THE VAN
     {
+        [Header("References")]
+        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem premiumGas;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem freshTires;
         [Header("Van Speed")]
-        public static float topSpeed=25f; //the fastest speed that the van can move 
+        public float topSpeed=25f; //the fastest speed that the van can move 
         public float topReverseSpeed; //the fastest speed that the van can move 
         public float overDriveSpeed;
         public float currSpeed; //the current speed the van is moving
@@ -28,71 +32,28 @@ namespace SameDayDelivery.VanControls
         public float brakeForce;
         public GameObject packageChute;
 
+        [Header("Collisions")]
+        RaycastHit hit;
+        [SerializeField] private Transform frontBumper;
+        [SerializeField] private Transform backBumper;
+        public bool crashed;
+
         [Header("Events")]
         public UnityEvent motorStart; 
         public UnityEvent driving; 
         public UnityEvent reverse;
         public UnityEvent stopNoises;
+        public UnityEvent crash; 
+
 
         // private variables
         private float defaultBrakeForce; 
         private bool chuteActive;
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
+        
 
-        /*
-        #region Input Events and Button State Control
 
-        private ButtonState _interactButton;
-        private bool _interactHeld;
-        private ButtonState _sprintButton;
-        private bool _sprintHeld;
-
-        // This may not be necessary, but if you need fine control over when the interact and sprinting buttons are pressed
-        // you can use these variables and functions.
-
-        private void OnEnable()
-        {
-            _playerControlManager.InteractBegin += InteractBegin;
-            _playerControlManager.InteractEnd += InteractEnd;
-            _playerControlManager.SprintBegin += SprintBegin;
-            _playerControlManager.SprintEnd += SprintEnd;
-        }
-
-        private void OnDisable()
-        {
-            _playerControlManager.InteractBegin -= InteractBegin;
-            _playerControlManager.InteractEnd -= InteractEnd;
-            _playerControlManager.SprintBegin -= SprintBegin;
-            _playerControlManager.SprintEnd -= SprintEnd;
-        }
-
-        private void InteractBegin()
-        {
-            _interactButton = ButtonState.Down;
-            _interactHeld = true;
-        }
-
-        private void InteractEnd()
-        {
-            _interactButton = ButtonState.Up;
-            _interactHeld = false;
-        }
-
-        private void SprintBegin()
-        {
-            _sprintButton = ButtonState.Down;
-            _sprintHeld = true;
-        }
-
-        private void SprintEnd()
-        {
-            _sprintButton = ButtonState.Up;
-            _sprintHeld = false;
-        }
-
-        #endregion
-        */
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
@@ -101,7 +62,44 @@ namespace SameDayDelivery.VanControls
             accelerating = false;
             chuteActive = false;
             packageChute.SetActive(false);
-            // Debug.Log("The Van's Top Speed is: " + topSpeed);
+            upgradeAttachment();
+            checkUpgradePurchaseValues();
+        }
+
+        private void FixedUpdate()//send out raycasts from the front and back of the van, if the van collides with a house then stop the car 
+        {
+            if (Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
+            {
+                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                if (house != null)
+                {
+                    currSpeed = 0;
+                    if (!crashed)
+                    {
+                        crashed = true;
+                        crash?.Invoke();
+                    }
+                }
+                else crashed = false;
+            }
+            else crashed = false; 
+           
+
+            if (Physics.Raycast(backBumper.position, -transform.forward, out hit, 1f))
+            {
+                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                if (house != null)
+                {
+                    currSpeed = 0;
+                    if (!crashed)
+                    {
+                        crashed = true;
+                        crash?.Invoke();
+                    }
+                }
+                else crashed = false;
+            }
+            
         }
 
         // Update is called once per frame
@@ -116,14 +114,29 @@ namespace SameDayDelivery.VanControls
                 if (backwards) StartCoroutine(DecelerateBackwards());
             }
             else return;
-
         }
 
+        void upgradeAttachment()
+        {
+            premiumGas = data.upgradeLookupTable.upgrades[9];
+            freshTires= data.upgradeLookupTable.upgrades[6];
+        }
+
+        void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
+        {
+            if (premiumGas.purchased) topSpeed = topSpeed+20;
+
+        }
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
         private void Drive()
         {
-            rotationSpeed = currSpeed*2;
+            if (!overDrive) 
+            {
+                if (freshTires.purchased) rotationSpeed = currSpeed * 2;
+                else rotationSpeed = currSpeed;
+            }
+
             var rotation = _movement.x * rotationSpeed;
             rotation *= Time.deltaTime;
             rotation = Mathf.Clamp(rotation, -45, 45);
@@ -238,7 +251,8 @@ namespace SameDayDelivery.VanControls
         {
             overDrive = true;
             topSpeed = overDriveSpeed;
-            rotationSpeed = currSpeed / 8;
+            if (freshTires.purchased) rotationSpeed = currSpeed/5;
+            else rotationSpeed = currSpeed/10;
             brakeForce = 0; 
         }
 
@@ -246,7 +260,8 @@ namespace SameDayDelivery.VanControls
         {
             overDrive = false;
             topSpeed = overDriveSpeed/2;
-            rotationSpeed = currSpeed*2;
+            if (freshTires.purchased) rotationSpeed = currSpeed * 2;
+            else rotationSpeed = currSpeed;
             brakeForce = defaultBrakeForce; 
         }
 
@@ -266,7 +281,7 @@ namespace SameDayDelivery.VanControls
             }
         }
 
-        private IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
+        public IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
         {
             transform.Translate(Vector3.forward * (currSpeed * Time.deltaTime));
             currSpeed -= decelerationSpeed;

@@ -22,7 +22,6 @@ namespace SameDayDelivery.DeliverySystem
         {
             if (active)
             {
-                Debug.Log("should be active"); 
                 destinationLight.SetActive(true);
             }
             else destinationLight.SetActive(false);
