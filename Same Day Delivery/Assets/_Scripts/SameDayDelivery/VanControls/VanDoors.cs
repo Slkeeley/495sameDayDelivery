@@ -16,6 +16,10 @@ namespace SameDayDelivery.VanControls
 
         public Transform playerExitPos;
 
+        private void Awake()
+        {
+            gameWatcher = GameObject.Find("GameWatcher").GetComponent<GameWatcher>(); 
+        }
         private void Start()
         {
             playerInVan = false;

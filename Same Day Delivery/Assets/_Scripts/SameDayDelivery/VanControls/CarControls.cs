@@ -70,7 +70,15 @@ namespace SameDayDelivery.VanControls
         {
             if (Physics.Raycast(frontBumper.position, transform.forward, out hit, 1f))
             {
-                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                Debug.Log("hit");
+                   SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+             /*  GameObject house = hit.transform.gameObject;
+                if (house.tag != "Obstacle")
+                {
+                    house = null;
+                    Debug.Log("Cast not null"); 
+                }
+             */
                 if (house != null)
                 {
                     currSpeed = 0;
@@ -87,7 +95,13 @@ namespace SameDayDelivery.VanControls
 
             if (Physics.Raycast(backBumper.position, -transform.forward, out hit, 1f))
             {
-                SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+                 SameDayDelivery.DeliverySystem.Destinations house = hit.transform.GetComponentInParent<SameDayDelivery.DeliverySystem.Destinations>();
+              /*  GameObject house = hit.transform.gameObject;
+                if (house.tag != "Obstacle")
+                {
+                    house = null;
+                }
+              */
                 if (house != null)
                 {
                     currSpeed = 0;
@@ -99,7 +113,6 @@ namespace SameDayDelivery.VanControls
                 }
                 else crashed = false;
             }
-            
         }
 
         // Update is called once per frame
@@ -133,8 +146,8 @@ namespace SameDayDelivery.VanControls
         {
             if (!overDrive) 
             {
-                if (freshTires.purchased) rotationSpeed = currSpeed * 2;
-                else rotationSpeed = currSpeed;
+                if (freshTires.purchased) rotationSpeed = currSpeed * 5;
+                else rotationSpeed = currSpeed*2.5f;
             }
 
             var rotation = _movement.x * rotationSpeed;

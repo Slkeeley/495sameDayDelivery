@@ -120,6 +120,7 @@ namespace SameDayDelivery.Controls
 
         private void SwitchControlsToVan()
         {
+            Debug.Log("Switching controls to Van"); 
             playerControls.enabled = false;
             carControls.enabled = true;
             carControls.ChuteActivation();           
@@ -131,6 +132,7 @@ namespace SameDayDelivery.Controls
 
         private void SwitchControlsToPlayer()
         {
+            Debug.Log("Switching controls to Player");
             carControls.ChuteActivation();
             if (carControls.currSpeed > 5)
             {
