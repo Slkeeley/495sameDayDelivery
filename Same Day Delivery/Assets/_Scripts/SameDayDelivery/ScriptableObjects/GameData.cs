@@ -99,7 +99,8 @@ namespace SameDayDelivery.ScriptableObjects
 
                 offset += 10;
             }
-
+            // EmergencyConsole.AddMessage($"[{offset}] tempList.Count={tempList.Count.ToString()}");
+            
             if (tempList.Count <= 0)
             {
                 Debug.LogError($"No more available delivery locations left.");
