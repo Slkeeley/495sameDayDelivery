@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2679435654987042739}
   - component: {fileID: 201452253147839353}
   - component: {fileID: 9170417587312942932}
+  - component: {fileID: 500007304627749179}
   m_Layer: 0
   m_Name: House_1
   m_TagString: Untagged
@@ -103,6 +104,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 201452253147839353}
   m_Enabled: 1
+--- !u!64 &500007304627749179
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858666896920648364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4374387922499511046, guid: f569bd9ef595fd1408ab3e0b9f833ade, type: 3}
 --- !u!1001 &5401300607925631293
 PrefabInstance:
   m_ObjectHideFlags: 0
