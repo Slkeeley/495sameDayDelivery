@@ -1,7 +1,10 @@
-﻿using SameDayDelivery.PackageSystem;
+﻿using System;
+using System.Collections;
+using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace SameDayDelivery.Utility
 {
@@ -18,13 +21,13 @@ namespace SameDayDelivery.Utility
         private void Start()
         {
             // tells the game database that this Package Delivery location is available.
-            gameData.availableDeliveriesList.Add(this);
+            DestinationRegistry.Instance.RegisterAvailableDelivery(this);
             Deactivate();
         }
 
         public void PackageDelivered(Package package)
         {
-            gameData.PackageDelivered(this, package);
+            DestinationRegistry.Instance.PackageDelivered(this, package);
         }
 
         public void Activate()
@@ -50,7 +53,6 @@ namespace SameDayDelivery.Utility
             onSpawnEvent?.Invoke();
             packageReceived?.Invoke(); //invoke the destination package received
             
-            // Destroy(package.gameObject, 0.05f);
             package.gameObject.SetActive(false);
             
             Deactivate();

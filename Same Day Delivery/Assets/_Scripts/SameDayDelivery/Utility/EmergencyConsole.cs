@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using SameDayDelivery.ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -10,15 +9,28 @@ namespace SameDayDelivery.Utility
     {
         public GameData gameData;
         public TMP_Text consoleText;
+        private static EmergencyConsole _instance;
+
+        private void Awake()
+        {
+            _instance = this;
+        }
+
+        // public static void AddMessage(string msg)
+        // {
+        //     _instance.consoleText.text += msg + "\n";
+        // }
 
         private void Start()
         {
+            consoleText.text = "";
+            // AddMessage("EmergencyConsole: Test test...");
             StartCoroutine(ShortDelay());
         }
 
         private IEnumerator ShortDelay()
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
 
             string msg = "";
 
@@ -27,7 +39,7 @@ namespace SameDayDelivery.Utility
             msg += $"availableDeliveriesList.Count = {gameData.availableDeliveriesList.Count.ToString()}\n";
             msg += $"deliveredLocationsList.Count = {gameData.deliveredLocationsList.Count.ToString()}\n";
             
-            consoleText.text = msg;
+            consoleText.text += msg;
         }
     }
 }

@@ -25,23 +25,6 @@ namespace SameDayDelivery.Utility
             _gameData.ResetData();
         }
 
-        private void OnEnable()
-        {
-            _gameData.OnGenericPackageDelivered += _gameWatcher.PackageReceived;
-        }
-
-        private void OnDisable()
-        {
-            _gameData.OnGenericPackageDelivered -= _gameWatcher.PackageReceived;
-        }
-
-        private void Start()
-        {
-            StartCoroutine(ShortDelay());
-            
-            
-        }
-
         private IEnumerator ShortDelay()
         {
             yield return new WaitForSeconds(_delay);
@@ -56,7 +39,7 @@ namespace SameDayDelivery.Utility
             }
 
             _gameData.playerTransform = _playerTransform;
-            _gameData.NextDelivery();
+            // _gameData.NextDelivery();
         }
     }
 }
