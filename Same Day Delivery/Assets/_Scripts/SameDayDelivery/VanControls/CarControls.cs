@@ -51,12 +51,14 @@ namespace SameDayDelivery.VanControls
         private bool chuteActive;
         private Vector2 _movement;
         private PlayerControlManager _playerControlManager;
-        
-
+        private CharacterController controller;
+        Vector3 move;
 
         private void Awake()
         {
             _playerControlManager = GetComponent<PlayerControlManager>();
+            controller = GetComponent<CharacterController>();
+             move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             overDriveSpeed = topSpeed * 2;
             defaultBrakeForce = brakeForce; 
             accelerating = false;
@@ -142,7 +144,7 @@ namespace SameDayDelivery.VanControls
         }
 
         //CONTROL INPUTS TO CONTROL THE PLAYER'S VEHICLE 
-        private void Drive()
+     /*   private void Drive()
         {
             if (!overDrive) 
             {
@@ -244,7 +246,110 @@ namespace SameDayDelivery.VanControls
 
             if (Input.GetKeyUp(KeyCode.LeftShift)) decreaseGear(); 
         }
+     */
+      
+        private void Drive()
+        {
+            if (!overDrive)
+            {
+                if (freshTires.purchased) rotationSpeed = currSpeed * 5;
+                else rotationSpeed = currSpeed * 2.5f;
+            }
 
+
+            //turning
+            var rotation = _movement.x * rotationSpeed;
+            rotation *= Time.deltaTime;
+            rotation = Mathf.Clamp(rotation, -45, 45);
+            this.transform.Rotate(0, rotation, 0);
+            //if the player presses W move forward in the direction they face
+            if (_movement.y > 0f)
+            {
+                //Adjust these booleans when the player begins moving forward again
+                decelerating = false;
+                forwards = true;
+                backwards = false;
+                StopCoroutine(Decelerate());
+                driving?.Invoke();
+
+                if (currSpeed < topSpeed) accelerating = true;
+
+                // if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
+                if (accelerating)
+                {
+                    currSpeed += accelerationSpeed;
+
+                    controller.Move(move* currSpeed * Time.deltaTime);
+
+                    if (currSpeed >= topSpeed)
+                    {
+                        accelerating = false;
+                        currSpeed = topSpeed;
+                    }
+                }
+                else
+                {
+                    // if the van reaches top speed it is no longer accelerating and have it move at top speed.
+                    var translation = _movement.y * topSpeed;
+                    translation *= Time.deltaTime;
+                    transform.Translate(0, 0, translation);
+                }
+
+                if (currSpeed > topSpeed) currSpeed -= decelerationSpeed;
+            }
+
+            if (Input.GetKeyUp(KeyCode.W))//(Mathf.Approximately(_movement.y, 0f)) // if the player lets go of W begin decelerating. 
+            {
+                accelerating = false;
+                decelerating = true;
+            }
+
+            // If the player presses S move backward on their relative z axis
+            if (_movement.y < 0f)//REVERSE
+            {
+                StopCoroutine(Decelerate());
+                //Adjust these booleans when the player begins moving forward again
+                if (forwards)
+                {
+                    ApplyBrakes();
+                }
+                else
+                {
+                    backwards = true;
+                    reverse?.Invoke();
+                    if (currSpeed < topReverseSpeed) accelerating = true;
+
+                    if (accelerating) //if the vans current speed is lower than the top speed have it speed up until it reaches the top speed. 
+                    {
+                        var translation = _movement.y * currSpeed;
+                        currSpeed += reverseAccelerationSpeed;
+                        translation *= Time.deltaTime;
+                        transform.Translate(0, 0, translation);
+                        if (currSpeed >= topReverseSpeed)
+                        {
+                            accelerating = false;
+                            currSpeed = topReverseSpeed;
+                        }
+                    }
+                    else // if the van reaches top speed it is no longer accelerating and have it move at top speed 
+                    {
+                        var translation = _movement.y * topReverseSpeed;
+                        translation *= Time.deltaTime;
+                        transform.Translate(0, 0, translation);
+                    }
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.S))//(_movement.y < 0f) //if the player lets go of S begin decelerating Backwards
+            {
+                accelerating = false;
+                decelerating = true;
+            }
+
+            if (_playerControlManager.sprinting) increaseGear();
+
+            if (Input.GetKeyUp(KeyCode.LeftShift)) decreaseGear();
+        }
         private void ApplyBrakes() //if the player is moving forward and presses S apply the brakes firs
         {
             if (currSpeed > 0)
