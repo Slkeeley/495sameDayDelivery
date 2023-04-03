@@ -27,6 +27,20 @@ namespace SameDayDelivery.VanControls
             SetPlayerObj();
         }
 
+        private void Update()//quick fix to get van door funtionality again
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                if (playerInVan)
+                {
+                    ExitVan();
+                }
+                else if (nearDoors)
+                {
+                    EnterVan();
+                }
+            }
+        }
         public void CheckEnterExitVan(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
@@ -100,6 +114,7 @@ namespace SameDayDelivery.VanControls
 
         private IEnumerator ExitDelay() //used to stop the player from flickering in and out of reality
         {
+            Debug.Log("Exit Delay");
             yield return new WaitForSeconds(1);
             playerInVan = true;
         }

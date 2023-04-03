@@ -17,7 +17,7 @@ namespace SameDayDelivery.Controls
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem employeeOfTheMonth;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
         [SerializeField] private SameDayDelivery.UI.gameplayUI UI; 
-        public CarControls carControls;
+        public VanController carControls;
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
         public GameObject vanCam;
@@ -132,7 +132,7 @@ namespace SameDayDelivery.Controls
             playerControls.enabled = false;
             carControls.enabled = true;
             carControls.ChuteActivation();           
-            carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
+           // carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
             sheldonCam.SetActive(false);
             vanCam.SetActive(true);
             currControls = "Van";
@@ -142,13 +142,13 @@ namespace SameDayDelivery.Controls
         {
             Debug.Log("Switching controls to Player");
             carControls.ChuteActivation();
-            if (carControls.currSpeed > 5)
+         /*   if (carControls.currSpeed > 5)
             {
                 currSpeed = 10;
                 driftingForward = true;
             }
-            carControls.currSpeed = 0;      
-            carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
+            carControls.currSpeed = 0;      */
+         //   carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
             vanCam.SetActive(false);

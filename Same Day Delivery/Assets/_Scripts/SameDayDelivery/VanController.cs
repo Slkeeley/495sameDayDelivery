@@ -27,6 +27,10 @@ public class VanController : MonoBehaviour
     [SerializeField] private Transform frontRightColliderTransform;
     [SerializeField] private Transform backLeftColliderTransform;
     [SerializeField] private Transform backRightColliderTransform;
+
+    public GameObject packageChute;
+    bool chuteActive = false; 
+
     private void FixedUpdate()
     {
         GetInput();
@@ -83,5 +87,19 @@ public class VanController : MonoBehaviour
         collider.GetWorldPose(out Pos, out Rot);
         transform.rotation = Rot;
         transform.position = Pos; 
+    }
+
+    public void  ChuteActivation() //If the player is within the correct area to drop the packages turn the shoot on if they leave turn int off. 
+    {
+        if (!chuteActive)
+        {
+            chuteActive = true;
+            packageChute.SetActive(true);
+        }
+        else
+        {
+            chuteActive = false;
+            packageChute.SetActive(false);
+        }
     }
 }
