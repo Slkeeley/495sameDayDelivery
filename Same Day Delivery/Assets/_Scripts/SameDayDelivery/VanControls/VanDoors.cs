@@ -114,7 +114,6 @@ namespace SameDayDelivery.VanControls
 
         private IEnumerator ExitDelay() //used to stop the player from flickering in and out of reality
         {
-            Debug.Log("Exit Delay");
             yield return new WaitForSeconds(1);
             playerInVan = true;
         }
