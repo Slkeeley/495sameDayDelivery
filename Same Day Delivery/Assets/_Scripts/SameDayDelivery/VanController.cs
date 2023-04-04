@@ -9,8 +9,8 @@ namespace SameDayDelivery.VanControls
     {
         [Header("References")]
         [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem premiumGas;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem freshTires;
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem premiumGas; //ChANGE THE MAX VELO VALUE
+        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem freshTires;//CHANGE THE MAX STEER ANGLE
         public GameObject packageChute;
         private Rigidbody rb; 
 
@@ -29,9 +29,8 @@ namespace SameDayDelivery.VanControls
         public float MaxSteerAngle;
         public float brakeForce; //how hard the car brakes
         public float currBrakeForce;
-        public float maxXVelocity;
-        public float maxZVelocity;
         public float maxVelo; 
+        public float maxReverseVelo; 
 
         [Header("Acceleration")]
         public float accelerationSpeed; //the speed at which the car accelerates
@@ -95,12 +94,12 @@ namespace SameDayDelivery.VanControls
             if (decelerating)
             {
                 StartCoroutine(Decelerate());
-                // if (forwards) StartCoroutine(Decelerate());
-           //        if (backwards) StartCoroutine(DecelerateBackwards());
             }
             else return;
 
             if (currMotorForce < 0f) currMotorForce = 0f;
+            if (currMotorForce < maxMotorForce) currMotorForce = maxMotorForce;
+            currMotorForce = Mathf.Clamp(currMotorForce, 0.0f, maxMotorForce);
         }
         void upgradeAttachment()//find the correct scriptable object for the upgrade references to grab and apply 
         {
@@ -121,24 +120,24 @@ namespace SameDayDelivery.VanControls
          
             if (Input.GetKey(KeyCode.W))//moving forwards 
             {
-                Debug.Log("W pressed");
-               // if (rb.velocity.magnitude <= 0) rb.velocity = 0.1f; 
                 decelerating = false;
                 forwards = true;
                 backwards = false;
-                StopCoroutine(Decelerate());
-                driving?.Invoke();
+                StopCoroutine(Decelerate());           
             }
-            isBraking = Input.GetKey(KeyCode.Space);
-
+      
             if (Input.GetKey(KeyCode.S))//moving Backwards
             {
-                Debug.Log("S pressed");
+               if(forwards)
+                {
+                    ApplyBraking();
+                    return; 
+                }
                 decelerating = false;
                 forwards = false;
                 backwards = true;
                 StopCoroutine(Decelerate());
-                driving?.Invoke();
+   
             }
 
 
@@ -162,7 +161,7 @@ namespace SameDayDelivery.VanControls
         {
             if (forwards) //Drive Forwards
             {
-           
+                driving?.Invoke();
                 if (rb.velocity.magnitude< Mathf.Abs(maxVelo)) accelerating = true;
 
                 if (accelerating)//if the car is still accleration have the wheels motor torque increase until it reaches max
@@ -170,27 +169,29 @@ namespace SameDayDelivery.VanControls
                    frontLeftCollider.motorTorque = verticalInput * currMotorForce;
                     frontRightCollider.motorTorque = verticalInput * currMotorForce;
                     currMotorForce += accelerationSpeed;
-                    rb.velocity *= 1.1f;
 
-                    if (currMotorForce >= maxMotorForce)//once the motor torque reaches max level stop accelerating
+                    if (rb.velocity.magnitude >= Mathf.Abs(maxVelo))//once the motor torque reaches max level stop accelerating
                     {
                         accelerating = false;
                         currMotorForce = maxMotorForce;
+                        rb.velocity = rb.velocity.normalized * maxVelo; 
                     }
                 }
                 else
                 {
                     frontLeftCollider.motorTorque = verticalInput * maxMotorForce;
                     frontRightCollider.motorTorque = verticalInput * maxMotorForce;
+                    rb.velocity = rb.velocity.normalized * maxVelo;
                 }
 
 
 
             }
 
-            if(backwards)//move in reverse
+            if (backwards) //Drive backwards
             {
-                if (currMotorForce < topReverseForce) accelerating = true;
+                reverse?.Invoke(); 
+                if (rb.velocity.magnitude < Mathf.Abs(maxReverseVelo)) accelerating = true;
 
                 if (accelerating)//if the car is still accleration have the wheels motor torque increase until it reaches max
                 {
@@ -198,25 +199,35 @@ namespace SameDayDelivery.VanControls
                     frontRightCollider.motorTorque = verticalInput * currMotorForce;
                     currMotorForce += accelerationSpeed;
 
-
-                    if (currMotorForce >= topReverseForce)//once the motor torque reaches max level stop accelerating
+                    if (rb.velocity.magnitude >= Mathf.Abs(maxReverseVelo))//once the motor torque reaches max level stop accelerating
                     {
                         accelerating = false;
-                        currMotorForce = topReverseForce;
+                        //currMotorForce = maxMotorForce;
+                        rb.velocity = rb.velocity.normalized * maxReverseVelo;
                     }
                 }
                 else
                 {
-                    frontLeftCollider.motorTorque = verticalInput *topReverseForce;
-                    frontRightCollider.motorTorque = verticalInput * topReverseForce;
+                    frontLeftCollider.motorTorque = verticalInput * maxMotorForce;
+                    frontRightCollider.motorTorque = verticalInput * maxMotorForce;
+                    rb.velocity = rb.velocity.normalized * maxReverseVelo;
                 }
+
+
+
             }
 
         }
         
 
-        void ApplyBraking()
+         void ApplyBraking()
         {
+            if (rb.velocity.magnitude <= 0)
+            {
+                forwards = false;
+                stopNoises?.Invoke(); 
+                return;
+            }
             frontLeftCollider.brakeTorque = currBrakeForce;
             frontRightCollider.brakeTorque = currBrakeForce;
             backLeftCollider.brakeTorque = currBrakeForce;
@@ -281,12 +292,15 @@ namespace SameDayDelivery.VanControls
         public IEnumerator Decelerate() //for the car to continue to move forward once the player has let go of w
         {
             rb.velocity *= decelerationMultiplier;
+            frontLeftCollider.motorTorque = currMotorForce;
+            frontRightCollider.motorTorque = currMotorForce;
+            currMotorForce -= decelerationSpeed;
             yield return new WaitForEndOfFrame();
-            Debug.Log("Attempting to Decellerate");
             if (rb.velocity.magnitude <= 0.0f )
             {
                 stopNoises?.Invoke();
-                rb.velocity = rb.velocity.normalized * 0; 
+                rb.velocity = rb.velocity.normalized * 0;
+                currMotorForce = 0; 
                 decelerating = false;
             }
         }

@@ -26,7 +26,8 @@ public class VanSounds : MonoBehaviour
 
     public void reverse()//if the player is backing up play the reverse horn
     {
-        //reverse nboise here
+        source.clip = clips[2];
+        if (!source.isPlaying) source.Play();
     }
 
     public void crashNoise()

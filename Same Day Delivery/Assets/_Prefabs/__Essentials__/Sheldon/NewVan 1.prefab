@@ -339,7 +339,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: f27a2c8742e4f1349ad3461a304e3b3b, type: 3}
   - {fileID: 8300000, guid: a113734463777ea429d903beb2ab8575, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 389c89816a1339d47b69b2bdb3451e9d, type: 3}
   - {fileID: 8300000, guid: 37895ff3237a1164289a4ebdf03e3b99, type: 3}
 --- !u!82 &2299140665398824113
 AudioSource:
@@ -1682,9 +1682,11 @@ MonoBehaviour:
   MaxSteerAngle: 30
   brakeForce: 3000
   currBrakeForce: 0
+  maxVelo: 0
+  maxReverseVelo: 0
   accelerationSpeed: 30
-  reverseAccelerationSpeed: 30
   decelerationSpeed: 30
+  decelerationMultiplier: 0
   accelerating: 0
   decelerating: 0
   forwards: 0

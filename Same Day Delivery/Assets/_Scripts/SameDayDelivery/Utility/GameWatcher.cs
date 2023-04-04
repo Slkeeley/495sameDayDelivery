@@ -132,7 +132,7 @@ namespace SameDayDelivery.Controls
             playerControls.enabled = false;
             carControls.enabled = true;
             carControls.ChuteActivation();           
-           // carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
+            carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
             sheldonCam.SetActive(false);
             vanCam.SetActive(true);
             currControls = "Van";
