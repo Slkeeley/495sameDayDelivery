@@ -39,7 +39,7 @@ namespace SameDayDelivery.Controls
         public UnityEvent goToPassScreen;
 
         //Privaye vars 
-        private bool driftingForward = false;
+        public bool driftingForward = false;
         private float currSpeed;
         private bool payRaised; 
 
@@ -50,15 +50,11 @@ namespace SameDayDelivery.Controls
 
         private void Awake()
         {
-            //attach upgrade scriptable objects here 
-            earlyAlarm = data.upgradeLookupTable.upgrades[3];
-            payRaise= data.upgradeLookupTable.upgrades[8];
+            upgradeAttachment(); 
         }
         private void Start()
         {
-
             LevelSetup();
-            checkUpgradePurchaseValues(); 
         }
 
         // Update is called once per frame
@@ -99,13 +95,18 @@ namespace SameDayDelivery.Controls
             zergCoinsGained = 0; 
             SwitchControlsToPlayer();
         }
+        void upgradeAttachment()
+        {
+            earlyAlarm = data.upgradeLookupTable.upgrades[3];
+            payRaise = data.upgradeLookupTable.upgrades[8];
+            checkUpgradePurchaseValues(); 
+        }
 
         void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 
         {
             if (earlyAlarm.purchased) TimeLeft = TimeLeft + 10;
             if (payRaise.purchased) payRaised = true;
 
-            if (payRaised) Debug.Log("pay raised");
         }
 
         void updateUI()//update these values in the UI 
@@ -126,11 +127,12 @@ namespace SameDayDelivery.Controls
             }
         }
 
-        private void SwitchControlsToVan()
+        private void SwitchControlsToVan()//enter the van and switch the control scheme to driving
         {
-            Debug.Log("Switching controls to Van"); 
             playerControls.enabled = false;
             carControls.enabled = true;
+            carControls.rb.velocity = Vector3.zero;
+            carControls.rb.isKinematic = false;  
             carControls.ChuteActivation();           
             carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
             sheldonCam.SetActive(false);
@@ -138,17 +140,16 @@ namespace SameDayDelivery.Controls
             currControls = "Van";
         }
 
-        private void SwitchControlsToPlayer()
+        private void SwitchControlsToPlayer()//exit the van and switch the control scheme to the player
         {
-            Debug.Log("Switching controls to Player");
             carControls.ChuteActivation();
-         /*   if (carControls.currSpeed > 5)
+            if (carControls.rb.velocity.magnitude > 5)
             {
                 currSpeed = 10;
                 driftingForward = true;
+                carControls.rb.isKinematic = true;
             }
-            carControls.currSpeed = 0;      */
-         //   carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
+            carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
             vanCam.SetActive(false);
@@ -168,14 +169,16 @@ namespace SameDayDelivery.Controls
             UI.scoreText.text = $"Score: {score}";
         }
 
-        void driftToStop()
+        void driftToStop()//function for the car to drift to a stop if sheldon leaves while the car is still moving 
         {
+            Debug.Log("Drifting To Stop");
             if (currSpeed > 0)
             {
                 van.transform.Translate(Vector3.forward * currSpeed * Time.fixedDeltaTime);
                 currSpeed -= 0.05f;
             }
             else driftingForward = false;
+            
         }
 
 
