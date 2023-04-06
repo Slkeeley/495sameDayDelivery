@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
@@ -23,7 +24,7 @@ public class NPC : MonoBehaviour
             ragDoll.SetActive(true); 
             if(evilIntentions.purchased)
             {
-                watcher.currentScore = watcher.currentScore + 5; 
+                GameWatcher.currentScore += 5; 
             }
         }
     }

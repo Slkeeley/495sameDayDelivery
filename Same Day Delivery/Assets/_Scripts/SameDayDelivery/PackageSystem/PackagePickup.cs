@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cinemachine;
 using SameDayDelivery.Controls;
 using SameDayDelivery.ScriptableObjects;
 using SameDayDelivery.Utility;
@@ -42,6 +43,7 @@ namespace SameDayDelivery.PackageSystem
         private Vector3 _reticleOriginalScale;
         private static readonly int PickupAnim = Animator.StringToHash("Pickup");
         private static readonly int ThrowAnim = Animator.StringToHash("Throw");
+        private CinemachineImpulseSource _impulseSource;
 
         private void Awake()
         {
@@ -49,6 +51,7 @@ namespace SameDayDelivery.PackageSystem
             _throwReticle.SetActive(false);
             _throwReticleImage = _throwReticle.GetComponent<Image>();
             _reticleOriginalScale = _throwReticle.transform.localScale;
+            _impulseSource = GetComponent<CinemachineImpulseSource>();
         }
 
         private void OnEnable()
@@ -82,7 +85,10 @@ namespace SameDayDelivery.PackageSystem
             var frequency = Mathf.Lerp(0.25f, 0.5f, percentCharge);
             var amplitude = Mathf.Lerp(0.15f, 1f, percentCharge);
             var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
-            CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
+            _impulseSource.m_ImpulseDefinition.m_AmplitudeGain = amplitude;
+            _impulseSource.m_ImpulseDefinition.m_FrequencyGain = frequency;
+            _impulseSource.GenerateImpulse();
+            // CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
 
             // change scale
             _throwReticle.transform.localScale = _reticleOriginalScale * percentCharge;

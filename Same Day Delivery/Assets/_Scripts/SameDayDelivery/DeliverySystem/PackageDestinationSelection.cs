@@ -29,6 +29,7 @@ namespace SameDayDelivery.DeliverySystem
                 if (chosenN != mostRecentNeighborhood)
                 {
                     mostRecentNeighborhood = chosenN;
+                    Debug.Log("A neighborhood has been shosen");
                     break;
                 }
                 else
