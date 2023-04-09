@@ -6,11 +6,17 @@ public class NPC : MonoBehaviour
 {
     //  private Animator am;
     [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
-    [SerializeField] private GameObject ragDoll;
+    //[SerializeField] private GameObject ragDoll;
     private SameDayDelivery.Controls.GameWatcher watcher;
+    public Rigidbody[] ragdollLimbs; 
     private void Awake()
     {
-        ragDoll.SetActive(false);
+        // ragDoll.SetActive(false);
+        ragdollLimbs = GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody i in ragdollLimbs)
+        {
+            i.isKinematic = true; 
+        }
         // am = GetComponent<Animator>();
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
     }
@@ -19,9 +25,13 @@ public class NPC : MonoBehaviour
     {
         if (other.tag == "Van" || other.tag =="Player")
         {
-          //  am.enabled = false;
-            ragDoll.SetActive(true); 
-            if(evilIntentions.purchased)
+            foreach (Rigidbody i in ragdollLimbs)
+            {
+                i.isKinematic = false;
+            }
+            //  am.enabled = false;
+            // ragDoll.SetActive(true); 
+            if (evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
             }
@@ -29,8 +39,12 @@ public class NPC : MonoBehaviour
 
         if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())
         {
+            foreach (Rigidbody i in ragdollLimbs)
+            {
+                i.isKinematic = false;
+            }
             //  am.enabled = false;
-            ragDoll.SetActive(true);
+            //    ragDoll.SetActive(true);
             if (evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5;

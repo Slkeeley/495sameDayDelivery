@@ -2798,7 +2798,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 10, z: 1}
+  m_Size: {x: 5, y: 10, z: 2}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &2596582836557941363
 MonoBehaviour:
@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   evilIntentions: {fileID: 11400000, guid: 48c076b8c4227544f8efabfcc4d58818, type: 2}
-  ragDoll: {fileID: 5863106176906536828}
+  ragdollLimbs: []
 --- !u!1 &8172649323974471365
 GameObject:
   m_ObjectHideFlags: 0
