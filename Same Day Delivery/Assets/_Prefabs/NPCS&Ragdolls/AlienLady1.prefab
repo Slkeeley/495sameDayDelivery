@@ -2764,6 +2764,7 @@ GameObject:
   - component: {fileID: 8910443004629830713}
   - component: {fileID: 953613302030505418}
   - component: {fileID: 2596582836557941363}
+  - component: {fileID: 7091979476007587291}
   m_Layer: 0
   m_Name: AlienLady1
   m_TagString: Untagged
@@ -2798,7 +2799,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 10, z: 2}
+  m_Size: {x: 5, y: 10, z: 3}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &2596582836557941363
 MonoBehaviour:
@@ -2812,8 +2813,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b64b98da8d584438f8ebb301cbfe8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 10
+  whatIsSidewalk:
+    serializedVersion: 2
+    m_Bits: 128
+  walkPointRange: 10
+  walkPoint: {x: 0, y: 0, z: 0}
   evilIntentions: {fileID: 11400000, guid: 48c076b8c4227544f8efabfcc4d58818, type: 2}
   ragdollLimbs: []
+--- !u!195 &7091979476007587291
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8134503787279881859}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 5
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8172649323974471365
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6164554597402839586}
   - component: {fileID: 4912539188378999864}
   - component: {fileID: 4912539188378999861}
+  - component: {fileID: -2937665696845134607}
   m_Layer: 0
   m_Name: ToddlerNPC_v1
   m_TagString: Untagged
@@ -58,8 +59,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b64b98da8d584438f8ebb301cbfe8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 10
+  whatIsSidewalk:
+    serializedVersion: 2
+    m_Bits: 128
+  walkPointRange: 10
+  walkPoint: {x: 0, y: 0, z: 0}
   evilIntentions: {fileID: 11400000, guid: 48c076b8c4227544f8efabfcc4d58818, type: 2}
   ragdollLimbs: []
+--- !u!195 &-2937665696845134607
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8083006320901131196}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 5
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &7312119070339252898
 PrefabInstance:
   m_ObjectHideFlags: 0

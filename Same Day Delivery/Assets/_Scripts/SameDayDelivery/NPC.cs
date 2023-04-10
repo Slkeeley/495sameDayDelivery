@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [Header("AI Data")]
+    public float moveSpeed; 
     public LayerMask whatIsSidewalk;
-    public float walkPointRange; 
-    bool walkPointSet; 
+    public float walkPointRange;
+    public Vector3 walkPoint; 
+    private NavMeshAgent agent;
+    bool walkPointSet=false; 
 
     //  private Animator am;
     [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
-    //[SerializeField] private GameObject ragDoll;
     private SameDayDelivery.Controls.GameWatcher watcher;
     public Rigidbody[] ragdollLimbs; 
     private void Awake()
@@ -40,9 +42,11 @@ public class NPC : MonoBehaviour
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
+
             }
+            agent.Stop(); 
             //  am.enabled = false;
-  
+
             if (evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
@@ -55,6 +59,7 @@ public class NPC : MonoBehaviour
             {
                 i.isKinematic = false;
             }
+            agent.Stop(); 
             //  am.enabled = false;
             if (evilIntentions.purchased)
             {
@@ -65,14 +70,35 @@ public class NPC : MonoBehaviour
 
     void walk()
     {
-        if (!walkPointSet) searchWalkPoint(); 
+        Debug.Log("walking"); 
+        if (!walkPointSet) searchWalkPoint();
 
+        if (walkPointSet)
+        {
+            //     var step = moveSpeed * Time.deltaTime; // calculate distance to move
+            //   transform.position = Vector3.MoveTowards(transform.position, walkPoint, step);
+            agent.SetDestination(walkPoint); 
+        }
+        Vector3 distanceToWalkPoint = transform.position - walkPoint; 
+
+        if(distanceToWalkPoint.magnitude < 1f)
+        {
+            walkPointSet = false; 
+        }
     }
 
     void searchWalkPoint()
     {
-        float randomZ;
-        float randomX;
+        Debug.Log("Searching for walk Point"); 
+        float randomZ = Random.Range(-walkPointRange, walkPointRange); 
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsSidewalk))
+        {
+            walkPointSet = true; 
+        } 
     }
 
 }
