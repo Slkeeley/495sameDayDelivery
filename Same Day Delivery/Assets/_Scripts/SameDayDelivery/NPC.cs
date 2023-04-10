@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI; 
 
 public class NPC : MonoBehaviour
 {
+    private NavMeshAgent agent;
+    public LayerMask whatIsSidewalk;
+    public float walkPointRange; 
+    bool walkPointSet; 
+
     //  private Animator am;
     [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
     //[SerializeField] private GameObject ragDoll;
@@ -11,9 +17,10 @@ public class NPC : MonoBehaviour
     public Rigidbody[] ragdollLimbs; 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>(); 
         // ragDoll.SetActive(false);
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody i in ragdollLimbs)
+        foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
             i.isKinematic = true; 
         }
@@ -21,43 +28,51 @@ public class NPC : MonoBehaviour
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
     }
 
+    private void Update()
+    {
+        walk(); 
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.tag =="Player")
+        if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
             }
             //  am.enabled = false;
-            // ragDoll.SetActive(true); 
+  
             if (evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
             }
         }
 
-        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())
+        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
             }
             //  am.enabled = false;
-            //    ragDoll.SetActive(true);
             if (evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5;
             }
         }
     }
-/*
-    private void OnTriggerExit(Collider other)
+
+    void walk()
     {
-        if(other.tag=="Van")
-        {
-            //reassemble ragdoll 
-        }
+        if (!walkPointSet) searchWalkPoint(); 
+
     }
-*/
+
+    void searchWalkPoint()
+    {
+        float randomZ;
+        float randomX;
+    }
+
 }
