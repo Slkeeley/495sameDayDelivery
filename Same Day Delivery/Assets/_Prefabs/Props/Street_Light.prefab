@@ -129,7 +129,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.057634976
+  - screenRelativeHeight: 0.101501204
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3562012632241208730}
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 280475740982498678}
   - component: {fileID: 3870375934050773849}
   - component: {fileID: 4385898670095772960}
+  - component: {fileID: 8449574573850070621}
   m_Layer: 0
   m_Name: street_light
   m_TagString: Untagged
@@ -217,6 +218,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8449574573850070621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032074704984984321}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0930936, y: 4.5454817, z: 0.9039269}
+  m_Center: {x: 0.34479463, y: 2.2717204, z: 0.036975175}
 --- !u!1 &8866535635311832841
 GameObject:
   m_ObjectHideFlags: 0
