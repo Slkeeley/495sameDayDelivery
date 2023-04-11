@@ -15,7 +15,7 @@ namespace SameDayDelivery.Controls
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem earlyAlarm;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem payRaise;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem employeeOfTheMonth;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
+        [SerializeField] public SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
         [SerializeField] private SameDayDelivery.UI.gameplayUI UI; 
         public VanController carControls;
         public PlayerControlManager playerControls;
@@ -99,6 +99,8 @@ namespace SameDayDelivery.Controls
         {
             earlyAlarm = data.upgradeLookupTable.upgrades[3];
             payRaise = data.upgradeLookupTable.upgrades[8];
+            employeeOfTheMonth = data.upgradeLookupTable.upgrades[8];
+            evilIntentions = data.upgradeLookupTable.upgrades[8];
             checkUpgradePurchaseValues(); 
         }
 

@@ -14,8 +14,8 @@ public class NPC : MonoBehaviour
     bool walkPointSet=false; 
 
     //  private Animator am;
-    [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
     private SameDayDelivery.Controls.GameWatcher watcher;
+    private BasicNPCSpawn spawner; 
     public Rigidbody[] ragdollLimbs; 
     private void Awake()
     {
@@ -24,10 +24,12 @@ public class NPC : MonoBehaviour
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
+            i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
             i.isKinematic = true; 
         }
         // am = GetComponent<Animator>();
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
+        spawner = GameObject.Find("EnemySpawner").GetComponent<BasicNPCSpawn>(); 
     }
 
     private void Update()
@@ -44,13 +46,14 @@ public class NPC : MonoBehaviour
                 i.isKinematic = false;
 
             }
-            agent.Stop(); 
+            agent.isStopped = true; 
             //  am.enabled = false;
 
-            if (evilIntentions.purchased)
+            if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
             }
+            StartCoroutine(despawn()); 
         }
 
         if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the npc is hit by a thrown package damage the package then activate the ragdoll
@@ -59,12 +62,13 @@ public class NPC : MonoBehaviour
             {
                 i.isKinematic = false;
             }
-            agent.Stop(); 
+            agent.isStopped = true;
             //  am.enabled = false;
-            if (evilIntentions.purchased)
+            if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5;
             }
+            StartCoroutine(despawn());
         }
     }
 
@@ -101,4 +105,10 @@ public class NPC : MonoBehaviour
         } 
     }
 
+    IEnumerator despawn()
+    {
+        yield return new WaitForSeconds(5);
+        spawner.npcsOut--; 
+        Destroy(this.gameObject); 
+    }
 }
