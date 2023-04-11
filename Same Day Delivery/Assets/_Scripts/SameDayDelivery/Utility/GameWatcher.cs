@@ -151,6 +151,7 @@ namespace SameDayDelivery.Controls
                 driftingForward = true;
                 carControls.rb.isKinematic = true;
             }
+            else carControls.rb.isKinematic = true; 
             carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
