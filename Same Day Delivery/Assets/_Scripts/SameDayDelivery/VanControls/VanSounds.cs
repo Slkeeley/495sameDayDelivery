@@ -5,26 +5,44 @@ using UnityEngine;
 public class VanSounds : MonoBehaviour
 {
     public AudioClip[] clips;
-    private AudioSource source; 
+    private AudioSource source;
+
     // Start is called before the first frame update
     void Awake()
     {
-        source = GetComponent<AudioSource>();    
+        source = GetComponent<AudioSource>();
     }
 
-      public void startMotor()// on entry play the car engine starting noise; 
+    public void startMotor()// on entry play the car engine starting noise; 
     {
-        source.PlayOneShot(clips[0]); 
+        source.PlayOneShot(clips[0]);
     }
 
     public void drive()// on entry play the car engine starting noise; 
     {
         source.clip = clips[1];
-        if (!source.isPlaying) source.Play(); 
+        if (!source.isPlaying) source.Play();
     }
 
     public void reverse()//if the player is backing up play the reverse horn
     {
-        //reverse nboise here
+        source.clip = clips[2];
+        if (!source.isPlaying) source.Play();
     }
+
+    public void crashNoise()
+    {
+        if (GetComponentInParent<SameDayDelivery.VanControls.CarControls>().crashed)
+        {
+            source.clip = clips[3];
+            source.PlayOneShot(clips[3]);
+           // StartCoroutine(resetCrashNoise);
+        }
+    }
+
+   /* IEnumerator resetCrashNoise()
+   {
+     //   yield return new WaitUntil
+    }*/
+
 }

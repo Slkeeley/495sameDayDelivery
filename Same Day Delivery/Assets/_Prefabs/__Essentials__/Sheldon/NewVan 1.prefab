@@ -1637,7 +1637,7 @@ GameObject:
   - component: {fileID: 8419910363525750804}
   m_Layer: 0
   m_Name: NewVan 1
-  m_TagString: Untagged
+  m_TagString: Van
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1674,6 +1674,7 @@ MonoBehaviour:
   premiumGas: {fileID: 0}
   freshTires: {fileID: 0}
   packageChute: {fileID: 4357906418590263044}
+  rb: {fileID: 0}
   currMotorForce: 0
   maxMotorForce: 1000
   currSteerAngle: 0
