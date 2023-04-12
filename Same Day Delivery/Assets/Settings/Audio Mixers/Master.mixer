@@ -15,6 +15,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -5136904015874889925}
+  - {fileID: 5925778612457349209}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -187,10 +188,28 @@ AudioMixerSnapshotController:
   m_SnapshotID: d423200308552924eb289f668233c2d4
   m_FloatValues:
     a448c30080a078049b3bd02eaa5dbc42: -6
+    025ac5405bbc00a4c879750bb2bd0f08: 3405
     38fb4c61d908a0d439adcac1da49d329: 10
-    71efa8624d695fb429359b2d9c22018d: -19
-    3ec2fdd920bc64041b20dc954a7c6076: -4
-    7d359e7a2dc326f4cbfcbbb1e2ece11b: -24
+    f7dfeb22e1f4fec4a8dc63396a88c655: 110.8
+    71efa8624d695fb429359b2d9c22018d: -6.3929553
+    97a89d349092d434da7b813cef716fa0: 22.6
+    06b3cb54eb3af894183e2e012b735bf4: 0.6
+    aec78ab7533dd4c449b82511a940b8b5: 0
+    5b2ab02821c622d42bcc07e0f7e08ef1: 715
+    8c725fb90a441b442b207a06cbf15fe5: 18096
+    3ec2fdd920bc64041b20dc954a7c6076: -5.9025264
+    1b4875e9b783e94468445738e8012cb8: 48
+    5f7fd5f9794ce724e90433badebabc60: 119
+    7d359e7a2dc326f4cbfcbbb1e2ece11b: -21.148092
+    391b840bd1f178647af83a735d829599: 5
+    9f98351bbce536b49ab96f6252ad23bf: -17.4
+    01cc5d1ca7529ee438f70e2ff5f4f904: 54.9
+    dd44023d428ff914e95f080f51ac51ba: 393
+    e91a584d1001dda468542269bdfa4e28: 0.046
+    32ddc38d83a18174d9ad0ffb03eebe68: -27.9
+    55e3de9f83d1fa64a9a3a6c56336a919: -21.4
+    fae4b6bf9ff9e57449a181e50d1aba83: -26.7
+    dcde41ffd0de574478434bd6c14c4374: 9113
   m_TransitionOverrides: {}
 --- !u!244 &4562491107088588165
 AudioMixerEffectController:
@@ -225,6 +244,28 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &5925778612457349209
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0b591f0cc3450e540b84edd793ecd0af
+  m_EffectName: Compressor
+  m_MixLevel: 3e521d81b3e7c474bad8040ed4e10750
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: fae4b6bf9ff9e57449a181e50d1aba83
+  - m_ParameterName: Attack
+    m_GUID: 97a89d349092d434da7b813cef716fa0
+  - m_ParameterName: Release
+    m_GUID: dd44023d428ff914e95f080f51ac51ba
+  - m_ParameterName: Make up gain
+    m_GUID: aa86a669b90725b43bf2efc580e5615f
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &6297812958149865311
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

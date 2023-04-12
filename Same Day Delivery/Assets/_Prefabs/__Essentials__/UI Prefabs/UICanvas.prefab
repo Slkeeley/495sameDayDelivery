@@ -1264,6 +1264,7 @@ GameObject:
   - component: {fileID: 1116741358483317979}
   - component: {fileID: 4868591859589061786}
   - component: {fileID: 2190141139012032305}
+  - component: {fileID: 8298465012953013501}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -1405,6 +1406,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9324da428cf24b8ecc076b66bdc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8298465012953013501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116741358483317978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74669aadee840c5448051c7d262ccfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1116741358313322071}
+  scoreText: {fileID: 5750278830978432473}
+  levelText: {fileID: 5353030789420967949}
+  zergCoinsText: {fileID: 5536234538358444154}
+  deliveryText: {fileID: 7408936512917750989}
+  packagesText: {fileID: 8346833782881489814}
+  failNotification: {fileID: 1116741358840399656}
+  successNotification: {fileID: 1116741357483278864}
 --- !u!1 &1116741358787099828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8218132191609350029}
   m_Layer: 5
-  m_Name: XSensitivity
+  m_Name: CameraSensitivity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3891,7 +3912,7 @@ GameObject:
   - component: {fileID: 142375293965432019}
   - component: {fileID: 1193214946846763698}
   m_Layer: 5
-  m_Name: MasterVolumeSlider
+  m_Name: CameraSensitivitySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3969,7 +3990,20 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SameDayDelivery.Utility.CameraSensitivityManager,
+          Assembly-CSharp
+        m_MethodName: UpdateSensitivity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3211298771624140358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,7 +4432,7 @@ GameObject:
   - component: {fileID: 2118897757303443268}
   - component: {fileID: 4509933407307526654}
   m_Layer: 5
-  m_Name: XSensitivityLabel
+  m_Name: CameraSensitivityLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4451,7 +4485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6ed3abf4969ad44aa0e5abf3ee41386, type: 2}
   m_sharedMaterial: {fileID: 517946313724014077, guid: e6ed3abf4969ad44aa0e5abf3ee41386, type: 2}
@@ -6346,7 +6380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mouze Zensitivity
+  m_text: Mouze Zenzitivity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6ed3abf4969ad44aa0e5abf3ee41386, type: 2}
   m_sharedMaterial: {fileID: 517946313724014077, guid: e6ed3abf4969ad44aa0e5abf3ee41386, type: 2}
@@ -6601,7 +6635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5642840203979079834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7130,7 +7164,7 @@ MonoBehaviour:
   voiceVolumeSlider: {fileID: 4088543985411438902}
   ambienceVolumeSlider: {fileID: 9215074198729354657}
   slideVolumeScale: 50
-  _startingSliderValue: 50
+  _startingSliderValue: 0
 --- !u!1 &8677761722279573865
 GameObject:
   m_ObjectHideFlags: 0
@@ -7584,3 +7618,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5484626767957495046, guid: b2472bd241fab1e4c80b7bf0d600166f, type: 3}
   m_PrefabInstance: {fileID: 1055004938684945647}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7408936512917750989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7527192728891494434, guid: b2472bd241fab1e4c80b7bf0d600166f, type: 3}
+  m_PrefabInstance: {fileID: 1055004938684945647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

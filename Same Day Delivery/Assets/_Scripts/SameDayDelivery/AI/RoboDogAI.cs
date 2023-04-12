@@ -77,7 +77,7 @@ namespace SameDayDelivery.AI
 
         public void ChooseRandomIdleHead()
         {
-            _animator.SetInteger(HeadIdleAnim, Random.Range(0, _bodyIdleAnimations));
+            _animator.SetInteger(HeadIdleAnim, Random.Range(0, _headIdleAnimations));
         }
     }
 }

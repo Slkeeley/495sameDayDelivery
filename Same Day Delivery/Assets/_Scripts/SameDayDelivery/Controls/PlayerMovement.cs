@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
-using SameDayDelivery.Utility;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -21,7 +19,7 @@ namespace SameDayDelivery.Controls
         public float groundCheckInterval = 0.25f;
         public float yOffset = 0.2f;
 
-        [SerializeField]
+        [SerializeField, Header("Camera Settings")]
         private Camera _cam;
 
         [SerializeField]
@@ -187,16 +185,6 @@ namespace SameDayDelivery.Controls
 
         private void GroundCharacter()
         {
-            // var transform1 = transform;
-            // _ray = new Ray();
-            // _ray.origin = transform1.position;
-            // _ray.direction = Vector3.down;
-            //
-            // if (!Physics.Raycast(_ray, out _hit, 100f, groundLayer)) return;
-            //
-            // var pos = transform1.position;
-            // pos.y = _hit.point.y;
-            // transform.position = pos;
             _isGrounded = _characterController.isGrounded;
         }
     }
