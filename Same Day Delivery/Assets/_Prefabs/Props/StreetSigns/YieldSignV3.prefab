@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 8149408643770162119}
   - component: {fileID: 8543955792655743064}
   - component: {fileID: 8722512652274914778}
-  - component: {fileID: 8512785663678854934}
+  - component: {fileID: 1629531455511188316}
   m_Layer: 0
   m_Name: YieldSignV3
   m_TagString: Untagged
@@ -533,25 +533,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
-    fadeTransitionWidth: 0.025
-    renderers:
-    - renderer: {fileID: 6728162814250808653}
-    - renderer: {fileID: 2843326325271494415}
-    - renderer: {fileID: 5182629765883204393}
-    - renderer: {fileID: 5590245468562239143}
-    - renderer: {fileID: 1343977529934517481}
-    - renderer: {fileID: 3520715187437272150}
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0.025
-    renderers:
-    - renderer: {fileID: 6728162814250808653}
-    - renderer: {fileID: 2843326325271494415}
-    - renderer: {fileID: 5182629765883204393}
-    - renderer: {fileID: 5590245468562239143}
-    - renderer: {fileID: 1343977529934517481}
-    - renderer: {fileID: 3520715187437272150}
-  - screenRelativeHeight: 0.049683917
+  - screenRelativeHeight: 0.021675078
     fadeTransitionWidth: 0.025
     renderers:
     - renderer: {fileID: 6728162814250808653}
@@ -577,7 +559,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8512785663678854934
+--- !u!65 &1629531455511188316
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -588,8 +570,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20157462, y: 3.1634777, z: 0.21924123}
-  m_Center: {x: 0, y: 0, z: 0.009964429}
+  m_Size: {x: 0.005, y: 0.04, z: 0.005}
+  m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!1 &9171588446920874367
 GameObject:
   m_ObjectHideFlags: 0
