@@ -37,10 +37,12 @@ public class NPC : MonoBehaviour
         walk(); 
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
+            Debug.Log("Collided"); 
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;

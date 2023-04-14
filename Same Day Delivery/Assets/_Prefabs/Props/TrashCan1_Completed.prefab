@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2600099021015577570}
   - component: {fileID: 7777477423724331592}
-  - component: {fileID: 4797900456015961213}
   m_Layer: 0
   m_Name: TrashCan1_Completed
   m_TagString: Untagged
@@ -29,7 +28,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2351588472398560081}
   - {fileID: 8030502781704895401}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,111 +46,12 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.05491322
+  - screenRelativeHeight: 0.01807251
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1206232743506522807}
     - renderer: {fileID: 1011844547728201130}
-  - screenRelativeHeight: 0.019354774
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5136187474323918988}
   m_Enabled: 1
---- !u!54 &4797900456015961213
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4575239903418120638}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!1001 &6562075111957826453
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2600099021015577570}
-    m_Modifications:
-    - target: {fileID: 5165040524614539626, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_Name
-      value: TrashCan_v1Low
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7340538
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.56179845
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.67269033
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.675
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
---- !u!4 &2351588472398560081 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8913654788224561348, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-  m_PrefabInstance: {fileID: 6562075111957826453}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &5136187474323918988 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2041902801668201241, guid: a5f65e5ef0fccfa44a03ff67b63710af, type: 3}
-  m_PrefabInstance: {fileID: 6562075111957826453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6583491423315828559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,7 +61,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3760313455041340646, guid: 551bf8cc2622a70458b2218b1bcec382, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3760313455041340646, guid: 551bf8cc2622a70458b2218b1bcec382, type: 3}
       propertyPath: m_LocalPosition.x
@@ -251,8 +150,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3292645424822173765
-BoxCollider:
+--- !u!64 &2805382965810896808
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -261,9 +160,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.4723036, y: 3.2282424, z: 2.472304}
-  m_Center: {x: 0, y: 0.015146136, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5844435623575427901, guid: cd662bf02dc4de0469292a0cd0f80dc4, type: 3}
 --- !u!54 &6458656151743362266
 Rigidbody:
   m_ObjectHideFlags: 0
