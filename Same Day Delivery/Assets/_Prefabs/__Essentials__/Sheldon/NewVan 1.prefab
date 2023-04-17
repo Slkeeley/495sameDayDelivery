@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 938737894859155401}
   m_Layer: 0
   m_Name: CarFront
-  m_TagString: Untagged
+  m_TagString: Van
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1121,7 +1121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4866752047702698646}
   m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -5.7, y: 0.9, z: 0}
+  m_LocalPosition: {x: -5.5, y: 0.9, z: 0.00000017881393}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children: []
   m_Father: {fileID: 5414833800435062093}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   brakeForce: 3000
   maxVelo: 20
   maxReverseVelo: 5
-  accelerationSpeed: 40
+  accelerationSpeed: 50
   decelerationSpeed: 50
   decelerationMultiplier: 0.98
   accelerating: 0
@@ -1837,7 +1837,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 10}
+  m_Size: {x: 4, y: 4.4, z: 10}
   m_Center: {x: 0, y: 3.5, z: 0.4}
 --- !u!114 &5363266208471157899
 MonoBehaviour:
@@ -7340,7 +7340,7 @@ GameObject:
   - component: {fileID: 9204471321524428826}
   m_Layer: 0
   m_Name: backBumper
-  m_TagString: Untagged
+  m_TagString: Van
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
