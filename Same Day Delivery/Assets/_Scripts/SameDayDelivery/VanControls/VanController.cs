@@ -305,7 +305,7 @@ namespace SameDayDelivery.VanControls
             }
         }
 
-
+        #region INPUTS
         public void OnMove(InputAction.CallbackContext context)//forwards and reverse movement
         {
             if(context.performed)
@@ -349,6 +349,17 @@ namespace SameDayDelivery.VanControls
             maxMotorForce = overDriveForce/1.5f;
             brakeForce = defaultBrakeForce;
         }
+        #endregion
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.tag=="MailBox")
+            {
+                other.GetComponent<Rigidbody>().useGravity = true; 
+                other.GetComponent<BoxCollider>().isTrigger= false; 
+            }
+        }
     }
+
+    
 }
