@@ -1209,7 +1209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632220342439559873}
-  - component: {fileID: 1632220342439559874}
+  - component: {fileID: 3593207050830001993}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -1277,7 +1277,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1632220342439559874
+--- !u!114 &3593207050830001993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1286,58 +1286,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1632220342439559872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1120c07cd3de7459bd4bb1409af7e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6aaaa5d5dbd8b71459d70758216144f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnLocations:
-  - {fileID: 1632220340914336525}
-  - {fileID: 1632220341626102194}
-  - {fileID: 1632220342771279002}
-  - {fileID: 1632220341100152284}
-  - {fileID: 1632220341034162598}
-  - {fileID: 1632220341422118308}
-  - {fileID: 1632220341619705587}
-  - {fileID: 1632220341000894186}
-  - {fileID: 1632220341258715378}
-  - {fileID: 1632220341309087076}
-  - {fileID: 1632220341360868478}
-  - {fileID: 1632220341550767634}
-  - {fileID: 1632220341299592724}
-  - {fileID: 1632220342290787154}
-  - {fileID: 1632220341755405395}
-  - {fileID: 1632220341860604766}
-  - {fileID: 1632220341889655967}
-  - {fileID: 1632220341173314094}
-  - {fileID: 1632220341923994610}
-  - {fileID: 1632220340922050810}
-  - {fileID: 1632220341613444047}
-  - {fileID: 1632220342531352084}
-  - {fileID: 1632220342155953781}
-  - {fileID: 1632220342135483453}
-  - {fileID: 1632220340796813935}
-  - {fileID: 1632220341444114086}
-  - {fileID: 1632220342070387733}
-  - {fileID: 1632220340666719328}
-  - {fileID: 1632220342724874272}
-  - {fileID: 1632220342031424992}
-  - {fileID: 1632220342190295158}
-  - {fileID: 1632220342181212934}
-  - {fileID: 1632220342049834988}
-  - {fileID: 1632220342319394439}
-  - {fileID: 1632220342028297331}
-  - {fileID: 1632220340670665665}
-  - {fileID: 1632220341269429077}
-  - {fileID: 1632220341325498697}
-  - {fileID: 1632220341518098385}
-  - {fileID: 1632220340810132560}
-  - {fileID: 1632220341261382980}
-  - {fileID: 1632220342757616007}
-  - {fileID: 1632220342529483310}
-  - {fileID: 1632220342575100841}
-  - {fileID: 1632220342205872394}
-  - {fileID: 1632220340860220000}
+  maxNPCs: 50
+  npcsOut: 0
   NPCs:
   - {fileID: 984331179977672664, guid: 6b9a52a82922c234aa8f18383228d05d, type: 3}
+  - {fileID: 6944672895597059608, guid: 8e0131c5e2cef86488d071eb117f25a9, type: 3}
+  - {fileID: 4754804178197565114, guid: 972c3a3c722245240bb1f2a8926cd295, type: 3}
   - {fileID: 8134503787279881859, guid: 9105c84d47b036c419e34b88cfc30997, type: 3}
   - {fileID: 8134503787279881859, guid: 748ae5a8fa37aa0448283fb18ab1ac7f, type: 3}
   - {fileID: 7924960738641284190, guid: f614a367d0855f842a57d2d3964d704b, type: 3}
@@ -1351,8 +1308,10 @@ MonoBehaviour:
   - {fileID: 8083006320901131196, guid: 5fefddd4593bb1e4089145367825cc5c, type: 3}
   - {fileID: 6984741054756106506, guid: e0c5645573ed82443b51dbddfc755ebf, type: 3}
   - {fileID: 9038643734206871257, guid: 60d3aff46e856cf428c1ee183c8b2dd0, type: 3}
-  maxNPCs: 50
-  npcsOut: 0
+  spawnRadius: 40
+  whatIsNavMesh:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1632220342529483310
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour
 
     //  private Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
-    private BasicNPCSpawn spawner; 
+    private NPCSpawner spawner; 
     public Rigidbody[] ragdollLimbs; 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class NPC : MonoBehaviour
         }
         // am = GetComponent<Animator>();
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
-        spawner = GameObject.Find("EnemySpawner").GetComponent<BasicNPCSpawn>(); 
+        spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>(); 
     }
 
     private void Update()
@@ -42,7 +42,7 @@ public class NPC : MonoBehaviour
     {
         if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
-            Debug.Log("Collided"); 
+
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
@@ -76,13 +76,10 @@ public class NPC : MonoBehaviour
 
     void walk()
     {
-        Debug.Log("walking"); 
         if (!walkPointSet) searchWalkPoint();
 
         if (walkPointSet)
-        {
-            //     var step = moveSpeed * Time.deltaTime; // calculate distance to move
-            //   transform.position = Vector3.MoveTowards(transform.position, walkPoint, step);
+        {           
             agent.SetDestination(walkPoint); 
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint; 
@@ -95,7 +92,6 @@ public class NPC : MonoBehaviour
 
     void searchWalkPoint()
     {
-        Debug.Log("Searching for walk Point"); 
         float randomZ = Random.Range(-walkPointRange, walkPointRange); 
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
