@@ -10,6 +10,7 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] private GameObject[] NPCs;
     [Header("Spawning")]
     public float spawnRadius;
+    public float despawnRadius;
     public LayerMask whatIsNavMesh;
     public Vector3 spawnPoint;
 

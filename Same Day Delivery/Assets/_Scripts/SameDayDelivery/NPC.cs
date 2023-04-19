@@ -11,7 +11,10 @@ public class NPC : MonoBehaviour
     public float walkPointRange;
     public Vector3 walkPoint; 
     private NavMeshAgent agent;
-    bool walkPointSet=false; 
+    private GameObject player;
+    bool walkPointSet=false;
+    float despawnRadius; 
+   
 
     //  private Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
@@ -28,13 +31,16 @@ public class NPC : MonoBehaviour
             i.isKinematic = true; 
         }
         // am = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
-        spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>(); 
+        spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
+        despawnRadius = spawner.despawnRadius; 
     }
 
     private void Update()
     {
-        walk(); 
+        walk();
+        checkDistFromPlayer();
     }
 
 
@@ -103,6 +109,22 @@ public class NPC : MonoBehaviour
         } 
     }
 
+
+   void checkDistFromPlayer()
+    {
+        Vector3 distanceFromPlayer = transform.position - player.transform.position;
+        
+        if(distanceFromPlayer.magnitude >= despawnRadius)
+        {
+            cullNPC(); 
+        }
+    }
+
+    private void cullNPC()
+    {
+        spawner.npcsOut--;
+        Destroy(this.gameObject); 
+    }
     IEnumerator despawn()
     {
         yield return new WaitForSeconds(5);
