@@ -35,13 +35,19 @@ namespace SameDayDelivery.Controls
         public int zergCoinsGained;//How much currency the player currently has 
 
         [Header("Events")]
+        //Scene Events
         public UnityEvent goToFailScreen; 
         public UnityEvent goToPassScreen;
+        //UI Events; 
+        public UnityEvent danStart;
+        public UnityEvent workFaster;
+        public UnityEvent oneMinute;  
 
         //Privaye vars 
         public bool driftingForward = false;
         private float currSpeed;
-        private bool payRaised; 
+        private bool payRaised;
+        private bool minuteLeft = false; 
 
         //temporary statics 
         //REPLACE THESE WHEN WE HAVE A MORE FORMAL SAVE SYSTEM 
@@ -55,6 +61,7 @@ namespace SameDayDelivery.Controls
         private void Start()
         {
             LevelSetup();
+            danStart?.Invoke(); 
         }
 
         // Update is called once per frame
@@ -72,6 +79,13 @@ namespace SameDayDelivery.Controls
                 TimerOn = false;
                 StartCoroutine(GgGoNext());
             }
+            if (TimeLeft <= 60 && !minuteLeft)
+            {
+                minuteLeft = true;
+                oneMinute?.Invoke(); 
+            }
+      
+            
 
             if (packagesDelivered >= packagesNeeded) StartCoroutine(LevelComplete());  //if the packages delivered exceeds the necessary number to beat a level go to the success screen
 
@@ -224,6 +238,7 @@ namespace SameDayDelivery.Controls
             else if (timeSinceLastDelivery >= 60) //slow delivery penalty
             {
                 UI.deliveryMessage(2);
+                workFaster?.Invoke(); 
                 currentScore = currentScore + 75;
                 zergCoinsGained = zergCoinsGained + 1;
             }
