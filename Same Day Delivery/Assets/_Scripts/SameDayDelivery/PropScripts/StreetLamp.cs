@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events; 
 
 public class StreetLamp : MonoBehaviour
 {
     Rigidbody rb;
-    Collider cd; 
+    Collider cd;
+    SameDayDelivery.Controls.GameWatcher gw;
     [SerializeField] private GameObject lamp;
     [SerializeField] private GameObject lense;
     [SerializeField] private Material gray; 
@@ -15,7 +17,8 @@ public class StreetLamp : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        cd = GetComponent<BoxCollider>(); 
+        cd = GetComponent<BoxCollider>();
+        gw = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>(); 
         rb.useGravity = false; 
         rb.isKinematic = true; 
     }
@@ -26,6 +29,7 @@ public class StreetLamp : MonoBehaviour
             rb.useGravity = true; 
             rb.isKinematic = false;
             cd.enabled = false;
+            gw.propHit?.Invoke(); 
             StartCoroutine(flicker());
 
         }

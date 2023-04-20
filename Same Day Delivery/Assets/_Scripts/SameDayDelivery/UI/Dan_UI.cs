@@ -34,7 +34,7 @@ public class Dan_UI : MonoBehaviour
         messageText.text = "";
     }
 
-    public void workFaster()
+    public void workFaster()//dan yells at player after making a slow delivery
     {
         StartCoroutine(workFasterCR()); 
     }
@@ -51,7 +51,7 @@ public class Dan_UI : MonoBehaviour
         messageText.text = ""; 
     }
 
-    public void oneMinute()
+    public void oneMinute()//dan yells at player when there is less than a minute left. 
     {
         StartCoroutine(oneMinuteCR()); 
     }
@@ -61,8 +61,43 @@ public class Dan_UI : MonoBehaviour
         danAudioSource.clip = danVoiceLines[2];
         danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
         face.SetActive(true);
-        messageText.fontSize = 24; 
+        messageText.fontSize = 24;
         messageText.text = "Hurry up! You're running out of time!";
+        yield return new WaitForSeconds(danDelay);
+        face.SetActive(false);
+        messageText.text = "";
+        messageText.fontSize = 36;
+    }
+
+    public void pedestrianHit()//dan yells at the player every time they hit a pedestrian 
+    {
+        StartCoroutine(pedestrianHitCR());
+    }
+
+    IEnumerator pedestrianHitCR()
+    {
+        danAudioSource.clip = danVoiceLines[3];
+        danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
+        face.SetActive(true);
+        messageText.text = "SHEEELLDON!";
+        yield return new WaitForSeconds(danDelay);
+        face.SetActive(false);
+        messageText.text = "";
+        messageText.fontSize = 36;
+    }
+
+    public void propHit()
+    {
+        StartCoroutine(propHitCR());
+    }
+
+    IEnumerator propHitCR()
+    {
+        danAudioSource.clip = danVoiceLines[4];
+        danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
+        face.SetActive(true);
+        messageText.fontSize = 24;
+        messageText.text = "Hey! That's coming out of your paycheck!";
         yield return new WaitForSeconds(danDelay);
         face.SetActive(false);
         messageText.text = "";

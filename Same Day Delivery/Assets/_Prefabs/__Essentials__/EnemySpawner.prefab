@@ -1308,10 +1308,15 @@ MonoBehaviour:
   - {fileID: 8083006320901131196, guid: 5fefddd4593bb1e4089145367825cc5c, type: 3}
   - {fileID: 6984741054756106506, guid: e0c5645573ed82443b51dbddfc755ebf, type: 3}
   - {fileID: 9038643734206871257, guid: 60d3aff46e856cf428c1ee183c8b2dd0, type: 3}
+  vanHit:
+    m_PersistentCalls:
+      m_Calls: []
   spawnRadius: 40
+  despawnRadius: 50
   whatIsNavMesh:
     serializedVersion: 2
     m_Bits: 128
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632220342529483310
 GameObject:
   m_ObjectHideFlags: 0

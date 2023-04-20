@@ -41,7 +41,8 @@ namespace SameDayDelivery.Controls
         //UI Events; 
         public UnityEvent danStart;
         public UnityEvent workFaster;
-        public UnityEvent oneMinute;  
+        public UnityEvent oneMinute;
+        public UnityEvent propHit;  
 
         //Privaye vars 
         public bool driftingForward = false;
@@ -250,7 +251,7 @@ namespace SameDayDelivery.Controls
             }
             timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
         }
-        
+
     }
 
 

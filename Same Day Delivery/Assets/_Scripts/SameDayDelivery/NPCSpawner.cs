@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events; 
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class NPCSpawner : MonoBehaviour
     public int maxNPCs; 
     public int npcsOut;
     [SerializeField] private GameObject[] NPCs;
+    public UnityEvent vanHit; 
+
     [Header("Spawning")]
     public float spawnRadius;
     public float despawnRadius;
@@ -64,5 +67,5 @@ public class NPCSpawner : MonoBehaviour
         isSpawning = true;
         spawnPointFound = false;
     }
-  
+
 }

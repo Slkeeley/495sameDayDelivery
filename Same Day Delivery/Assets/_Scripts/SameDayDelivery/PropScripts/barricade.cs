@@ -6,9 +6,11 @@ public class barricade : MonoBehaviour
 {
     [SerializeField] private GameObject unbroken; 
     [SerializeField] private GameObject Broken;
+    SameDayDelivery.Controls.GameWatcher gw;
 
     private void Awake()
     {
+        gw = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
         unbroken.SetActive(true);
         Broken.SetActive(false); 
     }
@@ -18,6 +20,7 @@ public class barricade : MonoBehaviour
         if(other.tag=="Van")
         {
             switchStates();
+            gw.propHit?.Invoke(); 
             GetComponent<BoxCollider>().enabled = false;
         }
     }

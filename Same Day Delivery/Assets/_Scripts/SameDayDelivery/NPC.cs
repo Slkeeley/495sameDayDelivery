@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
+
 
 public class NPC : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class NPC : MonoBehaviour
     //  private Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
     private NPCSpawner spawner; 
-    public Rigidbody[] ragdollLimbs; 
+    public Rigidbody[] ragdollLimbs;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>(); 
@@ -48,6 +50,7 @@ public class NPC : MonoBehaviour
     {
         if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
+            if (other.tag == "Van") spawner.vanHit?.Invoke(); 
 
             foreach (Rigidbody i in ragdollLimbs)
             {
@@ -66,6 +69,7 @@ public class NPC : MonoBehaviour
 
         if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
+            spawner.vanHit?.Invoke();
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
