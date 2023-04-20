@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4995344411185711485}
   - component: {fileID: 4995344411185711484}
   - component: {fileID: 4995344411185711475}
+  - component: {fileID: 8860439719833307651}
   m_Layer: 0
   m_Name: polySurface22
   m_TagString: Untagged
@@ -116,6 +117,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344411185711485}
   m_Enabled: 1
+--- !u!54 &8860439719833307651
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344411185711473}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4995344411885676261
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +142,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4995344411885676262}
+  - component: {fileID: 284204077597065897}
+  - component: {fileID: 6885529570432975135}
   m_Layer: 0
   m_Name: FlimsyFence_Wood_v2
   m_TagString: Untagged
@@ -148,6 +167,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &284204077597065897
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344411885676261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.75}
+  m_Center: {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &6885529570432975135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344411885676261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc693cb34f80c04a82a4ebe333a0346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rBodies: []
 --- !u!1 &4995344412525775343
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +206,7 @@ GameObject:
   - component: {fileID: 4995344412525775339}
   - component: {fileID: 4995344412525775338}
   - component: {fileID: 4995344412525775337}
+  - component: {fileID: 5244793480082282467}
   m_Layer: 0
   m_Name: polySurface19
   m_TagString: Untagged
@@ -264,6 +310,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344412525775339}
   m_Enabled: 1
+--- !u!54 &5244793480082282467
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344412525775343}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4995344412561294941
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +339,7 @@ GameObject:
   - component: {fileID: 4995344412561294937}
   - component: {fileID: 4995344412561294936}
   - component: {fileID: 4995344412561294943}
+  - component: {fileID: 4829762836376525224}
   m_Layer: 0
   m_Name: polySurface23
   m_TagString: Untagged
@@ -380,6 +443,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344412561294937}
   m_Enabled: 1
+--- !u!54 &4829762836376525224
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344412561294941}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4995344412751117575
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +507,7 @@ GameObject:
   - component: {fileID: 4995344412958736595}
   - component: {fileID: 4995344412958736594}
   - component: {fileID: 4995344412958736593}
+  - component: {fileID: 3275355401224670429}
   m_Layer: 0
   m_Name: Flimsy_v1.2_trim
   m_TagString: Untagged
@@ -531,6 +611,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344412958736595}
   m_Enabled: 1
+--- !u!54 &3275355401224670429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344412958736599}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4995344412984462400
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +640,7 @@ GameObject:
   - component: {fileID: 4995344412984462412}
   - component: {fileID: 4995344412984462403}
   - component: {fileID: 4995344412984462402}
+  - component: {fileID: 7580418229070301406}
   m_Layer: 0
   m_Name: polySurface20
   m_TagString: Untagged
@@ -647,6 +744,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344412984462412}
   m_Enabled: 1
+--- !u!54 &7580418229070301406
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344412984462400}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4995344413182647261
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +773,7 @@ GameObject:
   - component: {fileID: 4995344413182647257}
   - component: {fileID: 4995344413182647256}
   - component: {fileID: 4995344413182647263}
+  - component: {fileID: 8184877927318777602}
   m_Layer: 0
   m_Name: polySurface21
   m_TagString: Untagged
@@ -763,3 +877,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4995344413182647257}
   m_Enabled: 1
+--- !u!54 &8184877927318777602
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4995344413182647261}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

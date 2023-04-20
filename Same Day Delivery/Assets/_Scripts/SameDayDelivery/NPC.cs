@@ -50,7 +50,8 @@ public class NPC : MonoBehaviour
     {
         if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
-            if (other.tag == "Van") spawner.vanHit?.Invoke(); 
+            int eventChance = Random.Range(0, 5);
+            if (eventChance < 1) spawner.vanHit?.Invoke(); 
 
             foreach (Rigidbody i in ragdollLimbs)
             {
@@ -67,9 +68,8 @@ public class NPC : MonoBehaviour
             StartCoroutine(despawn()); 
         }
 
-        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the npc is hit by a thrown package damage the package then activate the ragdoll
+        if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
-            spawner.vanHit?.Invoke();
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
