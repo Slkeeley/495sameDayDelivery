@@ -16,6 +16,7 @@ public class Dan_UI : MonoBehaviour
     {
         face.SetActive(false);
         messageText.text = "";
+        messageText.fontSize = 36; 
         danAudioSource = GetComponent<AudioSource>(); 
     }
 
@@ -61,7 +62,7 @@ public class Dan_UI : MonoBehaviour
         danAudioSource.clip = danVoiceLines[2];
         danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
         face.SetActive(true);
-        messageText.fontSize = 24;
+        messageText.fontSize = 20;
         messageText.text = "Hurry up! You're running out of time!";
         yield return new WaitForSeconds(danDelay);
         face.SetActive(false);
@@ -79,14 +80,15 @@ public class Dan_UI : MonoBehaviour
         danAudioSource.clip = danVoiceLines[3];
         danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
         face.SetActive(true);
-        messageText.text = "SHEEELLDON!";
+        messageText.fontSize = 24;
+        messageText.text = "SHHHEEELLLDON!";
         yield return new WaitForSeconds(danDelay);
         face.SetActive(false);
         messageText.text = "";
         messageText.fontSize = 36;
     }
 
-    public void propHit()
+    public void propHit()//Dan yells at the player for hitting breakable objects 
     {
         StartCoroutine(propHitCR());
     }
@@ -96,7 +98,7 @@ public class Dan_UI : MonoBehaviour
         danAudioSource.clip = danVoiceLines[4];
         danAudioSource.PlayOneShot(danAudioSource.clip, 1.0f);
         face.SetActive(true);
-        messageText.fontSize = 24;
+        messageText.fontSize = 20;
         messageText.text = "Hey! That's coming out of your paycheck!";
         yield return new WaitForSeconds(danDelay);
         face.SetActive(false);
