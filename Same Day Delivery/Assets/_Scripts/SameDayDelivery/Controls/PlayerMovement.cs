@@ -20,6 +20,8 @@ namespace SameDayDelivery.Controls
         public float groundCheckInterval = 0.25f;
         public float yOffset = 0.2f;
         public float pushPower = 2.0F;
+        [Tooltip("Any rigidbody with mass equal to this number or greater, will not be pushed.")]
+        public float pushMassMax = 100f;
 
         [SerializeField, Header("Camera Settings")]
         private Camera _cam;
@@ -175,7 +177,8 @@ namespace SameDayDelivery.Controls
                 motionWithSpeed.y = -9.81f;
             }
             
-            _characterController.Move(motionWithSpeed);
+            if (_characterController && motionWithSpeed != Vector3.zero)
+                _characterController.Move(motionWithSpeed);
 
             // "rotates" character to always face in direction of camera. We may want to slerp this in the future.
             transform.forward = forward;
@@ -194,9 +197,12 @@ namespace SameDayDelivery.Controls
         void OnControllerColliderHit(ControllerColliderHit hit)
         {
             Rigidbody body = hit.collider.attachedRigidbody;
+            if (!body) return;
             
-            if (body.mass > 100) return;
+            var mass = body.mass;
+            if (mass >= pushMassMax) return;
 
+            mass = Mathf.Max(mass, 1f);
             // no rigidbody
             if (body == null || body.isKinematic)
                 return;
@@ -213,7 +219,8 @@ namespace SameDayDelivery.Controls
             // then you can also multiply the push velocity by that.
 
             // Apply the push
-            body.velocity = pushDir * pushPower;
+            
+            body.velocity = pushDir * pushPower / mass;
         }
     }
 }
