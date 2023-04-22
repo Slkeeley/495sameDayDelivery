@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5794136952416569249}
   - component: {fileID: 660185069664819994}
   - component: {fileID: 8126269932071645957}
+  - component: {fileID: 1251225526077358532}
   m_Layer: 0
   m_Name: sidewalk_145angleTurn_v3
   m_TagString: Untagged
@@ -137,6 +138,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7067106119564528763, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &1251225526077358532
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378618055797333935}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 3.2149487, y: 0.07235015, z: -2.1524606}
+  m_Size: 6.4303856
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.048500933
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 660185069664819994}
+  m_Enabled: 1
 --- !u!1 &2163528128962885557
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +169,7 @@ GameObject:
   - component: {fileID: 6835615978854947320}
   - component: {fileID: 3733105953385770633}
   - component: {fileID: 7515681074131861194}
+  - component: {fileID: 5985975808439856341}
   m_Layer: 0
   m_Name: sidewalk_outerCorner_rnd90turn
   m_TagString: Untagged
@@ -233,6 +254,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5461576445980920483, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &5985975808439856341
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163528128962885557}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -5.0000005, y: 0.079666115, z: -5}
+  m_Size: 10
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.073380165
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3733105953385770633}
+  m_Enabled: 1
 --- !u!1 &3185563408672821661
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +285,7 @@ GameObject:
   - component: {fileID: 7070271484668221882}
   - component: {fileID: 2975592578896909592}
   - component: {fileID: 1980748979351614100}
+  - component: {fileID: 9132250626594049524}
   m_Layer: 0
   m_Name: sidewalk_145angleTurn_v2
   m_TagString: Untagged
@@ -329,6 +370,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8736956263092332329, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &9132250626594049524
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185563408672821661}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 2.758435, y: 0.07235015, z: -2.1688988}
+  m_Size: 5.5173583
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.039383695
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2975592578896909592}
+  m_Enabled: 1
 --- !u!1 &3744920125228729621
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +401,7 @@ GameObject:
   - component: {fileID: 715304492760483323}
   - component: {fileID: 4640563358781576577}
   - component: {fileID: 9173161819366577061}
+  - component: {fileID: 5062297076253551987}
   m_Layer: 0
   m_Name: sidewalk_ending
   m_TagString: Untagged
@@ -425,6 +486,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4883120483341574571, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &5062297076253551987
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744920125228729621}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -1.5, y: 0.0725311, z: -1.5}
+  m_Size: 3
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.027851216
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4640563358781576577}
+  m_Enabled: 1
 --- !u!1 &4619210948733058130
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +517,7 @@ GameObject:
   - component: {fileID: 7159191151225394683}
   - component: {fileID: 3387469198465190901}
   - component: {fileID: 8586117247021670192}
+  - component: {fileID: 9039063495750385739}
   m_Layer: 0
   m_Name: sidewalk_145angleTurn_v1
   m_TagString: Untagged
@@ -521,6 +602,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7342898885764189641, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &9039063495750385739
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619210948733058130}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -2.4818163, y: 0.07253109, z: 3.4996824}
+  m_Size: 6.999365
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.046394747
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3387469198465190901}
+  m_Enabled: 1
 --- !u!1 &5367508298480639819
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,6 +633,7 @@ GameObject:
   - component: {fileID: 4463787835443613817}
   - component: {fileID: 3783240680206648204}
   - component: {fileID: 5882809369449708653}
+  - component: {fileID: 4561875350317618758}
   m_Layer: 0
   m_Name: sidewalk_innerCorner_rnd90turn
   m_TagString: Untagged
@@ -617,6 +718,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5204658616093327665, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &4561875350317618758
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367508298480639819}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.004867077, y: 0.07253109, z: -0.00007200241}
+  m_Size: 6.010602
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.049571186
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3783240680206648204}
+  m_Enabled: 1
 --- !u!1 &5688025438663995456
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +749,7 @@ GameObject:
   - component: {fileID: 6653939146707027119}
   - component: {fileID: 7190957750401055465}
   - component: {fileID: 2131995166971260924}
+  - component: {fileID: 660715181516468666}
   m_Layer: 0
   m_Name: sidewalk_outerCorner_sharp90turn
   m_TagString: Untagged
@@ -713,6 +834,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3184461167825938695, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &660715181516468666
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688025438663995456}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -1.0003711, y: 0.0725311, z: -0.9994385}
+  m_Size: 4.001123
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.0356292
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7190957750401055465}
+  m_Enabled: 1
 --- !u!1 &5971251089033719501
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +865,7 @@ GameObject:
   - component: {fileID: 5393086414062392093}
   - component: {fileID: 6544122263966845024}
   - component: {fileID: 3243568880470042219}
+  - component: {fileID: 6118600401769968062}
   m_Layer: 0
   m_Name: sidewalk_main
   m_TagString: Untagged
@@ -808,6 +949,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.1450622, z: 3}
   m_Center: {x: -1.5, y: 0.0725311, z: -1.5}
+--- !u!205 &6118600401769968062
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971251089033719501}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -1.5, y: 0.0725311, z: -1.5}
+  m_Size: 3
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.024691949
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6544122263966845024}
+  m_Enabled: 1
 --- !u!1 &7707602292665871769
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +980,7 @@ GameObject:
   - component: {fileID: 8148222807187141639}
   - component: {fileID: 1893740551094387231}
   - component: {fileID: 3662493946022828085}
+  - component: {fileID: 4253548387070113033}
   m_Layer: 0
   m_Name: sidewalk_roundabout
   m_TagString: Untagged
@@ -904,6 +1065,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5420036938855442964, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &4253548387070113033
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707602292665871769}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.0000014305115, y: 0.07253109, z: -0.00021886826}
+  m_Size: 6.0004325
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.059718624
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 1893740551094387231}
+  m_Enabled: 1
 --- !u!1 &8152430937923374448
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +1096,7 @@ GameObject:
   - component: {fileID: 3011888468467348431}
   - component: {fileID: 720749045131553686}
   - component: {fileID: 4132829346000988937}
+  - component: {fileID: 806916745554204606}
   m_Layer: 0
   m_Name: sidewalk_145angleTurn_v4
   m_TagString: Untagged
@@ -1000,6 +1181,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6401859730208376391, guid: 0f029075a36f4224bba058ebdd1902f6, type: 3}
+--- !u!205 &806916745554204606
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152430937923374448}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.7183423, y: 0.07253109, z: 2.363192}
+  m_Size: 4.726384
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.032057855
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 720749045131553686}
+  m_Enabled: 1
 --- !u!1 &9149872297150272445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1212,7 @@ GameObject:
   - component: {fileID: 3881188491395563175}
   - component: {fileID: 4684932377511428566}
   - component: {fileID: 5971828674347607775}
+  - component: {fileID: 705963088498068009}
   m_Layer: 0
   m_Name: sidewalk_main_Lg
   m_TagString: Untagged
@@ -1095,3 +1296,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.1450622, z: 3.9999762}
   m_Center: {x: -1.5, y: 0.0725311, z: -1.9999881}
+--- !u!205 &705963088498068009
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149872297150272445}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -1.5, y: 0.0725311, z: -1.9999881}
+  m_Size: 3.9999762
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.037483554
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4684932377511428566}
+  m_Enabled: 1
