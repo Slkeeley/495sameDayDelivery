@@ -3213,6 +3213,7 @@ GameObject:
   - component: {fileID: 7006039835228591331}
   - component: {fileID: 7006039835228591328}
   - component: {fileID: 2174011720612019706}
+  - component: {fileID: 9155175741503171810}
   m_Layer: 0
   m_Name: BuffAlien1
   m_TagString: Untagged
@@ -3249,7 +3250,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.15, z: 0.1}
+  m_Size: {x: 0.25, y: 0.15, z: 0.1}
   m_Center: {x: 0, y: 0.07077735, z: 0}
 --- !u!114 &7006039835228591328
 MonoBehaviour:
@@ -3267,9 +3268,8 @@ MonoBehaviour:
   whatIsSidewalk:
     serializedVersion: 2
     m_Bits: 128
-  walkPointRange: 10
+  walkPointRange: 50
   walkPoint: {x: 0, y: 0, z: 0}
-  evilIntentions: {fileID: 11400000, guid: 48c076b8c4227544f8efabfcc4d58818, type: 2}
   ragdollLimbs: []
 --- !u!195 &2174011720612019706
 NavMeshAgent:
@@ -3293,6 +3293,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &9155175741503171810
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924960738641284190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 192a5c56c140ad240a12f4cd42bbf9f9, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1edb8097bae47d449a4118e3c2ba85c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8106380064493241797
 GameObject:
   m_ObjectHideFlags: 0
