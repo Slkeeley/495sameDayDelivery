@@ -17,7 +17,7 @@ public class NPC : MonoBehaviour
     float despawnRadius; 
    
 
-    //  private Animator am;
+    private Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
     private NPCSpawner spawner; 
     public Rigidbody[] ragdollLimbs;
@@ -25,14 +25,13 @@ public class NPC : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>(); 
-        // ragDoll.SetActive(false);
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
             i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
             i.isKinematic = true; 
         }
-        // am = GetComponent<Animator>();
+        am = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
@@ -50,16 +49,17 @@ public class NPC : MonoBehaviour
     {
         if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
         {
-            int eventChance = Random.Range(0, 5);
-            if (eventChance < 1) spawner.vanHit?.Invoke(); 
-
+            am.enabled = false; //turn off the animator so that the ragdolls can work
+      
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
 
             }
+            int eventChance = Random.Range(0, 5);
+            if (eventChance < 1) spawner.vanHit?.Invoke();
             agent.isStopped = true; 
-            //  am.enabled = false;
+          
 
             if (watcher.evilIntentions.purchased)
             {
@@ -70,12 +70,13 @@ public class NPC : MonoBehaviour
 
         if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
+            am.enabled = false;
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
             }
             agent.isStopped = true;
-            //  am.enabled = false;
+            
             if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5;

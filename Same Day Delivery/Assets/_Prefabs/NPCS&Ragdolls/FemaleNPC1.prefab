@@ -3643,6 +3643,7 @@ GameObject:
   - component: {fileID: 8638563276633526529}
   - component: {fileID: 8638563276633526528}
   - component: {fileID: -1631863746594058341}
+  - component: {fileID: 8691811253904891084}
   m_Layer: 0
   m_Name: FemaleNPC1
   m_TagString: Untagged
@@ -3723,3 +3724,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &8691811253904891084
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873004230298103207}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: f3b03f11192bb00458f71613a4d6d028, type: 3}
+  m_Controller: {fileID: 9100000, guid: fee09727dbfdecb4892b332baca028a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
