@@ -2275,6 +2275,7 @@ GameObject:
   - component: {fileID: 8376939842793066665}
   - component: {fileID: 8376939842793066670}
   - component: {fileID: 4597630559516107979}
+  - component: {fileID: -8283177628858687382}
   m_Layer: 0
   m_Name: AlienBaby3
   m_TagString: Untagged
@@ -2353,6 +2354,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-8283177628858687382
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754804178197565114}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 06713014e44f43a4aa57886bf9bdf532, type: 3}
+  m_Controller: {fileID: 9100000, guid: e31890bee44166040b61559bc20487c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5197071040907548037
 GameObject:
   m_ObjectHideFlags: 0
