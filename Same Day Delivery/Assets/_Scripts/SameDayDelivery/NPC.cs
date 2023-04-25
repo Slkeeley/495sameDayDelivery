@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
+        if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
         {
             am.enabled = false; //turn off the animator so that the ragdolls can work
       
@@ -73,6 +73,7 @@ public class NPC : MonoBehaviour
             am.enabled = false;
             foreach (Rigidbody i in ragdollLimbs)
             {
+                Debug.Log("Making RBs active"); 
                 i.isKinematic = false;
             }
             agent.isStopped = true;
