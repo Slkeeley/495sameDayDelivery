@@ -9,16 +9,15 @@ namespace SameDayDelivery.UI
         public TMP_Text mostRecentScore;
 
         public TMP_Text packagesDelivered;
-        public TMP_Text coinsEarned;
 
         // Start is called before the first frame update
         void Start()
         {
-            mostRecentScore.text = "Your Score: " + GameWatcher.scoreEarned.ToString();
-            packagesDelivered.text = "Packages Delivered: " + GameWatcher.successFullDeliveries.ToString();
-
+            mostRecentScore.text = "Your Score: " + GameWatcher.currentScore.ToString();
+           // packagesDelivered.text = "Packages Delivered: " + GameWatcher.packagesDelivered.ToString();
             
-           
+            
+            //put zBucks here
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

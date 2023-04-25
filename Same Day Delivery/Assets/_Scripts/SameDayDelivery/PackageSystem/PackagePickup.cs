@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Cinemachine;
 using SameDayDelivery.Controls;
 using SameDayDelivery.ScriptableObjects;
 using SameDayDelivery.Utility;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // ReSharper disable once CheckNamespace
@@ -44,7 +42,6 @@ namespace SameDayDelivery.PackageSystem
         private Vector3 _reticleOriginalScale;
         private static readonly int PickupAnim = Animator.StringToHash("Pickup");
         private static readonly int ThrowAnim = Animator.StringToHash("Throw");
-        private CinemachineImpulseSource _impulse;
 
         private void Awake()
         {
@@ -52,19 +49,18 @@ namespace SameDayDelivery.PackageSystem
             _throwReticle.SetActive(false);
             _throwReticleImage = _throwReticle.GetComponent<Image>();
             _reticleOriginalScale = _throwReticle.transform.localScale;
-            _impulse = GetComponent<CinemachineImpulseSource>();
         }
 
         private void OnEnable()
         {
-            // _playerControls.InteractBegin += ButtonDown;
-            // _playerControls.InteractEnd += ButtonUp;
+            _playerControls.InteractBegin += ButtonDown;
+            _playerControls.InteractEnd += ButtonUp;
         }
 
         private void OnDisable()
         {
-            // _playerControls.InteractBegin -= ButtonDown;
-            // _playerControls.InteractEnd -= ButtonUp;
+            _playerControls.InteractBegin -= ButtonDown;
+            _playerControls.InteractEnd -= ButtonUp;
         }
 
         private void Update()
@@ -83,14 +79,10 @@ namespace SameDayDelivery.PackageSystem
             _throwCharge = Mathf.Clamp(_throwCharge, 0f, maxChargeTime);
             var percentCharge = Mathf.InverseLerp(0f, maxChargeTime, _throwCharge);
 
-            // var frequency = Mathf.Lerp(0.25f, 0.5f, percentCharge);
-            // var amplitude = Mathf.Lerp(0.15f, 1f, percentCharge);
-            // var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
-            // // CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
-            // if (_impulse)
-            // {
-            //     _impulse.GenerateImpulse();
-            // }
+            var frequency = Mathf.Lerp(0.25f, 0.5f, percentCharge);
+            var amplitude = Mathf.Lerp(0.15f, 1f, percentCharge);
+            var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
+            CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
 
             // change scale
             _throwReticle.transform.localScale = _reticleOriginalScale * percentCharge;
@@ -115,22 +107,8 @@ namespace SameDayDelivery.PackageSystem
             _fullChargeAnimator.SetBool(GrowParam, true);
         }
 
-        public void OnPackageInteract(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                ButtonDown();
-            }
-
-            if (context.canceled)
-            {
-                ButtonUp();
-            }
-        }
-
         private void ButtonUp()
         {
-            Debug.Log($"Button up!");
             _buttonDown = false;
             if (!carryingPackage) return;
             if (_justPickedUp)
@@ -145,7 +123,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonDown()
         {
-            Debug.Log($"Button down!");
             if (carryingPackage)
             {
                 gameData.carryingPackage = carryingPackage;
@@ -162,7 +139,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ThrowPackage()
         {
-            if (Time.timeScale < 0.01) return;
             Transform packageTransform = carryingPackage.transform;
             packageTransform.localRotation = Quaternion.identity;
             packageTransform.rotation = Quaternion.identity;
@@ -199,19 +175,16 @@ namespace SameDayDelivery.PackageSystem
 
             _fullChargeAnimator.SetBool(LockParam, false);
 
-            // var frequency = Mathf.Lerp(0.5f, 2.5f, percentCharge);
-            // var amplitude = Mathf.Lerp(0.15f, 4f, percentCharge);
-            // var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
+            var frequency = Mathf.Lerp(0.5f, 2.5f, percentCharge);
+            var amplitude = Mathf.Lerp(0.15f, 4f, percentCharge);
+            var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
 
-            // CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
-            if (_impulse)
-                _impulse.GenerateImpulse();
+            CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
         }
 
         private void PickupPackage()
         {
             if (_availablePackages.Count <= 0) return;
-            if (Time.timeScale < 0.01) return;
 
             var targetPackage = _availablePackages[0];
             var finalDistance = Vector3.Distance(transform.position, targetPackage.transform.position);

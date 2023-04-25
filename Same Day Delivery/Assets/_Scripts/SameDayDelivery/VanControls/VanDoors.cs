@@ -16,10 +16,6 @@ namespace SameDayDelivery.VanControls
 
         public Transform playerExitPos;
 
-        private void Awake()
-        {
-            gameWatcher = GameObject.Find("GameWatcher").GetComponent<GameWatcher>(); 
-        }
         private void Start()
         {
             playerInVan = false;
@@ -27,20 +23,6 @@ namespace SameDayDelivery.VanControls
             SetPlayerObj();
         }
 
-        private void Update()//quick fix to get van door funtionality again
-        {
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                if (playerInVan)
-                {
-                    ExitVan();
-                }
-                else if (nearDoors)
-                {
-                    EnterVan();
-                }
-            }
-        }
         public void CheckEnterExitVan(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
@@ -98,9 +80,7 @@ namespace SameDayDelivery.VanControls
             player.transform.position = playerExitPos.position;
             player.SetActive(true);
             playerInVan = false;
-            
             gameWatcher.SwitchControls();
-
         }
 
         private void EnterVan() //upon entering disable the player and then switch the controls to the van controls

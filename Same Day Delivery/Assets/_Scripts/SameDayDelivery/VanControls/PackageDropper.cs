@@ -17,17 +17,6 @@ namespace SameDayDelivery.VanControls
             reminderText.SetActive(false);
         }
 
-        private void Update()
-        {
-            if(playerInRange)
-            {
-                if(Input.GetKeyDown(KeyCode.E))
-                {
-                    SpawnPackage(); 
-                }
-            }
-        }
-
         public void CheckSpawnPackage(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
