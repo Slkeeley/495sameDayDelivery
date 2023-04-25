@@ -2765,6 +2765,7 @@ GameObject:
   - component: {fileID: 953613302030505418}
   - component: {fileID: 2596582836557941363}
   - component: {fileID: 1118615198247266990}
+  - component: {fileID: -8322696992544202255}
   m_Layer: 0
   m_Name: AlienLady2
   m_TagString: Untagged
@@ -2842,6 +2843,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-8322696992544202255
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8134503787279881859}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 5cb988e9d78922845a8e4325c65b3ba0, type: 3}
+  m_Controller: {fileID: 9100000, guid: 765330d5b1b2557469a56a136c475319, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8172649323974471365
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,6 +130,7 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonUp()
         {
+            Debug.Log($"Button up!");
             _buttonDown = false;
             if (!carryingPackage) return;
             if (_justPickedUp)
@@ -144,6 +145,7 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonDown()
         {
+            Debug.Log($"Button down!");
             if (carryingPackage)
             {
                 gameData.carryingPackage = carryingPackage;
@@ -202,7 +204,8 @@ namespace SameDayDelivery.PackageSystem
             // var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
 
             // CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
-            _impulse.GenerateImpulse();
+            if (_impulse)
+                _impulse.GenerateImpulse();
         }
 
         private void PickupPackage()

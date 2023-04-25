@@ -2168,6 +2168,7 @@ GameObject:
   - component: {fileID: 7150319982985466014}
   - component: {fileID: 3123052163981764706}
   - component: {fileID: 8968533685448304855}
+  - component: {fileID: 2405040469829940400}
   m_Layer: 0
   m_Name: HumanMale1
   m_TagString: Untagged
@@ -2250,6 +2251,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &2405040469829940400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225849838177655563}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6336050292982162253
 GameObject:
   m_ObjectHideFlags: 0
