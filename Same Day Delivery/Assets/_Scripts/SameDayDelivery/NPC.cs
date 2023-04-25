@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
     public float walkPointRange;
     public Vector3 walkPoint; 
     private NavMeshAgent agent;
-    private GameObject player;
+    private Vector3 vanPos; 
     bool walkPointSet=false;
     float despawnRadius; 
    
@@ -32,7 +32,7 @@ public class NPC : MonoBehaviour
             i.isKinematic = true; 
         }
         am = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        vanPos = GameObject.FindGameObjectWithTag("Van").transform.position; 
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
         despawnRadius = spawner.despawnRadius; 
@@ -117,7 +117,7 @@ public class NPC : MonoBehaviour
 
    void checkDistFromPlayer()
     {
-        Vector3 distanceFromPlayer = transform.position - player.transform.position;
+        Vector3 distanceFromPlayer = transform.position - vanPos; 
         
         if(distanceFromPlayer.magnitude >= despawnRadius)
         {
