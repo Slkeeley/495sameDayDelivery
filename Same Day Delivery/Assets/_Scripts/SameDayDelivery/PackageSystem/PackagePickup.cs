@@ -130,7 +130,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonUp()
         {
-            Debug.Log($"Button up!");
             _buttonDown = false;
             if (!carryingPackage) return;
             if (_justPickedUp)
@@ -145,7 +144,6 @@ namespace SameDayDelivery.PackageSystem
 
         private void ButtonDown()
         {
-            Debug.Log($"Button down!");
             if (carryingPackage)
             {
                 gameData.carryingPackage = carryingPackage;

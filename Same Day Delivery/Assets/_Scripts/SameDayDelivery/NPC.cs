@@ -117,6 +117,7 @@ public class NPC : MonoBehaviour
 
    void checkDistFromPlayer()
     {
+        if (!player) return;
         Vector3 distanceFromPlayer = transform.position - player.transform.position;
         
         if(distanceFromPlayer.magnitude >= despawnRadius)
