@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1048270542748076202}
   - component: {fileID: 7713069772373887074}
   - component: {fileID: 1083242229502356667}
+  - component: {fileID: 7941103261624786641}
   m_Layer: 0
   m_Name: Bin
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7941103261624786641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143371821786334975}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.50834, y: 1, z: 0.7967185}
+  m_Center: {x: 0, y: 0, z: -0.0000003427267}
 --- !u!1 &4660707344414042634
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +106,7 @@ GameObject:
   - component: {fileID: 398765992642841793}
   - component: {fileID: 8756137730455406636}
   - component: {fileID: 1278985025757858726}
+  - component: {fileID: 9195022073621907671}
   m_Layer: 0
   m_Name: Lid
   m_TagString: Untagged
@@ -162,6 +177,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &9195022073621907671
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4660707344414042634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4293751317952506913, guid: 9de748a7c4291864798a7ef295ec5733, type: 3}
 --- !u!1 &8902726187657740063
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8126471612046796197}
+  - component: {fileID: 469596194175566387}
   m_Layer: 0
   m_Name: TrashCan_v2
   m_TagString: Untagged
@@ -194,3 +224,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &469596194175566387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902726187657740063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.5, z: 0}

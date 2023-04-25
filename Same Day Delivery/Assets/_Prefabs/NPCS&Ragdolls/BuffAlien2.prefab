@@ -3249,7 +3249,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.15, z: 0.1}
+  m_Size: {x: 0.25, y: 0.15, z: 0.1}
   m_Center: {x: 0, y: 0.07077735, z: 0}
 --- !u!114 &7006039835228591328
 MonoBehaviour:
@@ -3267,9 +3267,8 @@ MonoBehaviour:
   whatIsSidewalk:
     serializedVersion: 2
     m_Bits: 128
-  walkPointRange: 10
+  walkPointRange: 50
   walkPoint: {x: 0, y: 0, z: 0}
-  evilIntentions: {fileID: 11400000, guid: 48c076b8c4227544f8efabfcc4d58818, type: 2}
   ragdollLimbs: []
 --- !u!195 &-7993906440816318875
 NavMeshAgent:
