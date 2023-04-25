@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace SameDayDelivery.AI
@@ -16,6 +17,9 @@ namespace SameDayDelivery.AI
         private float _aggroRange = 15f;
         [SerializeField, Tooltip("")]
         private float speed = 8f;
+        [FormerlySerializedAs("ActivateRobotAIAtStart")]
+        [SerializeField, Tooltip("")]
+        private bool _activateRobotAIAtStart = true;
 
         [SerializeField]
         private Transform _player;
@@ -34,6 +38,12 @@ namespace SameDayDelivery.AI
         }
 
         private void Start()
+        {
+            if (_activateRobotAIAtStart)
+                ActivateAI();
+        }
+
+        private void ActivateAI()
         {
             EstablishPlayer();
             StartCoroutine(Think());
@@ -77,7 +87,7 @@ namespace SameDayDelivery.AI
 
         public void ChooseRandomIdleHead()
         {
-            _animator.SetInteger(HeadIdleAnim, Random.Range(0, _bodyIdleAnimations));
+            _animator.SetInteger(HeadIdleAnim, Random.Range(0, _headIdleAnimations));
         }
     }
 }
