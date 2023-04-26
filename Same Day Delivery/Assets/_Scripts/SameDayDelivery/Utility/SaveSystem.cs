@@ -34,6 +34,8 @@ namespace SameDayDelivery.Utility
         private UnityEvent _onSave;
         [SerializeField]
         private UnityEvent _onDelete;
+        [SerializeField]
+        private UnityEvent _onLoadFailure;
 
         private void Awake()
         {
@@ -70,7 +72,11 @@ namespace SameDayDelivery.Utility
             using StreamReader reader = new StreamReader(path);
             string jsonData = reader.ReadToEnd();
             
-            if (jsonData.Length <= 0) return;
+            if (jsonData.Length <= 0)
+            {
+                _onLoadFailure?.Invoke();
+                return;
+            }
 
             SaveData saveData = new SaveData();
             saveData = JsonUtility.FromJson<SaveData>(jsonData);
@@ -99,9 +105,10 @@ namespace SameDayDelivery.Utility
         {
             return $"{Application.persistentDataPath}/{_filename}";
         }
-
+#if UNITY_EDITOR
         private void OnGUI()
         {
+            // Debug only, not meant for build
             if (GUI.Button(new Rect(10, 10, 200, 100), "Save Game Data"))
             {
                 SaveToFile();
@@ -111,5 +118,6 @@ namespace SameDayDelivery.Utility
                 LoadFromFile();
             }
         }
+#endif
     }
 }
