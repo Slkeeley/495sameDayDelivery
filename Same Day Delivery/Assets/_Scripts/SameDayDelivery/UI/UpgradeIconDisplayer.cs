@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 
@@ -12,8 +13,13 @@ namespace SameDayDelivery.UI
         public Color activateColor = Color.white;
         public Color inactiveColor = new Color(1f, 1f, 1f, 0.25f);
 
-        private void Start()
+        public void UpdateUpgradeIcons()
         {
+            foreach (Transform child in upgradeIconsParent)
+            {
+                Destroy(child.gameObject);
+            }
+            
             foreach (UpgradeItem upgradeItem in upgradeLookupTable.upgrades)
             {
                 GameObject go = Instantiate(upgradeIconPrefab, upgradeIconsParent);

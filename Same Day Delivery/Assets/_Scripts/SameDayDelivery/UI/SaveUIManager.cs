@@ -14,6 +14,7 @@ namespace SameDayDelivery.UI
         public TMP_Text coinsText;
         public TMP_Text scoreText;
         public TMP_Text upgradesText;
+        public UpgradeIconDisplayer upgradeIconDisplayer;
 
         private void Start()
         {
@@ -22,11 +23,13 @@ namespace SameDayDelivery.UI
 
         public void UpdateUI()
         {
-            daysText.text = $"{gameData.day}";
-            coinsText.text = $"{gameData.money}";
-            scoreText.text = $"{gameData.score}";
+            daysText.text = $"{gameData.day.ToString()}";
+            coinsText.text = $"{gameData.money.ToString()}";
+            scoreText.text = $"{gameData.score.ToString()}";
             int numOfUpgrades = gameData.upgradeLookupTable.upgrades.Count(upgradeItem => upgradeItem.purchased);
-            upgradesText.text = $"{numOfUpgrades}";
+            upgradesText.text = $"{numOfUpgrades.ToString()}";
+            if (upgradeIconDisplayer)
+                upgradeIconDisplayer.UpdateUpgradeIcons();
         }
     }
 }
