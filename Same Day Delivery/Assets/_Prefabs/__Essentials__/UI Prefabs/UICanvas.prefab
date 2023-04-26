@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 1116741358483317976}
   - component: {fileID: 1116741358483317979}
   - component: {fileID: 5729960718726430061}
+  - component: {fileID: 3198191540356641771}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -1041,11 +1042,35 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a035b314-9a71-465e-b2a3-3d629bc694e5
+    m_ActionName: Player/Package Interact[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3198191540356641771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116741358483317978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74669aadee840c5448051c7d262ccfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1116741358313322071}
+  scoreText: {fileID: 5750278830978432473}
+  levelText: {fileID: 5353030789420967949}
+  zergCoinsText: {fileID: 5536234538358444154}
+  deliveryText: {fileID: 7408936512917750989}
+  packagesText: {fileID: 8346833782881489814}
+  failNotification: {fileID: 1116741358840399656}
+  successNotification: {fileID: 1116741357483278864}
 --- !u!1 &1116741358787099828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2653,6 +2678,17 @@ PrefabInstance:
       objectReference: {fileID: 517946313724014077, guid: e6ed3abf4969ad44aa0e5abf3ee41386, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2472bd241fab1e4c80b7bf0d600166f, type: 3}
+--- !u!114 &7408936512917750989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7527192728891494434, guid: b2472bd241fab1e4c80b7bf0d600166f, type: 3}
+  m_PrefabInstance: {fileID: 1055004938684945647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4807996786476964329 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5484626767957495046, guid: b2472bd241fab1e4c80b7bf0d600166f, type: 3}

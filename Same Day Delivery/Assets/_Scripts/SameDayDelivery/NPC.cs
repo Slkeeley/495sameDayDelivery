@@ -73,7 +73,6 @@ public class NPC : MonoBehaviour
             am.enabled = false;
             foreach (Rigidbody i in ragdollLimbs)
             {
-                Debug.Log("Making RBs active"); 
                 i.isKinematic = false;
             }
             agent.isStopped = true;
@@ -129,6 +128,7 @@ public class NPC : MonoBehaviour
     private void cullNPC()
     {
         spawner.npcsOut--;
+        Debug.Log("Destroying NPC"); 
         Destroy(this.gameObject); 
     }
     IEnumerator despawn()
