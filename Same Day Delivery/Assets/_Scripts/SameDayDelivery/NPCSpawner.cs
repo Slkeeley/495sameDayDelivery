@@ -18,7 +18,7 @@ public class NPCSpawner : MonoBehaviour
     public Vector3 spawnPoint;
 
     //Private Vars
-    public bool isSpawning;
+    private bool isSpawning;
     private bool spawnPointFound;
     private GameObject player;
 
