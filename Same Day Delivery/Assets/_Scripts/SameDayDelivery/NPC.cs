@@ -17,7 +17,7 @@ public class NPC : MonoBehaviour
     float despawnRadius; 
    
 
-    private Animator am;
+    public Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
     private NPCSpawner spawner; 
     public Rigidbody[] ragdollLimbs;
@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
             i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
             i.isKinematic = true; 
         }
-        am = GetComponent<Animator>();
+       // am = GetComponent<Animator>();
         vanPos = GameObject.FindGameObjectWithTag("Van").transform.position; 
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
