@@ -203,7 +203,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8333035430374463770}
-  - component: {fileID: 7465814108071951602}
   m_Layer: 0
   m_Name: RoboDog
   m_TagString: Untagged
@@ -228,28 +227,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &7465814108071951602
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8714240146482299808}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 324.61127, z: -31.1036}
-  m_Size: 498.48407
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.022449484
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 6305777847809886679}
-    - renderer: {fileID: 2367994176527839773}
-    - renderer: {fileID: 337948834558596150}
-    - renderer: {fileID: 2927545423272480510}
-  m_Enabled: 1
 --- !u!1 &8875753052734597742
 GameObject:
   m_ObjectHideFlags: 0
