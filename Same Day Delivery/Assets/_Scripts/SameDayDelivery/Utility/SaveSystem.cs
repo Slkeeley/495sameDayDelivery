@@ -109,14 +109,14 @@ namespace SameDayDelivery.Utility
         private void OnGUI()
         {
             // Debug only, not meant for build
-            if (GUI.Button(new Rect(10, 10, 200, 100), "Save Game Data"))
-            {
-                SaveToFile();
-            }
-            if (GUI.Button(new Rect(10, 110, 200, 100), "Load Game Data"))
-            {
-                LoadFromFile();
-            }
+            // if (GUI.Button(new Rect(10, 10, 200, 100), "Save Game Data"))
+            // {
+            //     SaveToFile();
+            // }
+            // if (GUI.Button(new Rect(10, 110, 200, 100), "Load Game Data"))
+            // {
+            //     LoadFromFile();
+            // }
         }
 #endif
     }
