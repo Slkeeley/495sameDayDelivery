@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2767028708381802553}
   - component: {fileID: 108793079681987827}
   - component: {fileID: 5961728807430610909}
-  - component: {fileID: 932442542597507282}
+  - component: {fileID: 667631439562333225}
   m_Layer: 0
   m_Name: House2_v2
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,12 +99,12 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.20149998
+  - screenRelativeHeight: 0.07170222
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 108793079681987827}
   m_Enabled: 1
---- !u!64 &932442542597507282
+--- !u!64 &667631439562333225
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
