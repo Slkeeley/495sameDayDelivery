@@ -38,7 +38,7 @@ public class UpgradeScreen : MonoBehaviour
         checkSelectedButton();
         if (sheldonIsBroke)//if sheldon does not have the required amount of money then have the text say not enough zerg
         {
-            descText.fontSize = 24;
+            descText.fontSize = 14;
             descText.text = "NOT ENOUGH ZERG!";
             descText.color = new Color(1, 0, 0, 1);
         }
@@ -105,6 +105,6 @@ public class UpgradeScreen : MonoBehaviour
         sheldonIsBroke = false;
         descText.text = "";
         descText.color = new Color(0, 0, 0, 1);
-        descText.fontSize = 10; 
+        descText.fontSize = 8; 
     }
 }
