@@ -24,7 +24,8 @@ public class UpgradeScreen : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        buyButton.SetActive(false); 
+        buyButton.SetActive(false);
+        totalZergCoins = 100; 
     }
 
     // Update is called once per frame
