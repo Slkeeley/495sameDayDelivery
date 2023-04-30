@@ -14,8 +14,8 @@ public class NPC : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 vanPos; 
     bool walkPointSet=false;
-    float despawnRadius; 
-   
+    float despawnRadius;
+    private AudioSource source; 
 
     public Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
@@ -26,6 +26,7 @@ public class NPC : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>(); 
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
+        source = GetComponent<AudioSource>(); 
         foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
             i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
@@ -50,7 +51,7 @@ public class NPC : MonoBehaviour
         if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
         {
             am.enabled = false; //turn off the animator so that the ragdolls can work
-      
+            source.PlayOneShot(source.clip, 1.0f); 
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
@@ -71,6 +72,7 @@ public class NPC : MonoBehaviour
         if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
             am.enabled = false;
+            source.PlayOneShot(source.clip, 1.0f);
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
