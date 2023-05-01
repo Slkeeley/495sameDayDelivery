@@ -12,12 +12,12 @@ public class NPC : MonoBehaviour
     public float walkPointRange;
     public Vector3 walkPoint; 
     private NavMeshAgent agent;
-    private GameObject player;
+    private Vector3 vanPos; 
     bool walkPointSet=false;
     float despawnRadius; 
    
 
-    private Animator am;
+    public Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
     private NPCSpawner spawner; 
     public Rigidbody[] ragdollLimbs;
@@ -31,8 +31,8 @@ public class NPC : MonoBehaviour
             i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
             i.isKinematic = true; 
         }
-        am = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player");
+       // am = GetComponent<Animator>();
+        vanPos = GameObject.FindGameObjectWithTag("Van").transform.position; 
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
         despawnRadius = spawner.despawnRadius; 
@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
+        if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
         {
             am.enabled = false; //turn off the animator so that the ragdolls can work
       
@@ -117,8 +117,7 @@ public class NPC : MonoBehaviour
 
    void checkDistFromPlayer()
     {
-        if (!player) return;
-        Vector3 distanceFromPlayer = transform.position - player.transform.position;
+        Vector3 distanceFromPlayer = transform.position - vanPos; 
         
         if(distanceFromPlayer.magnitude >= despawnRadius)
         {
@@ -129,6 +128,7 @@ public class NPC : MonoBehaviour
     private void cullNPC()
     {
         spawner.npcsOut--;
+        Debug.Log("Destroying NPC"); 
         Destroy(this.gameObject); 
     }
     IEnumerator despawn()

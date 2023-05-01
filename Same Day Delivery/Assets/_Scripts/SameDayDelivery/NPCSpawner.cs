@@ -54,6 +54,7 @@ public class NPCSpawner : MonoBehaviour
 
     void selectNPC()
     {
+        Debug.Log("trying to spawn an NPC"); 
         int randomNPC = Random.Range(0, NPCs.Length);
         GameObject.Instantiate(NPCs[randomNPC], spawnPoint, Quaternion.identity);
         npcsOut++; 
@@ -63,7 +64,7 @@ public class NPCSpawner : MonoBehaviour
     IEnumerator spawnNPC()
     {
         if (searchSpawnPoint()) selectNPC(); 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
         isSpawning = true;
         spawnPointFound = false;
     }
