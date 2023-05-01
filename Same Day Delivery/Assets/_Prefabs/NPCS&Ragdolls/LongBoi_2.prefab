@@ -3988,7 +3988,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 10, z: 3}
+  m_Size: {x: 6, y: 10, z: 5}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &151023268892889304
 MonoBehaviour:
@@ -4008,7 +4008,7 @@ MonoBehaviour:
     m_Bits: 128
   walkPointRange: 50
   walkPoint: {x: 0, y: 0, z: 0}
-  am: {fileID: 0}
+  am: {fileID: 8870154649356495398}
   ragdollLimbs: []
 --- !u!195 &7926089047171936259
 NavMeshAgent:
@@ -4061,8 +4061,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: e48bff3d781f2464f8dc20fa71899f57, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

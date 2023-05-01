@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour
                 watcher.currentScore = watcher.currentScore + 5; 
             }
             StartCoroutine(despawn());
-            GetComponent<BoxCollider>().isTrigger = false; 
+
         }
 
         if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
@@ -85,7 +85,6 @@ public class NPC : MonoBehaviour
                 watcher.currentScore = watcher.currentScore + 5;
             }
             StartCoroutine(despawn());
-            GetComponent<BoxCollider>().isTrigger = false;
         }
     }
 

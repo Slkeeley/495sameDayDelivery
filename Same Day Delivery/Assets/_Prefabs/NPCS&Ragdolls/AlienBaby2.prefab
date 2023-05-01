@@ -3155,7 +3155,7 @@ MonoBehaviour:
     m_Bits: 128
   walkPointRange: 50
   walkPoint: {x: 0, y: 0, z: 0}
-  am: {fileID: 0}
+  am: {fileID: -2366197086906244211}
   ragdollLimbs: []
 --- !u!195 &2184820464577868905
 NavMeshAgent:
@@ -3208,8 +3208,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: f590cb822953f624bac891e93b635add, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
