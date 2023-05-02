@@ -131,7 +131,6 @@ public class NPC : MonoBehaviour
     private void cullNPC()
     {
         spawner.npcsOut--;
-        Debug.Log("Destroying NPC"); 
         Destroy(this.gameObject); 
     }
     IEnumerator despawn()

@@ -52,7 +52,6 @@ namespace SameDayDelivery.VanControls
         public bool backwards;
         public bool overDrive;
         public bool chuteActive = false;
-        public bool crashed;
 
         [Header("Audio Events")] //Used to determine what sound should be played
         public UnityEvent motorStart;
@@ -357,6 +356,15 @@ namespace SameDayDelivery.VanControls
             {
                 other.GetComponent<Rigidbody>().useGravity = true; 
                 other.GetComponent<BoxCollider>().isTrigger= false; 
+            }
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 8)
+            {
+                Debug.Log("Collided"); 
+                stopNoises?.Invoke(); 
+                crash?.Invoke(); 
             }
         }
     }

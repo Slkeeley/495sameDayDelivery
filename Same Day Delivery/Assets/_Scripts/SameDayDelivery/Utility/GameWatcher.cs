@@ -202,7 +202,7 @@ namespace SameDayDelivery.Controls
             UI.failNotification.SetActive(true); 
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
-            zergCoinsGained = currentScore / 50;
+            zergCoinsGained = zergCoinsGained + (currentScore / 50);
             if (payRaised)
             {
                 data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
@@ -223,6 +223,7 @@ namespace SameDayDelivery.Controls
             UI.successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
+            zergCoinsGained = zergCoinsGained + (currentScore / 50);
             if (payRaised)
             {
                 data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
