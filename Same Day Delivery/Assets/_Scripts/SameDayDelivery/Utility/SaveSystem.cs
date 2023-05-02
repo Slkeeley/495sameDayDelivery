@@ -39,7 +39,6 @@ namespace SameDayDelivery.Utility
 
         private void Awake()
         {
-            // return;
             if (_loadSavedDataOnAwake)
                 LoadFromFile();
         }

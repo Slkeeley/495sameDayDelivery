@@ -31,7 +31,7 @@ public class UpgradeScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinsText.text = "Zerg Coins: " + totalZergCoins.ToString();
+        coinsText.text = "Zerg Coins: " + data.money.ToString();
     
 
 
@@ -85,14 +85,15 @@ public class UpgradeScreen : MonoBehaviour
 
     public void buyUpgrade()
     {
-
-        if (selectedButton.GetComponent<upgradeButton>().price <= totalZergCoins)//if the player has enough zerg coins
+        upgradeButton upgradeButton = selectedButton.GetComponent<upgradeButton>();
+        
+        if (upgradeButton.price <= data.money)//if the player has enough zerg coins
         {
             upgradeSelected = false;
-            selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
-            selectedButton.GetComponent<upgradeButton>().upgrade.purchased = true; 
+            upgradeButton.glow.SetActive(false);
+            upgradeButton.upgrade.purchased = true; 
             descText.text = "";
-            data.money = data.money- selectedButton.GetComponent<upgradeButton>().price;
+            data.money -= upgradeButton.price;
             selectedButton = null;
 
         }
