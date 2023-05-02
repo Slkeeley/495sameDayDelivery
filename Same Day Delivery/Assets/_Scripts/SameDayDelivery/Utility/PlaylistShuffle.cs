@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
@@ -7,7 +8,15 @@ namespace SameDayDelivery.Utility
 
     public class PlaylistShuffle : MonoBehaviour
     {
+        public enum PlaylistType
+        {
+            Shuffle,
+            Sequence
+        }
+        
         public List<AudioClip> playlist = new List<AudioClip>();
+        [SerializeField, Tooltip("Shuffle = next track is randomized, Sequence = plays the next track in order.")]
+        private PlaylistType _playlistType = PlaylistType.Shuffle;
         [Min(0f)] public float nextTrackDurationMin = 1f;
         [Min(0f)] public float nextTrackDurationMax = 3f;
         [Range(0f, 2f)] public float pitchVariance = 0.1f;
@@ -19,6 +28,7 @@ namespace SameDayDelivery.Utility
         
         [SerializeField] private bool _paused;
         [SerializeField] private float _nextTrackClock;
+        [SerializeField] private int _currentTrack;
 
         private void Awake()
         {
@@ -28,9 +38,7 @@ namespace SameDayDelivery.Utility
 
             if (!playOnAwake) return;
 
-            _paused = false;
-            
-            _nextTrackClock = Random.Range(nextTrackDurationMin, nextTrackDurationMax);
+            NextTrack(true);
         }
 
         public void Play()
@@ -43,18 +51,46 @@ namespace SameDayDelivery.Utility
             _paused = true;
         }
 
-        public void NextTrack()
+        public void NextTrack(bool repeatCurrentTrack = false)
         {
             _paused = false;
-            
-            PlayRandom();
+
+            switch (_playlistType)
+            {
+                case PlaylistType.Shuffle:
+                    PlayRandom(repeatCurrentTrack);
+                    break;
+                case PlaylistType.Sequence:
+                    PlayNextSequence(repeatCurrentTrack);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        public void PlayRandom()
+        public void PlayNextSequence(bool repeatCurrentTrack = false)
         {
             if (playlist.Count <= 0) return;
-            int r = Random.Range(0, playlist.Count);
-            _source.clip = playlist[r];
+            if (!repeatCurrentTrack)
+            {
+                _currentTrack++;
+                if (_currentTrack >= playlist.Count) _currentTrack = 0;
+            }
+            
+            _source.clip = playlist[_currentTrack];
+            _nextTrackClock = Random.Range(nextTrackDurationMin, nextTrackDurationMax);
+            _source.pitch = Mathf.Clamp(1 + pitchOffset + Random.Range(-pitchVariance, pitchVariance), -3, 3);
+            _source.Play();
+        }
+
+        public void PlayRandom(bool repeatCurrentTrack = false)
+        {
+            if (playlist.Count <= 0) return;
+            if (!repeatCurrentTrack)
+            {
+                _currentTrack = Random.Range(0, playlist.Count);
+            }
+            _source.clip = playlist[_currentTrack];
             _nextTrackClock = Random.Range(nextTrackDurationMin, nextTrackDurationMax);
             _source.pitch = Mathf.Clamp(1 + pitchOffset + Random.Range(-pitchVariance, pitchVariance), -3, 3);
             _source.Play();

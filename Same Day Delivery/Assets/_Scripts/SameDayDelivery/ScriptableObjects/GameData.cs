@@ -11,7 +11,6 @@ namespace SameDayDelivery.ScriptableObjects
     [CreateAssetMenu(fileName = "GameData", menuName = "Game/GameData", order = 51)]
     public class GameData : ScriptableObject
     {
-
         /**
          * Scripts can subscribe to these events or invoke them.So long as a script has a reference to the same GameData
          *   object, they will be communicating across the same network of events. 
@@ -59,72 +58,44 @@ namespace SameDayDelivery.ScriptableObjects
         [Header("Upgrades")]
         public UpgradeLookupTable upgradeLookupTable;
 
-        [Header("Delivery Locations")]
-        public FauxPackageDelivery activeDelivery;
-        public List<FauxPackageDelivery> availableDeliveriesList = new List<FauxPackageDelivery>();
-        public List<FauxPackageDelivery> deliveredLocationsList = new List<FauxPackageDelivery>();
         public Transform playerTransform;
-        public float packageDeliveryRange = 30f;
-
-        public void PackageDelivered(FauxPackageDelivery fauxPackageDelivery, Package package)
-        {
-            availableDeliveriesList.Remove(fauxPackageDelivery);
-            deliveredLocationsList.Add(fauxPackageDelivery);
-            
-            NextDelivery();
-        }
-
-        public void NextDelivery()
-        {
-            if (availableDeliveriesList.Count <= 0)
-            {
-                Debug.LogError($"No more available delivery locations left.");
-                activeDelivery = null;
-                return;
-            }
-
-            var offset = 0;
-
-            List<FauxPackageDelivery> tempList = new List<FauxPackageDelivery>();
-            
-            while (tempList.Count <= 0)
-            {
-                foreach (FauxPackageDelivery fauxPackageDelivery in availableDeliveriesList)
-                {
-                    if (Vector3.Distance(fauxPackageDelivery.transform.position, playerTransform.position) <= packageDeliveryRange + offset)
-                    {
-                        tempList.Add(fauxPackageDelivery);
-                    }
-                }
-
-                offset += 10;
-            }
-            // EmergencyConsole.AddMessage($"[{offset}] tempList.Count={tempList.Count.ToString()}");
-            
-            if (tempList.Count <= 0)
-            {
-                Debug.LogError($"No more available delivery locations left.");
-                activeDelivery = null;
-                return;
-            }
-            
-            activeDelivery = tempList[Random.Range(0, tempList.Count)];
-            activeDelivery.Activate();
-        }
 
         public void ResetData()
         {
+            day = 0;
             score = 0;
             money = 0;
 
-            foreach (var upgradeItem in upgradeLookupTable.upgrades)
+            foreach (UpgradeItem upgradeItem in upgradeLookupTable.upgrades)
             {
                 upgradeItem.purchased = false;
             }
+        }
 
-            activeDelivery = null;
-            availableDeliveriesList.Clear();
-            deliveredLocationsList.Clear();
+        public void TempSaveData()
+        {
+            PlayerPrefs.SetInt("day", day);
+            PlayerPrefs.SetInt("score", score);
+            PlayerPrefs.SetInt("money", money);
+
+            for (int i = 0; i < upgradeLookupTable.upgrades.Count; i++)
+            {
+                UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
+                PlayerPrefs.SetInt($"upgrade[{i}]", upgradeItem.purchased ? 1 : 0);
+            }
+        }
+
+        public void TempLoadData()
+        {
+            day = PlayerPrefs.GetInt("day");
+            score = PlayerPrefs.GetInt("score");
+            money = PlayerPrefs.GetInt("money");
+            
+            for (int i = 0; i < upgradeLookupTable.upgrades.Count; i++)
+            {
+                UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
+                upgradeItem.purchased = PlayerPrefs.GetInt($"upgrade[{i}]") == 1;
+            }
         }
     }
 }

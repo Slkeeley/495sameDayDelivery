@@ -15,7 +15,7 @@ namespace SameDayDelivery.Controls
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem earlyAlarm;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem payRaise;
         [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem employeeOfTheMonth;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
+        [SerializeField] public SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
         [SerializeField] private SameDayDelivery.UI.gameplayUI UI; 
         public VanController carControls;
         public PlayerControlManager playerControls;
@@ -33,15 +33,23 @@ namespace SameDayDelivery.Controls
         public float timeSinceLastDelivery;
         public static int currLevel;
         public int zergCoinsGained;//How much currency the player currently has 
+        
 
         [Header("Events")]
+        //Scene Events
         public UnityEvent goToFailScreen; 
         public UnityEvent goToPassScreen;
+        //UI Events; 
+        public UnityEvent danStart;
+        public UnityEvent workFaster;
+        public UnityEvent oneMinute;
+        public UnityEvent propHit;  
 
         //Privaye vars 
         public bool driftingForward = false;
         private float currSpeed;
-        private bool payRaised; 
+        private bool payRaised;
+        private bool minuteLeft = false; 
 
         //temporary statics 
         //REPLACE THESE WHEN WE HAVE A MORE FORMAL SAVE SYSTEM 
@@ -55,6 +63,7 @@ namespace SameDayDelivery.Controls
         private void Start()
         {
             LevelSetup();
+            danStart?.Invoke(); 
         }
 
         // Update is called once per frame
@@ -72,6 +81,13 @@ namespace SameDayDelivery.Controls
                 TimerOn = false;
                 StartCoroutine(GgGoNext());
             }
+            if (TimeLeft <= 60 && !minuteLeft)
+            {
+                minuteLeft = true;
+                oneMinute?.Invoke(); 
+            }
+      
+            
 
             if (packagesDelivered >= packagesNeeded) StartCoroutine(LevelComplete());  //if the packages delivered exceeds the necessary number to beat a level go to the success screen
 
@@ -99,6 +115,8 @@ namespace SameDayDelivery.Controls
         {
             earlyAlarm = data.upgradeLookupTable.upgrades[3];
             payRaise = data.upgradeLookupTable.upgrades[8];
+            employeeOfTheMonth = data.upgradeLookupTable.upgrades[8];
+            evilIntentions = data.upgradeLookupTable.upgrades[8];
             checkUpgradePurchaseValues(); 
         }
 
@@ -149,6 +167,7 @@ namespace SameDayDelivery.Controls
                 driftingForward = true;
                 carControls.rb.isKinematic = true;
             }
+            else carControls.rb.isKinematic = true; 
             carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
@@ -188,8 +207,17 @@ namespace SameDayDelivery.Controls
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
             zergCoinsGained = currentScore / 50;
-            if (payRaised) UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins; //replace the static int with a formal system later
-            else UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised)
+            {
+                UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins;
+                SameDayDelivery.UI.scoreDisplay.coinsGained = (zergCoinsGained / 10) + zergCoinsGained;
+            }//replace the static int with a formal system later
+            else
+            {
+                UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained;
+                SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
+            }//add the players gained zerg coins to the upgrade screen 
+            scoreEarned = currentScore; 
             successFullDeliveries = packagesDelivered; 
             goToFailScreen?.Invoke(); 
         }
@@ -200,10 +228,19 @@ namespace SameDayDelivery.Controls
             UI.successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
-            if (payRaised) UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins; //replace the static int with a formal system later
-            else UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained; //add the players gained zerg coins to the upgrade screen 
+            if (payRaised)
+            {
+                UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins;
+                SameDayDelivery.UI.scoreDisplay.coinsGained = (zergCoinsGained / 10) + zergCoinsGained;
+            }//replace the static int with a formal system later
+            else
+            {
+                UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained;
+                SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
+            }//add the players gained zerg coins to the upgrade screen 
             Debug.Log(UpgradeScreen.totalZergCoins);
-            successFullDeliveries = packagesDelivered; 
+            successFullDeliveries = packagesDelivered;
+            scoreEarned = currentScore;
             currLevel++;
             goToPassScreen?.Invoke();//invoke the event that moves to the success screen 
         }
@@ -221,6 +258,7 @@ namespace SameDayDelivery.Controls
             else if (timeSinceLastDelivery >= 60) //slow delivery penalty
             {
                 UI.deliveryMessage(2);
+                workFaster?.Invoke(); 
                 currentScore = currentScore + 75;
                 zergCoinsGained = zergCoinsGained + 1;
             }
@@ -232,7 +270,7 @@ namespace SameDayDelivery.Controls
             }
             timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
         }
-        
+
     }
 
 

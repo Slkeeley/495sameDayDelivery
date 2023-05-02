@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 8461125043516283864}
   - component: {fileID: 6923992375176773094}
   - component: {fileID: 7115302638013405661}
+  - component: {fileID: 5405343871971657075}
   m_Layer: 0
   m_Name: RoboDog
   m_TagString: Untagged
@@ -150,6 +151,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5405343871971657075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358182133863745073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49492b7e5e62480aaa892a6b64d4ecb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyIdleAnimations: 2
+  _headIdleAnimations: 2
+  _responseTime: 0.15
+  _aggroRange: 15
+  speed: 8
+  _player: {fileID: 0}
 --- !u!1 &8078587372030480236
 GameObject:
   m_ObjectHideFlags: 0

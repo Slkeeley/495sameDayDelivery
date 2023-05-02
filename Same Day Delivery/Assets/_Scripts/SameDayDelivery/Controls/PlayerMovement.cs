@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
@@ -18,6 +19,9 @@ namespace SameDayDelivery.Controls
         [Tooltip("How long between ground checks in seconds. [Not working]")]
         public float groundCheckInterval = 0.25f;
         public float yOffset = 0.2f;
+        public float pushPower = 2.0F;
+        [Tooltip("Any rigidbody with mass equal to this number or greater, will not be pushed.")]
+        public float pushMassMax = 100f;
 
         [SerializeField, Header("Camera Settings")]
         private Camera _cam;
@@ -172,7 +176,9 @@ namespace SameDayDelivery.Controls
             {
                 motionWithSpeed.y = -9.81f;
             }
-            _characterController.Move(motionWithSpeed);
+            
+            if (_characterController && motionWithSpeed != Vector3.zero)
+                _characterController.Move(motionWithSpeed);
 
             // "rotates" character to always face in direction of camera. We may want to slerp this in the future.
             transform.forward = forward;
@@ -186,6 +192,35 @@ namespace SameDayDelivery.Controls
         private void GroundCharacter()
         {
             _isGrounded = _characterController.isGrounded;
+        }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody body = hit.collider.attachedRigidbody;
+            if (!body) return;
+            
+            var mass = body.mass;
+            if (mass >= pushMassMax) return;
+
+            mass = Mathf.Max(mass, 1f);
+            // no rigidbody
+            if (body == null || body.isKinematic)
+                return;
+
+            // We dont want to push objects below us
+            if (hit.moveDirection.y < -0.3f)
+                return;
+
+            // Calculate push direction from move direction,
+            // we only push objects to the sides never up and down
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+            // If you know how fast your character is trying to move,
+            // then you can also multiply the push velocity by that.
+
+            // Apply the push
+            
+            body.velocity = pushDir * pushPower / mass;
         }
     }
 }

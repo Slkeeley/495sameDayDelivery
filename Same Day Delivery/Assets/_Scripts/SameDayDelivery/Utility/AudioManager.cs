@@ -41,38 +41,68 @@ namespace SameDayDelivery.Utility
         
         private void Start()
         {
-            masterMixerGroup.audioMixer.GetFloat(masterParam, out _originalVolumeMaster);
-            musicMixerGroup.audioMixer.GetFloat(musicParam, out _originalVolumeMusic);
-            sfxMixerGroup.audioMixer.GetFloat(sfxParam, out _originalVolumeSFX);
-            voiceMixerGroup.audioMixer.GetFloat(voiceParam, out _originalVolumeVoice);
-            ambienceMixerGroup.audioMixer.GetFloat(ambienceParam, out _originalVolumeAmbience);
+            if (masterMixerGroup)
+                masterMixerGroup.audioMixer.GetFloat(masterParam, out _originalVolumeMaster);
+            if (musicMixerGroup)
+                musicMixerGroup.audioMixer.GetFloat(musicParam, out _originalVolumeMusic);
+            if (sfxMixerGroup)
+                sfxMixerGroup.audioMixer.GetFloat(sfxParam, out _originalVolumeSFX);
+            if (voiceMixerGroup)
+                voiceMixerGroup.audioMixer.GetFloat(voiceParam, out _originalVolumeVoice);
+            if (ambienceMixerGroup)
+                ambienceMixerGroup.audioMixer.GetFloat(ambienceParam, out _originalVolumeAmbience);
 
-            masterVolumeSlider.minValue = 0f;
-            masterVolumeSlider.maxValue = 100f;
+            if (masterVolumeSlider)
+            {
+                masterVolumeSlider.minValue = 0f;
+                masterVolumeSlider.maxValue = 100f;
+            }
             
-            musicVolumeSlider.minValue = -slideVolumeScale;
-            musicVolumeSlider.maxValue = slideVolumeScale;
+            if (musicVolumeSlider)
+            {
+                musicVolumeSlider.minValue = -slideVolumeScale;
+                musicVolumeSlider.maxValue = slideVolumeScale;
+            }
             
-            sfxVolumeSlider.minValue = -slideVolumeScale;
-            sfxVolumeSlider.maxValue = slideVolumeScale;
+            if (sfxVolumeSlider)
+            {
+                sfxVolumeSlider.minValue = -slideVolumeScale;
+                sfxVolumeSlider.maxValue = slideVolumeScale;
+            }
             
-            voiceVolumeSlider.minValue = -slideVolumeScale;
-            voiceVolumeSlider.maxValue = slideVolumeScale;
+            if (voiceVolumeSlider)
+            {
+                voiceVolumeSlider.minValue = -slideVolumeScale;
+                voiceVolumeSlider.maxValue = slideVolumeScale;
+            }
             
-            ambienceVolumeSlider.minValue = -slideVolumeScale;
-            ambienceVolumeSlider.maxValue = slideVolumeScale;
+            if (ambienceVolumeSlider)
+            {
+                ambienceVolumeSlider.minValue = -slideVolumeScale;
+                ambienceVolumeSlider.maxValue = slideVolumeScale;
+            }
             
-            masterVolumeSlider.value = 100f;
-            musicVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
-            sfxVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
-            voiceVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
-            ambienceVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
+            if (masterVolumeSlider)
+                masterVolumeSlider.value = 100f;
+            if (musicVolumeSlider)
+                musicVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
+            if (sfxVolumeSlider)
+                sfxVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
+            if (voiceVolumeSlider)
+                voiceVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
+            if (ambienceVolumeSlider)
+                ambienceVolumeSlider.value = Mathf.Clamp(_startingSliderValue, -slideVolumeScale, slideVolumeScale);
 
-            UpdateMasterVolume(100f);
-            UpdateMusicVolume(musicVolumeSlider.value);
-            UpdateSFXVolume(sfxVolumeSlider.value);
-            UpdateVoiceVolume(voiceVolumeSlider.value);
-            UpdateAmbienceVolume(ambienceVolumeSlider.value);
+            if (masterVolumeSlider)
+                UpdateMasterVolume(100f);
+            if (musicVolumeSlider)
+                UpdateMusicVolume(musicVolumeSlider.value);
+            if (sfxVolumeSlider)
+                UpdateSFXVolume(sfxVolumeSlider.value);
+            if (voiceVolumeSlider)
+                UpdateVoiceVolume(voiceVolumeSlider.value);
+            if (ambienceVolumeSlider)
+                UpdateAmbienceVolume(ambienceVolumeSlider.value);
             
         }
 

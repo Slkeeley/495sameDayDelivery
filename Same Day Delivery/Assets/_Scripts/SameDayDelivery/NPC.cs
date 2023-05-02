@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
+
 
 public class NPC : MonoBehaviour
 {
@@ -11,72 +12,88 @@ public class NPC : MonoBehaviour
     public float walkPointRange;
     public Vector3 walkPoint; 
     private NavMeshAgent agent;
-    bool walkPointSet=false; 
+    private Vector3 vanPos; 
+    bool walkPointSet=false;
+    float despawnRadius;
+    private AudioSource source; 
 
-    //  private Animator am;
-    [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
+    public Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
-    public Rigidbody[] ragdollLimbs; 
+    private NPCSpawner spawner; 
+    public Rigidbody[] ragdollLimbs;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>(); 
-        // ragDoll.SetActive(false);
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
+        source = GetComponent<AudioSource>(); 
         foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
+            i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
             i.isKinematic = true; 
         }
-        // am = GetComponent<Animator>();
+        am = GetComponent<Animator>();
+        vanPos = GameObject.FindGameObjectWithTag("Van").transform.position; 
         watcher = GameObject.Find("GameWatcher").GetComponent<SameDayDelivery.Controls.GameWatcher>();
+        spawner = GameObject.Find("EnemySpawner").GetComponent<NPCSpawner>();
+        despawnRadius = spawner.despawnRadius; 
     }
 
     private void Update()
     {
-        walk(); 
+        walk();
+        checkDistFromPlayer();
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.tag =="Player")//if the NPC runs into a player or the player's van activate their ragdolls
+        if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
         {
+            am.enabled = false; //turn off the animator so that the ragdolls can work
+            source.PlayOneShot(source.clip, 1.0f); 
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
 
             }
-            agent.Stop(); 
-            //  am.enabled = false;
+            int eventChance = Random.Range(0, 5);
+            if (eventChance < 1) spawner.vanHit?.Invoke();
+            agent.isStopped = true; 
+          
 
-            if (evilIntentions.purchased)
+            if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
             }
+            StartCoroutine(despawn());
+
         }
 
-        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the npc is hit by a thrown package damage the package then activate the ragdoll
+        if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
+            am.enabled = false;
+            source.PlayOneShot(source.clip, 1.0f);
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
             }
-            agent.Stop(); 
-            //  am.enabled = false;
-            if (evilIntentions.purchased)
+            agent.isStopped = true;
+            
+            if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5;
             }
+            StartCoroutine(despawn());
         }
     }
 
     void walk()
     {
-        Debug.Log("walking"); 
         if (!walkPointSet) searchWalkPoint();
 
         if (walkPointSet)
-        {
-            //     var step = moveSpeed * Time.deltaTime; // calculate distance to move
-            //   transform.position = Vector3.MoveTowards(transform.position, walkPoint, step);
+        {           
             agent.SetDestination(walkPoint); 
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint; 
@@ -89,7 +106,6 @@ public class NPC : MonoBehaviour
 
     void searchWalkPoint()
     {
-        Debug.Log("Searching for walk Point"); 
         float randomZ = Random.Range(-walkPointRange, walkPointRange); 
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
@@ -101,4 +117,27 @@ public class NPC : MonoBehaviour
         } 
     }
 
+
+   void checkDistFromPlayer()
+    {
+        Vector3 distanceFromPlayer = transform.position - vanPos; 
+        
+        if(distanceFromPlayer.magnitude >= despawnRadius)
+        {
+            cullNPC(); 
+        }
+    }
+
+    private void cullNPC()
+    {
+        spawner.npcsOut--;
+        Debug.Log("Destroying NPC"); 
+        Destroy(this.gameObject); 
+    }
+    IEnumerator despawn()
+    {
+        yield return new WaitForSeconds(5);
+        spawner.npcsOut--; 
+        Destroy(this.gameObject); 
+    }
 }
