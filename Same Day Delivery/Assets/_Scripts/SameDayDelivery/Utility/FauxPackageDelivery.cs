@@ -44,7 +44,7 @@ namespace SameDayDelivery.Utility
 
         private void OnTriggerEnter(Collider other)
         {
-            Package package = other.GetComponentInChildren<Package>();
+            Package package = other.GetComponent<Package>();
             if (!package) return;
             if (gameData.carryingPackage == package) return;
 
