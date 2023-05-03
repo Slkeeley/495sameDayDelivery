@@ -21,11 +21,11 @@ public class NPCSpawner : MonoBehaviour
     //Private Vars
     private bool isSpawning;
     private bool spawnPointFound;
-    private GameObject player;
+    private GameObject van;
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        van = GameObject.FindGameObjectWithTag("Van");
         isSpawning = true;
         spawnPointFound = false;
 
@@ -45,7 +45,7 @@ public class NPCSpawner : MonoBehaviour
         float randomZ = Random.Range(-spawnRadius, spawnRadius);
         float randomX = Random.Range(-spawnRadius, spawnRadius);
 
-        spawnPoint = new Vector3(player.transform.position.x + randomX, player.transform.position.y+.25f, player.transform.position.z + randomZ);
+        spawnPoint = new Vector3(van.transform.position.x + randomX, van.transform.position.y+.25f, van.transform.position.z + randomZ);
         if (Physics.Raycast(spawnPoint, -transform.up, 15f, whatIsNavMesh))
         {
             return true;
