@@ -59,6 +59,7 @@ namespace SameDayDelivery.VanControls
         public UnityEvent reverse;
         public UnityEvent stopNoises;
         public UnityEvent crash;
+        public UnityEvent sheldonReaction;
 
     
         [Header("Wheels")]
@@ -362,9 +363,9 @@ namespace SameDayDelivery.VanControls
         {
             if(collision.gameObject.layer == 8)
             {
-                Debug.Log("Collided"); 
-                stopNoises?.Invoke(); 
-                crash?.Invoke(); 
+                sheldonReaction?.Invoke();
+                crash?.Invoke();
+       
             }
         }
     }

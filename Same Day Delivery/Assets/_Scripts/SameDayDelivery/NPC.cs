@@ -48,7 +48,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
+        if (other.tag == "Van")//if the NPC runs into a player or the player's van activate their ragdolls
         {
             am.enabled = false; //turn off the animator so that the ragdolls can work
             source.PlayOneShot(source.clip, 1.0f); 
@@ -59,12 +59,35 @@ public class NPC : MonoBehaviour
             }
             int eventChance = Random.Range(0, 5);
             if (eventChance < 1) spawner.vanHit?.Invoke();
+            spawner.sheldonNoise?.Invoke(); 
             agent.isStopped = true; 
           
 
             if (watcher.evilIntentions.purchased)
             {
                 watcher.currentScore = watcher.currentScore + 5; 
+            }
+            StartCoroutine(despawn());
+
+        }
+
+        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
+        {
+            am.enabled = false; //turn off the animator so that the ragdolls can work
+            source.PlayOneShot(source.clip, 1.0f);
+            foreach (Rigidbody i in ragdollLimbs)
+            {
+                i.isKinematic = false;
+
+            }
+            int eventChance = Random.Range(0, 5);
+            if (eventChance < 1) spawner.vanHit?.Invoke();
+            agent.isStopped = true;
+
+
+            if (watcher.evilIntentions.purchased)
+            {
+                watcher.currentScore = watcher.currentScore + 5;
             }
             StartCoroutine(despawn());
 

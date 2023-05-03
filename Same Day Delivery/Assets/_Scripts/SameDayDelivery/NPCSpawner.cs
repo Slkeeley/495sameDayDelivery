@@ -10,6 +10,7 @@ public class NPCSpawner : MonoBehaviour
     public int npcsOut;
     [SerializeField] private GameObject[] NPCs;
     public UnityEvent vanHit; 
+    public UnityEvent sheldonNoise; 
 
     [Header("Spawning")]
     public float spawnRadius;

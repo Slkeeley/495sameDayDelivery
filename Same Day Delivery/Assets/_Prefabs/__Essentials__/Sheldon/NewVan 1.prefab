@@ -336,13 +336,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 50
+  Priority: 200
   DopplerLevel: 1
   MinDistance: 7.618018
   MaxDistance: 500
@@ -487,10 +487,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee1ea0069385e04782a8fb3358e4e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
+  vanClips:
   - {fileID: 8300000, guid: f27a2c8742e4f1349ad3461a304e3b3b, type: 3}
   - {fileID: 8300000, guid: a113734463777ea429d903beb2ab8575, type: 3}
   - {fileID: 8300000, guid: 389c89816a1339d47b69b2bdb3451e9d, type: 3}
+  sheldonClips:
+  - {fileID: 8300000, guid: 46b3d6a84d2daa2489d704d24aca7a7a, type: 3}
+  - {fileID: 8300000, guid: 479d2817c244bd749aab0d8964f193b2, type: 3}
+  - {fileID: 8300000, guid: ed9c9c5708cc8634ca42bac3655834f1, type: 3}
 --- !u!82 &2299140665398824113
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6778,6 +6782,21 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  sheldonReaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6358818290196555968}
+        m_TargetAssemblyTypeName: VanSounds, Assembly-CSharp
+        m_MethodName: sheldonNoise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
