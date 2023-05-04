@@ -19,13 +19,13 @@ public class UpgradeScreen : MonoBehaviour
     private bool upgradeSelected = false;
     private bool sheldonIsBroke = false;
 
-    //static
-    public static int totalZergCoins;
+    //Total Currency =
+    public int totalZergCoins;
     // Start is called before the first frame update
     private void Start()
     {
         buyButton.SetActive(false);
-        totalZergCoins = 100; 
+        totalZergCoins = data.money; 
     }
 
     // Update is called once per frame

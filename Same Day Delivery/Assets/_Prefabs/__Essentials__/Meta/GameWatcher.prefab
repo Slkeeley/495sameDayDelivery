@@ -45,25 +45,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6ef12dae925019547af385ef10ffaa44, type: 2}
+  earlyAlarm: {fileID: 0}
+  payRaise: {fileID: 0}
+  employeeOfTheMonth: {fileID: 0}
+  evilIntentions: {fileID: 0}
+  UI: {fileID: 0}
   carControls: {fileID: 0}
   playerControls: {fileID: 0}
   sheldonCam: {fileID: 0}
   vanCam: {fileID: 0}
-  TimeLeft: 5
+  van: {fileID: 0}
+  currentScore: 0
+  TimeLeft: 360
   TimerOn: 0
   currControls: 
   packagesDelivered: 0
-  packagesNeeded: 0
+  packagesNeeded: 10
   timeSinceLastDelivery: 0
   zergCoinsGained: 0
-  timerText: {fileID: 0}
-  scoreText: {fileID: 0}
-  levelText: {fileID: 0}
-  zergCoinsText: {fileID: 0}
-  deliveryText: {fileID: 0}
-  packagesText: {fileID: 0}
-  failNotification: {fileID: 0}
-  successNotification: {fileID: 0}
   goToFailScreen:
     m_PersistentCalls:
       m_Calls:
@@ -94,6 +93,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  danStart:
+    m_PersistentCalls:
+      m_Calls: []
+  workFaster:
+    m_PersistentCalls:
+      m_Calls: []
+  oneMinute:
+    m_PersistentCalls:
+      m_Calls: []
+  propHit:
+    m_PersistentCalls:
+      m_Calls: []
+  driftingForward: 0
 --- !u!114 &7312099613720705333
 MonoBehaviour:
   m_ObjectHideFlags: 0

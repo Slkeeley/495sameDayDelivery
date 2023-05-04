@@ -32,7 +32,8 @@ namespace SameDayDelivery.Controls
         public int packagesNeeded;
         public float timeSinceLastDelivery;
         public static int currLevel;
-        public int zergCoinsGained;//How much currency the player currently has 
+        public static int scoreEarned;
+        public int zergCoinsGained;//How much currency the player has gained since the start of the level
         
 
         [Header("Events")]
@@ -51,10 +52,6 @@ namespace SameDayDelivery.Controls
         private bool payRaised;
         private bool minuteLeft = false; 
 
-        //temporary statics 
-        //REPLACE THESE WHEN WE HAVE A MORE FORMAL SAVE SYSTEM 
-        public static int scoreEarned; 
-        public static int successFullDeliveries; 
 
         private void Awake()
         {
@@ -106,8 +103,7 @@ namespace SameDayDelivery.Controls
             zergCoinsGained = 0; 
             UI.levelText.text = "Day: " + currLevel;
             UI.deliveryText.text = "";
-            scoreEarned = 0; //STATIC INT TO BE REPLACED
-            successFullDeliveries = 0; //STATIC INT TO BE REPLACED
+            scoreEarned = 0; 
             zergCoinsGained = 0; 
             SwitchControlsToPlayer();
         }
@@ -206,19 +202,18 @@ namespace SameDayDelivery.Controls
             UI.failNotification.SetActive(true); 
             yield return new WaitForSeconds(2.0f);
             StopAllCoroutines(); //stop coroutines so that the fail screen isn't loaded multiple times. 
-            zergCoinsGained = currentScore / 50;
+            zergCoinsGained = zergCoinsGained + (currentScore / 50);
             if (payRaised)
             {
-                UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins;
+                data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
                 SameDayDelivery.UI.scoreDisplay.coinsGained = (zergCoinsGained / 10) + zergCoinsGained;
-            }//replace the static int with a formal system later
+            }
             else
             {
-                UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained;
+                data.money = data.money + zergCoinsGained;
                 SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
             }//add the players gained zerg coins to the upgrade screen 
             scoreEarned = currentScore; 
-            successFullDeliveries = packagesDelivered; 
             goToFailScreen?.Invoke(); 
         }
 
@@ -228,18 +223,17 @@ namespace SameDayDelivery.Controls
             UI.successNotification.SetActive(true);
             yield return new WaitForSeconds(2);
             StopAllCoroutines();
+            zergCoinsGained = zergCoinsGained + (currentScore / 50);
             if (payRaised)
             {
-                UpgradeScreen.totalZergCoins = ((zergCoinsGained / 10) + zergCoinsGained) + UpgradeScreen.totalZergCoins;
+                data.money = ((zergCoinsGained / 10) + zergCoinsGained) + data.money;
                 SameDayDelivery.UI.scoreDisplay.coinsGained = (zergCoinsGained / 10) + zergCoinsGained;
-            }//replace the static int with a formal system later
+            }
             else
             {
-                UpgradeScreen.totalZergCoins = UpgradeScreen.totalZergCoins + zergCoinsGained;
+                data.money = data.money + zergCoinsGained; 
                 SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
             }//add the players gained zerg coins to the upgrade screen 
-            Debug.Log(UpgradeScreen.totalZergCoins);
-            successFullDeliveries = packagesDelivered;
             scoreEarned = currentScore;
             currLevel++;
             goToPassScreen?.Invoke();//invoke the event that moves to the success screen 
