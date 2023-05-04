@@ -196,7 +196,8 @@ GameObject:
   - component: {fileID: 280475740982498678}
   - component: {fileID: 3870375934050773849}
   - component: {fileID: 4385898670095772960}
-  - component: {fileID: 5993793115356601881}
+  - component: {fileID: 3944112016668805157}
+  - component: {fileID: 4449784014538936415}
   m_Layer: 8
   m_Name: street_light
   m_TagString: Untagged
@@ -267,8 +268,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5993793115356601881
-MeshCollider:
+--- !u!65 &3944112016668805157
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -277,10 +278,22 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1353272864970333055, guid: 888631c149a1fbe4c9744811f273890d, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.7116834, y: 2.607132, z: 1.9121971}
+  m_Center: {x: -1.913012, y: 7.3104506, z: -0.000035643578}
+--- !u!65 &4449784014538936415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032074704984984321}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4042616, y: 8.615037, z: 1.9121971}
+  m_Center: {x: 0.18921083, y: 4.306498, z: -0.000035643578}
 --- !u!1 &8866535635311832841
 GameObject:
   m_ObjectHideFlags: 0
