@@ -206,22 +206,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434401974}
-        m_TargetAssemblyTypeName: SameDayDelivery.Utility.SceneSelector, Assembly-CSharp
-        m_MethodName: toNewGame
-        m_Mode: 1
+      - m_Target: {fileID: 434401972}
+        m_TargetAssemblyTypeName: SameDayDelivery.Utility.SceneUtility, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 5
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: NewGameScreen
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1767305643}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -500,7 +500,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1767305643}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2087,7 +2087,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1767305643}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
