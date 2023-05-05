@@ -17,6 +17,7 @@ namespace SameDayDelivery.Utility
             public int money;
             public int score;
             public UpgradeLookupTable upgradeLookupTable;
+            public LevelSelectTable levelSelectTable; 
         }
         
         [SerializeField]
@@ -52,6 +53,7 @@ namespace SameDayDelivery.Utility
             saveData.money = _gameData.money;
             saveData.score = _gameData.score;
             saveData.upgradeLookupTable = _gameData.upgradeLookupTable;
+            saveData.levelSelectTable = _gameData.levelSelectTable;
             
             string jsonData = JsonUtility.ToJson(saveData);
             
@@ -84,6 +86,7 @@ namespace SameDayDelivery.Utility
             _gameData.money = saveData.money;
             _gameData.score = saveData.score;
             _gameData.upgradeLookupTable = saveData.upgradeLookupTable;
+            _gameData.levelSelectTable = saveData.levelSelectTable; 
             
             _onLoad?.Invoke();
         }
