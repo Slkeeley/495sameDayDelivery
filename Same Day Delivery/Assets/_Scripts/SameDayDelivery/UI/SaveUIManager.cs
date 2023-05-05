@@ -26,7 +26,9 @@ namespace SameDayDelivery.UI
             daysText.text = $"{gameData.day.ToString()}";
             coinsText.text = $"{gameData.money.ToString()}";
             scoreText.text = $"{gameData.score.ToString()}";
-            int numOfUpgrades = gameData.upgradeLookupTable.upgrades.Count(upgradeItem => upgradeItem.purchased);
+            int numOfUpgrades = 0;
+            if (gameData.upgradeLookupTable)
+                numOfUpgrades = gameData.upgradeLookupTable.upgrades.Count(upgradeItem => upgradeItem.purchased);
             upgradesText.text = $"{numOfUpgrades.ToString()}";
             if (upgradeIconDisplayer)
                 upgradeIconDisplayer.UpdateUpgradeIcons();

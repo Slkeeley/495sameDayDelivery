@@ -4,7 +4,6 @@ using System.IO;
 using SameDayDelivery.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace SameDayDelivery.Utility
 {
@@ -16,7 +15,7 @@ namespace SameDayDelivery.Utility
             public int day;
             public int money;
             public int score;
-            public UpgradeLookupTable upgradeLookupTable;
+            public List<int> unlockedUpgrades = new List<int>();
         }
         
         [SerializeField]
@@ -39,6 +38,7 @@ namespace SameDayDelivery.Utility
 
         private void Awake()
         {
+            return;
             if (_loadSavedDataOnAwake)
                 LoadFromFile();
         }
@@ -51,7 +51,11 @@ namespace SameDayDelivery.Utility
             saveData.day = _gameData.day;
             saveData.money = _gameData.money;
             saveData.score = _gameData.score;
-            saveData.upgradeLookupTable = _gameData.upgradeLookupTable;
+            List<UpgradeItem> upgrades = _gameData.upgradeLookupTable.upgrades;
+            for (int i = 0; i < upgrades.Count; i++)
+            {
+                saveData.unlockedUpgrades.Add(upgrades[i].purchased ? 1 : 0);
+            }
             
             string jsonData = JsonUtility.ToJson(saveData);
             
@@ -83,7 +87,13 @@ namespace SameDayDelivery.Utility
             _gameData.day = saveData.day;
             _gameData.money = saveData.money;
             _gameData.score = saveData.score;
-            _gameData.upgradeLookupTable = saveData.upgradeLookupTable;
+
+            List<int> upgrades = saveData.unlockedUpgrades;
+
+            for (int i = 0; i < upgrades.Count; i++)
+            {
+                _gameData.upgradeLookupTable.upgrades[i].purchased = upgrades[i] == 1;
+            }
             
             _onLoad?.Invoke();
         }
@@ -91,6 +101,8 @@ namespace SameDayDelivery.Utility
         public void DeleteSavedData()
         {
             string path = GetStandardPath();
+            
+            _gameData.DeleteTempData();
 
             if (!File.Exists(path)) return;
             using StreamWriter writer = new StreamWriter(path);

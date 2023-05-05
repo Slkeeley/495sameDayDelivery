@@ -91,10 +91,28 @@ namespace SameDayDelivery.ScriptableObjects
             score = PlayerPrefs.GetInt("score");
             money = PlayerPrefs.GetInt("money");
             
+            if (!upgradeLookupTable) return;
+            
             for (int i = 0; i < upgradeLookupTable.upgrades.Count; i++)
             {
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 upgradeItem.purchased = PlayerPrefs.GetInt($"upgrade[{i}]") == 1;
+            }
+        }
+
+        public void DeleteTempData()
+        {
+            PlayerPrefs.DeleteKey("day");
+            PlayerPrefs.DeleteKey("score");
+            PlayerPrefs.DeleteKey("money");
+            
+            if (!upgradeLookupTable) return;
+
+            List<UpgradeItem> upgrades = upgradeLookupTable.upgrades;
+            
+            for (int i = 0; i < upgrades.Count; i++)
+            {
+                PlayerPrefs.DeleteKey($"upgrade[{i}]");
             }
         }
     }
