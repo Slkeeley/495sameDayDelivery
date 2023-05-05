@@ -19,18 +19,19 @@ public class UpgradeScreen : MonoBehaviour
     private bool upgradeSelected = false;
     private bool sheldonIsBroke = false;
 
-    //static
-    public static int totalZergCoins;
+    //Total Currency =
+    public int totalZergCoins;
     // Start is called before the first frame update
     private void Start()
     {
-        buyButton.SetActive(false); 
+        buyButton.SetActive(false);
+        totalZergCoins = data.money; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        coinsText.text = "Zerg Coins: " + totalZergCoins.ToString();
+        coinsText.text = "Zerg Coins: " + data.money.ToString();
     
 
 
@@ -38,7 +39,7 @@ public class UpgradeScreen : MonoBehaviour
         checkSelectedButton();
         if (sheldonIsBroke)//if sheldon does not have the required amount of money then have the text say not enough zerg
         {
-            descText.fontSize = 24;
+            descText.fontSize = 14;
             descText.text = "NOT ENOUGH ZERG!";
             descText.color = new Color(1, 0, 0, 1);
         }
@@ -84,14 +85,15 @@ public class UpgradeScreen : MonoBehaviour
 
     public void buyUpgrade()
     {
-
-        if (selectedButton.GetComponent<upgradeButton>().price <= totalZergCoins)//if the player has enough zerg coins
+        upgradeButton upgradeButton = selectedButton.GetComponent<upgradeButton>();
+        
+        if (upgradeButton.price <= data.money)//if the player has enough zerg coins
         {
             upgradeSelected = false;
-            selectedButton.GetComponent<upgradeButton>().glow.SetActive(false);
-            selectedButton.GetComponent<upgradeButton>().upgrade.purchased = true; 
+            upgradeButton.glow.SetActive(false);
+            upgradeButton.upgrade.purchased = true; 
             descText.text = "";
-            data.money = data.money- selectedButton.GetComponent<upgradeButton>().price;
+            data.money -= upgradeButton.price;
             selectedButton = null;
 
         }
@@ -105,6 +107,6 @@ public class UpgradeScreen : MonoBehaviour
         sheldonIsBroke = false;
         descText.text = "";
         descText.color = new Color(0, 0, 0, 1);
-        descText.fontSize = 10; 
+        descText.fontSize = 8; 
     }
 }

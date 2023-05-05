@@ -1,0 +1,249 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2215010633009051222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2107832383857928053}
+  m_Layer: 0
+  m_Name: DogSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2107832383857928053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215010633009051222}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0023977838, y: 0.6059643, z: 1.468}
+  m_LocalScale: {x: 0.7921419, y: 0.7921419, z: 0.7921419}
+  m_Children: []
+  m_Father: {fileID: 7623683359428199259}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6996997917450736638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7623683359428199259}
+  - component: {fileID: 2723546512423374651}
+  m_Layer: 0
+  m_Name: DogHouse_LOD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7623683359428199259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996997917450736638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.83, y: 0.474, z: 0}
+  m_LocalScale: {x: 1.2624, y: 1.2624, z: 1.2624}
+  m_Children:
+  - {fileID: 2151450323090573313}
+  - {fileID: 4951579727451928430}
+  - {fileID: 2107832383857928053}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &2723546512423374651
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996997917450736638}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0023982525, y: 0.6059642, z: 0.19567496}
+  m_Size: 1.6619655
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 977369591970362222}
+  - screenRelativeHeight: 0.011228947
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6123953605416569857}
+  m_Enabled: 1
+--- !u!1001 &1896514445258780650
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7623683359428199259}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.002399769
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6059643
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19567494
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d186edd468497f479baf7efa1cfb86e, type: 2}
+    - target: {fileID: 919132149155446097, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+      propertyPath: m_Name
+      value: Unity_DogHouse_high
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+--- !u!1 &1625988611965375163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+  m_PrefabInstance: {fileID: 1896514445258780650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2151450323090573313 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+  m_PrefabInstance: {fileID: 1896514445258780650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &977369591970362222 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 11efcd553dfb5a04c9bbd409159180af, type: 3}
+  m_PrefabInstance: {fileID: 1896514445258780650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4448282907733786509
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625988611965375163}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 110.711006, y: 104.14491, z: 166.19655}
+  m_Center: {x: -0.00012207031, y: -0.0000076293945, z: 0}
+--- !u!1001 &4845084825414094981
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7623683359428199259}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.002399769
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6059643
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19567494
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d186edd468497f479baf7efa1cfb86e, type: 2}
+    - target: {fileID: 919132149155446097, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+      propertyPath: m_Name
+      value: Unity_DogHouse_Low
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+--- !u!4 &4951579727451928430 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+  m_PrefabInstance: {fileID: 4845084825414094981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6123953605416569857 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d332cfbf763727b4cac55da0c1caea8b, type: 3}
+  m_PrefabInstance: {fileID: 4845084825414094981}
+  m_PrefabAsset: {fileID: 0}

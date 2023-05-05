@@ -8,38 +8,46 @@ namespace SameDayDelivery.Utility
 {
     public class GameDataSetup : MonoBehaviour
     {
+        public enum LevelType
+        {
+            Level,
+            MainMenu
+        }
+        
         [SerializeField]
         private GameData _gameData;
 
         [SerializeField]
-        private Transform _playerTransform;
+        private LevelType _levelType = LevelType.Level;
 
-        [SerializeField]
-        private GameWatcher _gameWatcher;
-
-        [SerializeField]
-        private float _delay = 1f;
-
-        private void Awake()
+        private void OnEnable()
         {
-            _gameData.ResetData();
+            switch (_levelType)
+            {
+                case LevelType.Level:
+                    _gameData.TempLoadData();
+                    break;
+                case LevelType.MainMenu:
+                    _gameData.ResetData();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        private IEnumerator ShortDelay()
+        private void OnDisable()
         {
-            yield return new WaitForSeconds(_delay);
-            
-            if (!_playerTransform)
+            switch (_levelType)
             {
-                var playerMovement = FindObjectOfType<PlayerMovement>();
-                if (playerMovement)
-                    _playerTransform = playerMovement.transform;
-                else
-                    Debug.LogError("Cannot find object with PlayerMovement on it.");
+                case LevelType.Level:
+                    _gameData.TempSaveData();
+                    break;
+                case LevelType.MainMenu:
+                    _gameData.ResetData();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            _gameData.playerTransform = _playerTransform;
-            // _gameData.NextDelivery();
         }
     }
 }

@@ -34,7 +34,8 @@ namespace SameDayDelivery.PackageSystem
         [SerializeField] private UnityEvent onPackageThrow;
         [SerializeField] private UnityEvent onPickup;
         
-        private readonly List<Package> _availablePackages = new List<Package>();
+        [SerializeField]
+        private List<Package> _availablePackages = new List<Package>();
         private PlayerControlManager _playerControls;
         private bool _justPickedUp;
         private Image _throwReticleImage;

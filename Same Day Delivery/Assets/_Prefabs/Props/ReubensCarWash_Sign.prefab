@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3475600173743153846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2737847991950463936}
+  - component: {fileID: 6850914364846368151}
+  - component: {fileID: 8986217800614383231}
+  m_Layer: 0
+  m_Name: ReubensCarWash_Sign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2737847991950463936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475600173743153846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5251474251171795309}
+  - {fileID: 7854970196905836916}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &6850914364846368151
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475600173743153846}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.26392746, y: 5.711666, z: -0.00000011920929}
+  m_Size: 11.423332
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.29222444
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2958232401105514913}
+    - renderer: {fileID: 4811606043466859689}
+  - screenRelativeHeight: 0.045559827
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3299999146783800611}
+    - renderer: {fileID: 8440757654470441654}
+  m_Enabled: 1
+--- !u!65 &8986217800614383231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475600173743153846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5254991, y: 5.9997187, z: 0.48064753}
+  m_Center: {x: -0.0054566264, y: 2.9932737, z: 0.01415135}
+--- !u!1001 &5722462690279552646
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2737847991950463936}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3374817892383708325, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Name
+      value: ReubensCarwash_Sign_LOD0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 985170439028273711, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a638c94a160c65b4bbe22e4c93263c67, type: 2}
+    - target: {fileID: 7379013631871551271, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a638c94a160c65b4bbe22e4c93263c67, type: 2}
+    - target: {fileID: 8763241550569828884, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+--- !u!4 &5251474251171795309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+  m_PrefabInstance: {fileID: 5722462690279552646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3960648406407414930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8763241550569828884, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+  m_PrefabInstance: {fileID: 5722462690279552646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2958232401105514913 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7379013631871551271, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+  m_PrefabInstance: {fileID: 5722462690279552646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4811606043466859689 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 985170439028273711, guid: 750029a568145b54aa3ab67bbc535940, type: 3}
+  m_PrefabInstance: {fileID: 5722462690279552646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4795736624749662614
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960648406407414930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b765254c3468f5e4aaf37fdd24a5eedf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &7676610671293179551
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2737847991950463936}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6941361053024805847, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a638c94a160c65b4bbe22e4c93263c67, type: 2}
+    - target: {fileID: 919132149155446097, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_Name
+      value: ReubensCarwash_Sign_LOD1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135017298528361404, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a638c94a160c65b4bbe22e4c93263c67, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+--- !u!4 &7854970196905836916 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+  m_PrefabInstance: {fileID: 7676610671293179551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &991367377173627978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7442981078320505557, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+  m_PrefabInstance: {fileID: 7676610671293179551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3299999146783800611 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5135017298528361404, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+  m_PrefabInstance: {fileID: 7676610671293179551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8440757654470441654 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6941361053024805847, guid: cac5005aaefc6434d89274092a4247a0, type: 3}
+  m_PrefabInstance: {fileID: 7676610671293179551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2640905516666394380
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991367377173627978}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09636a6881215b4428135fb7d83a64f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

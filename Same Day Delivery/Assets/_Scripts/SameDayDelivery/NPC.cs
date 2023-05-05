@@ -14,8 +14,8 @@ public class NPC : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 vanPos; 
     bool walkPointSet=false;
-    float despawnRadius; 
-   
+    float despawnRadius;
+    private AudioSource source; 
 
     public Animator am;
     private SameDayDelivery.Controls.GameWatcher watcher;
@@ -26,6 +26,7 @@ public class NPC : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>(); 
         ragdollLimbs = GetComponentsInChildren<Rigidbody>();
+        source = GetComponent<AudioSource>(); 
         foreach (Rigidbody i in ragdollLimbs)//get all of the rigidbodies present within the rig and add them to the array 
         {
             i.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative; 
@@ -47,10 +48,10 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Van" || other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
+        if (other.tag == "Van")//if the NPC runs into a player or the player's van activate their ragdolls
         {
             am.enabled = false; //turn off the animator so that the ragdolls can work
-      
+            source.PlayOneShot(source.clip, 1.0f); 
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
@@ -58,6 +59,7 @@ public class NPC : MonoBehaviour
             }
             int eventChance = Random.Range(0, 5);
             if (eventChance < 1) spawner.vanHit?.Invoke();
+            spawner.sheldonNoise?.Invoke(); 
             agent.isStopped = true; 
           
 
@@ -65,12 +67,36 @@ public class NPC : MonoBehaviour
             {
                 watcher.currentScore = watcher.currentScore + 5; 
             }
-            StartCoroutine(despawn()); 
+            StartCoroutine(despawn());
+
+        }
+
+        if (other.GetComponent<SameDayDelivery.PackageSystem.Package>())//if the NPC runs into a player or the player's van activate their ragdolls
+        {
+            am.enabled = false; //turn off the animator so that the ragdolls can work
+            source.PlayOneShot(source.clip, 1.0f);
+            foreach (Rigidbody i in ragdollLimbs)
+            {
+                i.isKinematic = false;
+
+            }
+            int eventChance = Random.Range(0, 5);
+            if (eventChance < 1) spawner.vanHit?.Invoke();
+            agent.isStopped = true;
+
+
+            if (watcher.evilIntentions.purchased)
+            {
+                watcher.currentScore = watcher.currentScore + 5;
+            }
+            StartCoroutine(despawn());
+
         }
 
         if (other.tag=="Player")//if the npc is hit by a thrown package damage the package then activate the ragdoll
         {
             am.enabled = false;
+            source.PlayOneShot(source.clip, 1.0f);
             foreach (Rigidbody i in ragdollLimbs)
             {
                 i.isKinematic = false;
@@ -128,7 +154,6 @@ public class NPC : MonoBehaviour
     private void cullNPC()
     {
         spawner.npcsOut--;
-        Debug.Log("Destroying NPC"); 
         Destroy(this.gameObject); 
     }
     IEnumerator despawn()
