@@ -83,6 +83,8 @@ namespace SameDayDelivery.ScriptableObjects
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 PlayerPrefs.SetInt($"upgrade[{i}]", upgradeItem.purchased ? 1 : 0);
             }
+            
+            PlayerPrefs.Save();
         }
 
         public void TempLoadData()
