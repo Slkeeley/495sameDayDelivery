@@ -41,11 +41,6 @@ namespace SameDayDelivery.Utility
         {
             SceneManager.LoadScene("LevelSelect");
         }
-        
-        public void loadSelectedLevel(int indexNumber)
-        {
-            SceneManager.LoadScene(indexNumber); //select the level to load in the editor so we only need to use 1 function 
-        }
 
         public void toNewGame()
         {

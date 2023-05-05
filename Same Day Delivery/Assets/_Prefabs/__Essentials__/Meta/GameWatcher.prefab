@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6041456256240184914}
   - component: {fileID: 6041456256240184915}
-  - component: {fileID: 7312099613720705333}
   m_Layer: 0
   m_Name: GameWatcher
   m_TagString: Untagged
@@ -55,6 +54,7 @@ MonoBehaviour:
   sheldonCam: {fileID: 0}
   vanCam: {fileID: 0}
   van: {fileID: 0}
+  levelNumber: 0
   currentScore: 0
   TimeLeft: 360
   TimerOn: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   goToFailScreen:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7312099613720705333}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.SceneSelector, Assembly-CSharp
         m_MethodName: toFailScreen
         m_Mode: 1
@@ -81,7 +81,7 @@ MonoBehaviour:
   goToPassScreen:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7312099613720705333}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.SceneSelector, Assembly-CSharp
         m_MethodName: toPassScreen
         m_Mode: 1
@@ -106,15 +106,3 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   driftingForward: 0
---- !u!114 &7312099613720705333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041456256240184912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77273bdc53079d74c91637e348eb252e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
