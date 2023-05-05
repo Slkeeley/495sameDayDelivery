@@ -58,6 +58,9 @@ namespace SameDayDelivery.ScriptableObjects
         [Header("Upgrades")]
         public UpgradeLookupTable upgradeLookupTable;
 
+        [Header("Levels")]
+        public LevelSelectTable levelSelectTable; 
+
         public Transform playerTransform;
 
         public void ResetData()
@@ -69,6 +72,11 @@ namespace SameDayDelivery.ScriptableObjects
             foreach (UpgradeItem upgradeItem in upgradeLookupTable.upgrades)
             {
                 upgradeItem.purchased = false;
+            }
+
+            foreach (LevelData levelData in levelSelectTable.levels)
+            {
+                levelData.unlocked = false; 
             }
         }
 
@@ -83,6 +91,12 @@ namespace SameDayDelivery.ScriptableObjects
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 PlayerPrefs.SetInt($"upgrade[{i}]", upgradeItem.purchased ? 1 : 0);
             }
+
+            for (int i = 0; i < levelSelectTable.levels.Count; i++)
+            {
+                LevelData levelData = levelSelectTable.levels[i];
+                PlayerPrefs.SetInt($"level[{i}]", levelData.unlocked ? 1 : 0);
+            }
         }
 
         public void TempLoadData()
@@ -95,6 +109,12 @@ namespace SameDayDelivery.ScriptableObjects
             {
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 upgradeItem.purchased = PlayerPrefs.GetInt($"upgrade[{i}]") == 1;
+            }
+
+            for (int i = 0; i < levelSelectTable.levels.Count; i++)
+            {
+                LevelData levelData = levelSelectTable.levels[i];
+                levelData.unlocked = PlayerPrefs.GetInt($"level[{i}]") == 1;
             }
         }
     }
