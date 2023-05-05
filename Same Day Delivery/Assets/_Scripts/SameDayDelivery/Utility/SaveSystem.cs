@@ -16,6 +16,7 @@ namespace SameDayDelivery.Utility
             public int money;
             public int score;
             public List<int> unlockedUpgrades = new List<int>();
+            public List<int> unlockedLevels = new List<int>(); 
         }
         
         [SerializeField]
