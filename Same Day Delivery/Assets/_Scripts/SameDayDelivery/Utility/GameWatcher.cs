@@ -46,7 +46,7 @@ namespace SameDayDelivery.Controls
         public UnityEvent propHit;  
 
         //Privaye vars 
-        public bool driftingForward = false;
+        private bool driftingForward = false;
         private float currSpeed;
         private bool payRaised;
         private bool minuteLeft = false;

@@ -1448,6 +1448,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3.693062
       objectReference: {fileID: 0}
+    - target: {fileID: 1562931125010479991, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: TimeLeft
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562931125010479991, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: packagesNeeded
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1608899516034259175, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -9.254957
@@ -27961,31 +27969,7 @@ MonoBehaviour:
   houseBeam: {fileID: 7122113150598941408}
   onSpawnEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7132981621184116584}
-        m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
-        m_MethodName: PlayRandom
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1136184387}
-        m_TargetAssemblyTypeName: SameDayDelivery.Utility.SceneUtility, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: NewGameScreen
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   packageReceived:
     m_PersistentCalls:
       m_Calls: []

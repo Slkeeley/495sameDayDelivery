@@ -102,7 +102,7 @@ namespace SameDayDelivery.ScriptableObjects
 
             foreach (LevelData lvlData in lvlSelectTable.levels)
             {
-                if (day >= lvlData.levelNumber-1)
+                if (day >= lvlData.levelNumber)
                 {
                     lvlData.unlocked = true;
                 }
@@ -133,7 +133,7 @@ namespace SameDayDelivery.ScriptableObjects
 
             foreach  (LevelData lvlData in lvlSelectTable.levels)
             {
-                if(day>= lvlData.levelNumber-1)
+                if(day>= lvlData.levelNumber)
                 {
                     lvlData.unlocked = true; 
                 }
