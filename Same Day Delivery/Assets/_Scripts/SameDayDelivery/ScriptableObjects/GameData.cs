@@ -100,6 +100,14 @@ namespace SameDayDelivery.ScriptableObjects
                 PlayerPrefs.SetInt($"level[{i}]", lvlData.unlocked? 1 : 0);
             }
 
+            foreach (LevelData lvlData in lvlSelectTable.levels)
+            {
+                if (day >= lvlData.levelNumber-1)
+                {
+                    lvlData.unlocked = true;
+                }
+            }
+
             PlayerPrefs.Save();
         }
 
@@ -121,6 +129,14 @@ namespace SameDayDelivery.ScriptableObjects
             {
                 LevelData lvlData = lvlSelectTable.levels[i];
                 lvlData.unlocked = PlayerPrefs.GetInt($"levels[{i}]") == 1; 
+            }
+
+            foreach  (LevelData lvlData in lvlSelectTable.levels)
+            {
+                if(day>= lvlData.levelNumber-1)
+                {
+                    lvlData.unlocked = true; 
+                }
             }
         }
 
