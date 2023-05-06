@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3546960238323917408}
   - component: {fileID: 4261281412566293588}
   - component: {fileID: 7499485886353850797}
-  - component: {fileID: 6606703992453999967}
   - component: {fileID: 8987668730637011542}
+  - component: {fileID: 8430822436170477556}
   m_Layer: 0
   m_Name: Swing
   m_TagString: Untagged
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6606703992453999967
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7359472850979129631}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6287326614069351433, guid: 116c3c71e606ea04c9f9dd22a7088ea2, type: 3}
 --- !u!205 &8987668730637011542
 LODGroup:
   m_ObjectHideFlags: 0
@@ -116,6 +102,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7499485886353850797}
   m_Enabled: 1
+--- !u!65 &8430822436170477556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7359472850979129631}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 872.94464, y: 917.15875, z: 239.59068}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7674491314101529494
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5806553420855726416}
+  - component: {fileID: 7488167683314135007}
   m_Layer: 0
   m_Name: ParkSwing
   m_TagString: Untagged
@@ -147,3 +147,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7488167683314135007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674491314101529494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b940a01f400e8a7489b37a150e366c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.3
+  frequency: 0.3
+  outOfSync: 1
+  minPos: {x: 0, y: 0, z: 0}
+  maxPos: {x: 0, y: 0, z: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1527223960931059863}
   - component: {fileID: 486100483174150458}
   - component: {fileID: 8919341913736488873}
-  - component: {fileID: 6409130651832633380}
   - component: {fileID: 7507652975079917193}
+  - component: {fileID: 5893150393950662822}
   m_Layer: 0
   m_Name: Slide
   m_TagString: Untagged
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6409130651832633380
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331071240471428480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2885756083127718827, guid: 116c3c71e606ea04c9f9dd22a7088ea2, type: 3}
 --- !u!205 &7507652975079917193
 LODGroup:
   m_ObjectHideFlags: 0
@@ -116,6 +102,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8919341913736488873}
   m_Enabled: 1
+--- !u!65 &5893150393950662822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331071240471428480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1542.0175, y: 1602.4929, z: 2408.7695}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6862434469914216224
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9047455781679946376}
+  - component: {fileID: 2953619327924987591}
   m_Layer: 0
   m_Name: ParkSlide
   m_TagString: Untagged
@@ -147,3 +147,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2953619327924987591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862434469914216224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b940a01f400e8a7489b37a150e366c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.3
+  frequency: 0.3
+  outOfSync: 1
+  minPos: {x: 0, y: 0, z: 0}
+  maxPos: {x: 0, y: 0, z: 0}

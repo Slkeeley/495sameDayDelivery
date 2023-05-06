@@ -31,6 +31,7 @@ namespace SameDayDelivery.PackageSystem
         [SerializeField] private float _throwCharge;
         [SerializeField] private Animator _sheldonAnimator;
         [SerializeField] private UpgradeItem _upgradeWorkGloves;
+        [SerializeField] private float _packageCheckRadius = 1.5f;
         [SerializeField] private UnityEvent onPackageThrow;
         [SerializeField] private UnityEvent onPickup;
         
@@ -140,7 +141,8 @@ namespace SameDayDelivery.PackageSystem
                 return;
             }
             
-            ThrowPackage();
+            _sheldonAnimator.SetBool(ThrowAnim, true);
+            // ThrowPackage();
         }
 
         private void ButtonDown()
@@ -159,7 +161,7 @@ namespace SameDayDelivery.PackageSystem
             }
         }
 
-        private void ThrowPackage()
+        public void ThrowPackage()
         {
             if (Time.timeScale < 0.01) return;
             Transform packageTransform = carryingPackage.transform;
@@ -173,18 +175,21 @@ namespace SameDayDelivery.PackageSystem
 
             // gets ratio of chargeTime to maxChargeTime
             var percentCharge = Mathf.InverseLerp(0f, maxChargeTime, _throwCharge);
-            var chargeTimeRatio = percentCharge;
 
             // modifies throw force by a ValueA of the upgrade gloves which should be a percentage
             var modMaxThrowForce = (_upgradeWorkGloves != null && _upgradeWorkGloves.purchased) ? 
                 (maxThrowForce * _upgradeWorkGloves.valueA.uValue) : maxThrowForce;
             
             // Interpolated value from 0 to maxThrowForce based on ratio of chargeTime to maxChargeTime
-            var power = Mathf.Lerp(0f, modMaxThrowForce, chargeTimeRatio);
+            var power = Mathf.Lerp(0f, modMaxThrowForce, percentCharge);
 
             // drops the package with a force based on the camera's forward vector and the power based on the time
             // holding down the drop button.
-            carryingPackage.Throw(forward, power);
+            float upAngle = (_upgradeWorkGloves && _upgradeWorkGloves.purchased)
+                ? (_upgradeWorkGloves.valueB.uValue / 100f) * percentCharge
+                : 0f;
+            
+            carryingPackage.Throw(forward + Vector3.up * upAngle, power);
             _sheldonAnimator.SetBool(ThrowAnim, true);
 
             onPackageThrow?.Invoke();
@@ -197,18 +202,30 @@ namespace SameDayDelivery.PackageSystem
             _throwReticle.SetActive(false);
 
             _fullChargeAnimator.SetBool(LockParam, false);
-
-            // var frequency = Mathf.Lerp(0.5f, 2.5f, percentCharge);
-            // var amplitude = Mathf.Lerp(0.15f, 4f, percentCharge);
-            // var shakeTime = Mathf.Lerp(0.15f, 0.35f, percentCharge);
-
-            // CinemachineShake.Instance.ShakeCamera(amplitude, frequency, shakeTime);
+            
             if (_impulse)
                 _impulse.GenerateImpulse();
+            
+            RecycleAvailablePackages();
+        }
+
+        private void RecycleAvailablePackages()
+        {
+            _availablePackages.Clear();
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _packageCheckRadius);
+
+            foreach (Collider colliderCmp in colliders)
+            {
+                Package package = colliderCmp.GetComponent<Package>();
+                if (package)
+                    _availablePackages.Add(package);
+            }
         }
 
         private void PickupPackage()
         {
+            RecycleAvailablePackages();
+
             if (_availablePackages.Count <= 0) return;
             if (Time.timeScale < 0.01) return;
 
@@ -239,7 +256,7 @@ namespace SameDayDelivery.PackageSystem
 
         private void OnTriggerEnter(Collider other)
         {
-            var package = other.GetComponent<Package>();
+            Package package = other.GetComponent<Package>();
             if (!package) return;
             _availablePackages.Add(package);
         }
@@ -265,6 +282,11 @@ namespace SameDayDelivery.PackageSystem
         public void PickupAnimationCompleted()
         {
             _sheldonAnimator.SetBool(PickupAnim, false);
+            _sheldonAnimator.SetBool(ThrowAnim, false);
+        }
+
+        public void ThrowAnimationCompleted()
+        {
             _sheldonAnimator.SetBool(ThrowAnim, false);
         }
     }

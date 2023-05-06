@@ -12,5 +12,11 @@ namespace _Scripts.SameDayDelivery.Utility
         {
             _packagePickupScript.PickupAnimationCompleted();
         }
+
+        public void ThrowPackage()
+        {
+            _packagePickupScript.ThrowPackage();
+            _packagePickupScript.ThrowAnimationCompleted();
+        }
     }
 }

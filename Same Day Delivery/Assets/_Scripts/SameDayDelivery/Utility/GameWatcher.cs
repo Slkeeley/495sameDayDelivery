@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Globalization;
 using SameDayDelivery.VanControls;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events; 
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace SameDayDelivery.Controls
 {
     public class GameWatcher : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private SameDayDelivery.ScriptableObjects.GameData data;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem earlyAlarm;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem payRaise;
-        [SerializeField] private SameDayDelivery.ScriptableObjects.UpgradeItem employeeOfTheMonth;
-        [SerializeField] public SameDayDelivery.ScriptableObjects.UpgradeItem evilIntentions;
-        [SerializeField] private SameDayDelivery.UI.gameplayUI UI; 
+        [SerializeField] private ScriptableObjects.GameData data;
+        [SerializeField] private ScriptableObjects.UpgradeItem earlyAlarm;
+        [SerializeField] private ScriptableObjects.UpgradeItem payRaise;
+        [SerializeField] private ScriptableObjects.UpgradeItem employeeOfTheMonth;
+        [SerializeField] public ScriptableObjects.UpgradeItem evilIntentions;
+        [SerializeField] private UI.gameplayUI UI; 
         public VanController carControls;
         public PlayerControlManager playerControls;
         public GameObject sheldonCam;
@@ -50,7 +49,16 @@ namespace SameDayDelivery.Controls
         public bool driftingForward = false;
         private float currSpeed;
         private bool payRaised;
-        private bool minuteLeft = false; 
+        private bool minuteLeft = false;
+        [Header("Time | Score | Money")]
+        public float _speedyDeliveryTime = 30f;
+        public float _lateDeliveryTime = 60f;
+        public int _speedyDeliveryScore = 150;
+        public int _speedyDeliveryCoins = 3;
+        public int _lateDeliveryScore = 75;
+        public int _lateDeliveryMoney = 1;
+        public int _standardDeliveryScore = 100;
+        public int _standardDeliveryMoney = 2;
 
 
         private void Awake()
@@ -146,7 +154,7 @@ namespace SameDayDelivery.Controls
             playerControls.enabled = false;
             carControls.enabled = true;
             carControls.rb.velocity = Vector3.zero;
-            carControls.rb.isKinematic = false;  
+            // carControls.rb.isKinematic = false;
             carControls.ChuteActivation();           
             carControls.motorStart?.Invoke(); //play the sound effect for the van starting when the player enters. 
             sheldonCam.SetActive(false);
@@ -161,9 +169,9 @@ namespace SameDayDelivery.Controls
             {
                 currSpeed = 10;
                 driftingForward = true;
-                carControls.rb.isKinematic = true;
+                // carControls.rb.isKinematic = true;
             }
-            else carControls.rb.isKinematic = true; 
+            // else carControls.rb.isKinematic = true; 
             carControls.stopNoises?.Invoke();  //stop playing car audio when sheldon exits the van 
             carControls.enabled = false;
             playerControls.enabled = true;
@@ -180,16 +188,16 @@ namespace SameDayDelivery.Controls
             var seconds = Mathf.FloorToInt(currentTime % 60).ToString();
             var score = currentScore.ToString(CultureInfo.CurrentCulture);
 
-            UI.timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            UI.timerText.text = $"{minutes:00}:{seconds:00}";
             UI.scoreText.text = $"Score: {score}";
         }
 
         void driftToStop()//function for the car to drift to a stop if sheldon leaves while the car is still moving 
         {
-            Debug.Log("Drifting To Stop");
+            // Debug.Log("Drifting To Stop");
             if (currSpeed > 0)
             {
-                van.transform.Translate(Vector3.forward * currSpeed * Time.fixedDeltaTime);
+                van.transform.Translate(Vector3.forward * (currSpeed * Time.fixedDeltaTime));
                 currSpeed -= 0.05f;
             }
             else driftingForward = false;
@@ -242,25 +250,25 @@ namespace SameDayDelivery.Controls
         public void PackageReceived() //if a package was received the player's score will be updated and saved here
         {
             packagesDelivered++;
-            if (timeSinceLastDelivery <= 20) //speedy delivery bonus
+            if (timeSinceLastDelivery <= _speedyDeliveryTime) //speedy delivery bonus
             {              
                 UI.deliveryMessage(1);
-                currentScore = currentScore + 150; 
-                zergCoinsGained = zergCoinsGained + 3;
+                currentScore += _speedyDeliveryScore; 
+                zergCoinsGained += _speedyDeliveryCoins;
 
             }
-            else if (timeSinceLastDelivery >= 60) //slow delivery penalty
+            else if (timeSinceLastDelivery >= _lateDeliveryTime) //slow delivery penalty
             {
                 UI.deliveryMessage(2);
                 workFaster?.Invoke(); 
-                currentScore = currentScore + 75;
-                zergCoinsGained = zergCoinsGained + 1;
+                currentScore += _lateDeliveryScore;
+                zergCoinsGained += _lateDeliveryMoney;
             }
             else
             {
                 UI.deliveryMessage(3);
-                currentScore = currentScore + 100;
-                zergCoinsGained = zergCoinsGained + 2;
+                currentScore += _standardDeliveryScore;
+                zergCoinsGained += _standardDeliveryMoney;
             }
             timeSinceLastDelivery = 0; //make sure to reset time since delivery so that the player may get delivery bonuses 
         }

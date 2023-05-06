@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: StrengthSyringe
   m_EditorClassIdentifier: 
   upgradeName: Strength Syringe
-  description: Allows Sheldon to throw Heavy Packages.
+  description: When your van gets stuck, just get out and push!
   cost: 30
   icon: {fileID: 21300000, guid: 6ae2503e11998f44eb4ccaf2b7002599, type: 3}
-  purchased: 0
+  purchased: 1
   valueA:
-    uName: Character Speed
-    uValue: 0.5
+    uName: Push Power (Replaced default push power)
+    uValue: 3
   valueB:
     uName: 
     uValue: 0
