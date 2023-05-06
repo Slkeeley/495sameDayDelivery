@@ -109,7 +109,7 @@ namespace SameDayDelivery.Controls
             currentScore = 0; //reset the current score to 0 
             packagesDelivered = 0; //reset the packages delivered to 0 
             zergCoinsGained = 0; 
-            UI.levelText.text = "Day: " + levelNumber;
+            UI.levelText.text = "Day: " + data.day;
             UI.deliveryText.text = "";
             scoreEarned = 0; 
             zergCoinsGained = 0; 
@@ -222,7 +222,8 @@ namespace SameDayDelivery.Controls
                 data.money = data.money + zergCoinsGained;
                 SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
             }//add the players gained zerg coins to the upgrade screen 
-            scoreEarned = currentScore; 
+            scoreEarned = currentScore;
+            data.score = data.score + currentScore; 
             goToFailScreen?.Invoke(); 
         }
 
@@ -246,7 +247,8 @@ namespace SameDayDelivery.Controls
                 SameDayDelivery.UI.scoreDisplay.coinsGained = zergCoinsGained;
             }//add the players gained zerg coins to the upgrade screen 
             scoreEarned = currentScore;
-            data.levelSelectTable.levels[levelNumber].unlocked=true; 
+            data.day++;
+            data.score = data.score + currentScore;
             goToPassScreen?.Invoke();//invoke the event that moves to the success screen 
         }
 

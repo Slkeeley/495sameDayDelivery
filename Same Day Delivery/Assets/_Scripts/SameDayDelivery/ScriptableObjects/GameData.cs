@@ -58,6 +58,9 @@ namespace SameDayDelivery.ScriptableObjects
         [Header("Upgrades")]
         public UpgradeLookupTable upgradeLookupTable;
 
+        [Header("Level Data")]
+        public LevelSelectTable lvlSelectTable; 
+
         public Transform playerTransform;
 
         public void ResetData()
@@ -70,6 +73,12 @@ namespace SameDayDelivery.ScriptableObjects
             {
                 upgradeItem.purchased = false;
             }
+
+            foreach (LevelData lvlData in lvlSelectTable.levels)
+            {
+                lvlData.unlocked = false; 
+            }
+            lvlSelectTable.levels[0].unlocked = true; //check to confirm that level 1 is always unlocked; 
         }
 
         public void TempSaveData()
@@ -83,7 +92,22 @@ namespace SameDayDelivery.ScriptableObjects
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 PlayerPrefs.SetInt($"upgrade[{i}]", upgradeItem.purchased ? 1 : 0);
             }
-            
+
+
+            for (int i = 0; i < lvlSelectTable.levels.Count; i++)
+            {
+                LevelData lvlData = lvlSelectTable.levels[i]; 
+                PlayerPrefs.SetInt($"level[{i}]", lvlData.unlocked? 1 : 0);
+            }
+
+            foreach (LevelData lvlData in lvlSelectTable.levels)
+            {
+                if (day >= lvlData.levelNumber-1)
+                {
+                    lvlData.unlocked = true;
+                }
+            }
+
             PlayerPrefs.Save();
         }
 
@@ -100,6 +124,20 @@ namespace SameDayDelivery.ScriptableObjects
                 UpgradeItem upgradeItem = upgradeLookupTable.upgrades[i];
                 upgradeItem.purchased = PlayerPrefs.GetInt($"upgrade[{i}]") == 1;
             }
+
+            for (int i = 0; i < lvlSelectTable.levels.Count; i++)
+            {
+                LevelData lvlData = lvlSelectTable.levels[i];
+                lvlData.unlocked = PlayerPrefs.GetInt($"levels[{i}]") == 1; 
+            }
+
+            foreach  (LevelData lvlData in lvlSelectTable.levels)
+            {
+                if(day>= lvlData.levelNumber-1)
+                {
+                    lvlData.unlocked = true; 
+                }
+            }
         }
 
         public void DeleteTempData()
@@ -111,10 +149,16 @@ namespace SameDayDelivery.ScriptableObjects
             if (!upgradeLookupTable) return;
 
             List<UpgradeItem> upgrades = upgradeLookupTable.upgrades;
+            List<LevelData> levels = lvlSelectTable.levels; 
             
             for (int i = 0; i < upgrades.Count; i++)
             {
                 PlayerPrefs.DeleteKey($"upgrade[{i}]");
+            }
+
+            for (int i = 0; i < levels.Count; i++)
+            {
+                PlayerPrefs.DeleteKey($"Upgades[{i}]"); 
             }
         }
     }

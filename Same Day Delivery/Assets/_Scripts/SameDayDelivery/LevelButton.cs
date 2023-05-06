@@ -34,6 +34,7 @@ public class LevelButton : MonoBehaviour
     public void Update()
     {
         if (!levelData.unlocked) button.interactable = false;
+        else button.interactable = true; 
     }
 
     public void loadSelectedLevel()

@@ -16,6 +16,7 @@ namespace SameDayDelivery.Utility
             public int money;
             public int score;
             public List<int> unlockedUpgrades = new List<int>();
+            public List<int> unlockedLevels = new List<int>(); 
         }
         
         [SerializeField]
@@ -52,11 +53,16 @@ namespace SameDayDelivery.Utility
             saveData.money = _gameData.money;
             saveData.score = _gameData.score;
             List<UpgradeItem> upgrades = _gameData.upgradeLookupTable.upgrades;
+            List<LevelData> lvls = _gameData.lvlSelectTable.levels;
             for (int i = 0; i < upgrades.Count; i++)
             {
                 saveData.unlockedUpgrades.Add(upgrades[i].purchased ? 1 : 0);
             }
-            
+
+            for (int i = 0; i < lvls.Count; i++)
+            {
+                saveData.unlockedLevels.Add(lvls[i].unlocked ? 1 : 0);
+            }
             string jsonData = JsonUtility.ToJson(saveData);
             
             Debug.Log($"{jsonData}");
@@ -89,12 +95,18 @@ namespace SameDayDelivery.Utility
             _gameData.score = saveData.score;
 
             List<int> upgrades = saveData.unlockedUpgrades;
+            List<int> levels = saveData.unlockedLevels; 
 
             for (int i = 0; i < upgrades.Count; i++)
             {
                 _gameData.upgradeLookupTable.upgrades[i].purchased = upgrades[i] == 1;
             }
-            
+
+            for (int i = 0; i < levels.Count; i++)
+            {
+                _gameData.lvlSelectTable.levels[i].unlocked = levels[i] == 1;
+            }
+
             _onLoad?.Invoke();
         }
 
