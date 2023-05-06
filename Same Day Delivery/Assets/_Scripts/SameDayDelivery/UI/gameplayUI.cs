@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,7 +18,11 @@ namespace SameDayDelivery.UI
         private Color dtColor;
         public GameObject failNotification; //appears when the player fails
         public GameObject successNotification; //appears when the player passes
-                                               // Start is called before the first frame update
+
+        [SerializeField]
+        private GameWatcher _gameWatcher;
+
+        // Start is called before the first frame update
         void Start()
         {
             uiSetup();
@@ -37,19 +42,19 @@ namespace SameDayDelivery.UI
                 case 1: //speedy delivery 
                     dtColor = new Color(0.04669785f, 1f, 1f, 1f);
                     deliveryText.color = dtColor;
-                    deliveryText.text = "Speedy Delivery! +150";
+                    deliveryText.text = $"Speedy Delivery! +{_gameWatcher._speedyDeliveryScore.ToString()}";
                     StartCoroutine(displayDeliveryMessage());
                     break;
                 case 2://slow delivery
                     dtColor = new Color(1f, 0f, 0.1349077f, 1f);
                     deliveryText.color = dtColor;
-                    deliveryText.text = "Slow Delivery +75";
+                    deliveryText.text = $"Slow Delivery +{_gameWatcher._lateDeliveryScore.ToString()}";
                     StartCoroutine(displayDeliveryMessage());
                     break;
                 case 3://standard delivery
                     dtColor = new Color(0.6f, 0.6f, 0.6f, 1f);
                     deliveryText.color = dtColor;
-                    deliveryText.text = "Standard Delivery! +100";
+                    deliveryText.text = $"Standard Delivery! +{_gameWatcher._standardDeliveryScore.ToString()}";
                     StartCoroutine(displayDeliveryMessage());
                     break;
             }

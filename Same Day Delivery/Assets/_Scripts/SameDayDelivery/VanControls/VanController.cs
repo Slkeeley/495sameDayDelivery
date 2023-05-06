@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SameDayDelivery.Controls;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem; 
@@ -282,13 +283,14 @@ namespace SameDayDelivery.VanControls
             frontRightCollider.motorTorque = currMotorForce;
             currMotorForce -= decelerationSpeed;
             yield return new WaitForEndOfFrame();
-            if (Mathf.Approximately(rb.velocity.magnitude, 0.0f))
+            if (rb.velocity.magnitude < 0.1f)
             {
                 stopNoises?.Invoke();
                 rb.velocity = Vector3.zero;
                 currMotorForce = 0;
                 decelerating = false;
             }
+            
         }
         #endregion
         public void ChuteActivation() //If the player is within the correct area to drop the packages turn the shoot on if they leave turn int off. 

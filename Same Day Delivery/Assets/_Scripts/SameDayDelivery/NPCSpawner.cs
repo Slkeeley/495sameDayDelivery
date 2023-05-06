@@ -35,8 +35,8 @@ public class NPCSpawner : MonoBehaviour
     {
             if (npcsOut < maxNPCs && isSpawning)
             {
-            isSpawning = false;    
-            StartCoroutine(spawnNPC());
+                isSpawning = false;    
+                StartCoroutine(spawnNPC());
             }
     }
 
@@ -55,7 +55,7 @@ public class NPCSpawner : MonoBehaviour
 
     void selectNPC()
     {
-        Debug.Log("trying to spawn an NPC"); 
+        // Debug.Log("trying to spawn an NPC"); 
         int randomNPC = Random.Range(0, NPCs.Length);
         GameObject.Instantiate(NPCs[randomNPC], spawnPoint, Quaternion.identity);
         npcsOut++; 

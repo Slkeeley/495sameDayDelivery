@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: WorkGloves
   m_EditorClassIdentifier: 
   upgradeName: Work Gloves
-  description: Throw packages further.
+  description: Throw packages further and with an arc!
   cost: 20
   icon: {fileID: 21300000, guid: db1edf602c0e7c1458fa19b2621d593f, type: 3}
-  purchased: 0
+  purchased: 1
   valueA:
     uName: Modified throw force (percentage)
-    uValue: 1.25
+    uValue: 1.05
   valueB:
-    uName: 
-    uValue: 0
+    uName: Arc max angle
+    uValue: 30

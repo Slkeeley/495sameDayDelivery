@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using SameDayDelivery.PackageSystem;
 using SameDayDelivery.ScriptableObjects;
+using SameDayDelivery.VanControls;
 using UnityEngine;
 
 namespace SameDayDelivery.Controls
@@ -22,24 +23,22 @@ namespace SameDayDelivery.Controls
         public float pushPower = 2.0F;
         [Tooltip("Any rigidbody with mass equal to this number or greater, will not be pushed.")]
         public float pushMassMax = 100f;
+        [SerializeField] private float _bullyTime = 0.5f;
 
         [SerializeField, Header("Camera Settings")]
         private Camera _cam;
 
-        [SerializeField]
-        private UpgradeItem _upgradeCardio;
-        [SerializeField]
-        private UpgradeItem _upgradeWeightlifting;
+        [SerializeField] private UpgradeItem _upgradeCardio;
+        [SerializeField] private UpgradeItem _upgradeWeightlifting;
+        [SerializeField] private UpgradeItem _strengthSyringe;
         
         private CharacterController _characterController;
         private Rigidbody _rigidBody;
         private PlayerControlManager _playerControlManager;
         private Ray _ray;
         private RaycastHit _hit;
-        [SerializeField]
-        private bool _isGrounded;
-        [SerializeField]
-        private Animator _animator;
+        [SerializeField] private bool _isGrounded;
+        [SerializeField] private Animator _animator;
 
         private float _horizontalRampTimer;
         private float _verticalRampTimer;
@@ -196,15 +195,16 @@ namespace SameDayDelivery.Controls
 
         void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Rigidbody body = hit.collider.attachedRigidbody;
-            if (!body) return;
+            Rigidbody rb = hit.collider.attachedRigidbody;
+            if (!rb) return;
             
-            var mass = body.mass;
-            if (mass >= pushMassMax) return;
+            var mass = rb.mass;
+            
+            if (!CanPush(mass)) return;
 
             mass = Mathf.Max(mass, 1f);
             // no rigidbody
-            if (body == null || body.isKinematic)
+            if (rb == null || rb.isKinematic)
                 return;
 
             // We dont want to push objects below us
@@ -219,8 +219,33 @@ namespace SameDayDelivery.Controls
             // then you can also multiply the push velocity by that.
 
             // Apply the push
+            if (_strengthSyringe && _strengthSyringe.purchased)
+            {
+                rb.velocity = pushDir * _strengthSyringe.valueA.uValue;
+                if (hit.gameObject.GetComponent<VanController>() != null)
+                {
+                    StartCoroutine(BullyVan(rb));
+                }
+            }
+            else
+                rb.velocity = pushDir * pushPower / mass;
+
             
-            body.velocity = pushDir * pushPower / mass;
+        }
+
+        private IEnumerator BullyVan(Rigidbody rb)
+        {
+            yield return new WaitForSeconds(_bullyTime);
+            rb.isKinematic = true;
+            yield return new WaitForSeconds(_bullyTime);
+            rb.isKinematic = false;
+        }
+
+        private bool CanPush(float mass)
+        {
+            if (_strengthSyringe && _strengthSyringe.purchased) return true;
+            
+            return !(mass >= pushMassMax);
         }
     }
 }
