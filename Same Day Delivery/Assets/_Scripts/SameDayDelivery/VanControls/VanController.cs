@@ -117,8 +117,8 @@ namespace SameDayDelivery.VanControls
         #region UPGRADE REFERENCING
         void upgradeAttachment()//find the correct scriptable object for the upgrade references to grab and apply 
         {
-            premiumGas = data.upgradeLookupTable.upgrades[9];
-            freshTires = data.upgradeLookupTable.upgrades[6];
+            premiumGas = data.upgradeLookupTable.upgrades[4];
+            freshTires = data.upgradeLookupTable.upgrades[2];
         }
 
         void checkUpgradePurchaseValues()//checks if an upgrade is purchased, if so add its value to the default values. 

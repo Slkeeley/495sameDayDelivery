@@ -13,7 +13,6 @@ namespace SameDayDelivery.Controls
         [SerializeField] private ScriptableObjects.GameData data;
         [SerializeField] private ScriptableObjects.UpgradeItem earlyAlarm;
         [SerializeField] private ScriptableObjects.UpgradeItem payRaise;
-        [SerializeField] private ScriptableObjects.UpgradeItem employeeOfTheMonth;
         [SerializeField] public ScriptableObjects.UpgradeItem evilIntentions;
         [SerializeField] private UI.gameplayUI UI; 
         public VanController carControls;
@@ -117,10 +116,9 @@ namespace SameDayDelivery.Controls
         }
         void upgradeAttachment()
         {
-            earlyAlarm = data.upgradeLookupTable.upgrades[3];
-            payRaise = data.upgradeLookupTable.upgrades[8];
-            employeeOfTheMonth = data.upgradeLookupTable.upgrades[8];
-            evilIntentions = data.upgradeLookupTable.upgrades[8];
+            earlyAlarm = data.upgradeLookupTable.upgrades[1];
+            payRaise = data.upgradeLookupTable.upgrades[2];
+            evilIntentions = data.upgradeLookupTable.upgrades[9];
             checkUpgradePurchaseValues(); 
         }
 
