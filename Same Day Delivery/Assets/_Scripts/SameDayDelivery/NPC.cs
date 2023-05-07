@@ -65,6 +65,7 @@ public class NPC : MonoBehaviour
 
             if (watcher.evilIntentions.purchased)
             {
+                Debug.Log("Evil"); 
                 watcher.currentScore = watcher.currentScore + 5; 
             }
             StartCoroutine(despawn());
@@ -87,6 +88,7 @@ public class NPC : MonoBehaviour
 
             if (watcher.evilIntentions.purchased)
             {
+                Debug.Log("Evil");
                 watcher.currentScore = watcher.currentScore + 5;
             }
             StartCoroutine(despawn());

@@ -65,7 +65,7 @@ namespace SameDayDelivery.ScriptableObjects
 
         public void ResetData()
         {
-            day = 0;
+            day = 1;
             score = 0;
             money = 0;
 
@@ -102,7 +102,7 @@ namespace SameDayDelivery.ScriptableObjects
 
             foreach (LevelData lvlData in lvlSelectTable.levels)
             {
-                if (day >= lvlData.levelNumber)
+                if (day >= lvlData.levelNumber-1)
                 {
                     lvlData.unlocked = true;
                 }
@@ -133,7 +133,7 @@ namespace SameDayDelivery.ScriptableObjects
 
             foreach  (LevelData lvlData in lvlSelectTable.levels)
             {
-                if(day>= lvlData.levelNumber)
+                if(day>= lvlData.levelNumber-1)
                 {
                     lvlData.unlocked = true; 
                 }
