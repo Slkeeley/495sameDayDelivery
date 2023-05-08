@@ -101,7 +101,7 @@ MonoBehaviour:
       - m_Target: {fileID: 662331002613505115}
         m_TargetAssemblyTypeName: SameDayDelivery.Utility.PlaylistShuffle, Assembly-CSharp
         m_MethodName: PlayRandom
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -285,6 +285,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2cfb45cfb03105242b94969a7a692683, type: 3}
   - {fileID: 8300000, guid: 855f856a90b4c104a968f3f38bf79c74, type: 3}
   - {fileID: 8300000, guid: c2df6711dfb421c4fb7c47bdd418e066, type: 3}
+  _playlistType: 0
   nextTrackDurationMin: 1
   nextTrackDurationMax: 3
   pitchVariance: 0.1
@@ -292,6 +293,7 @@ MonoBehaviour:
   playOnAwake: 0
   _paused: 0
   _nextTrackClock: 0
+  _currentTrack: 0
 --- !u!82 &662331002613505114
 AudioSource:
   m_ObjectHideFlags: 0
@@ -680,6 +682,7 @@ MonoBehaviour:
   outOfSync: 0
   minPos: {x: 0, y: 0, z: 0}
   maxPos: {x: 0, y: 0, z: 0}
+  _updateInterval: 0.005
 --- !u!1001 &1703966247930097560
 PrefabInstance:
   m_ObjectHideFlags: 0

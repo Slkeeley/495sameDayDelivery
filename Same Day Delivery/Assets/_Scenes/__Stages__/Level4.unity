@@ -2480,7 +2480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 858343648286329206, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: _packageDeliveryRange
-      value: 175
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1135156101262194748, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3239,8 +3239,16 @@ PrefabInstance:
       value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6767396359560168962, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: MaxSteerAngle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767396359560168962, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: turnUpgradeMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767396359560168962, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: decelerationMultiplier
-      value: 0.95
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 6767396359560168965, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalPosition.x

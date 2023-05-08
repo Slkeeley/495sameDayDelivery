@@ -3414,7 +3414,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 858343648286329206, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: _packageDeliveryRange
-      value: 150
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 1562931125010479991, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: TimeLeft
@@ -3474,11 +3474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458076542693587314, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016509066
+      value: -0.000000016509066
       objectReference: {fileID: 0}
     - target: {fileID: 3458076542693587314, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004848744
+      value: 0.000000004848744
       objectReference: {fileID: 0}
     - target: {fileID: 3987669191027759550, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3591,6 +3591,14 @@ PrefabInstance:
     - target: {fileID: 6339431741842601959, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767396359560168962, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: MaxSteerAngle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767396359560168962, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
+      propertyPath: turnUpgradeMult
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6767396359560168965, guid: 51fc5fd3d994d6142a74404587cd6085, type: 3}
       propertyPath: m_LocalPosition.x

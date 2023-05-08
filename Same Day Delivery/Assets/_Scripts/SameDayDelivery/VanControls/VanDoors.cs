@@ -13,12 +13,13 @@ namespace SameDayDelivery.VanControls
         public GameObject enterText;
 
         public GameWatcher gameWatcher; //used to tell the game when to switch control schemes
-
         public Transform playerExitPos;
 
+        bool pressEnabled = true; 
         private void Awake()
         {
-            gameWatcher = GameObject.Find("GameWatcher").GetComponent<GameWatcher>(); 
+            gameWatcher = GameObject.Find("GameWatcher").GetComponent<GameWatcher>();
+            pressEnabled = true; 
         }
         private void Start()
         {
@@ -43,15 +44,18 @@ namespace SameDayDelivery.VanControls
         }
         public void CheckEnterExitVan(InputAction.CallbackContext context)
         {
-            if (!context.performed) return;
-            
-            if (playerInVan)
+            if (pressEnabled)
             {
-                ExitVan();
-            }
-            else if (nearDoors)
-            {
-                EnterVan();
+                if (!context.performed) return;
+
+                if (playerInVan)
+                {
+                    ExitVan();
+                }
+                else if (nearDoors)
+                {
+                    EnterVan();
+                }
             }
         }
 
@@ -108,14 +112,15 @@ namespace SameDayDelivery.VanControls
             player.SetActive(false);
             enterText.SetActive(false);
             gameWatcher.SwitchControls();
-            playerInVan = false;
+            playerInVan = true;
             StartCoroutine(ExitDelay());
         }
 
         private IEnumerator ExitDelay() //used to stop the player from flickering in and out of reality
         {
-            yield return new WaitForSeconds(1);
-            playerInVan = true;
+            pressEnabled = false; 
+            yield return new WaitForSeconds(2);
+            pressEnabled = true; 
         }
 
 
