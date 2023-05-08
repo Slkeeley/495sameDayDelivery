@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6258194205799029930}
   - component: {fileID: 756727199801188720}
   - component: {fileID: -4338827604631581226}
+  - component: {fileID: 3870595966058139891}
   m_Layer: 0
   m_Name: FlyingCar_GreenLOD
   m_TagString: Untagged
@@ -73,6 +74,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!65 &3870595966058139891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671887685803856642}
+  m_Material: {fileID: 13400000, guid: 9a274dc913fe531468454a1c2bd18f5a, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8366723, y: 1.8173039, z: 5.023754}
+  m_Center: {x: 0, y: 0.9086518, z: 0}
 --- !u!1001 &472622454255912960
 PrefabInstance:
   m_ObjectHideFlags: 0

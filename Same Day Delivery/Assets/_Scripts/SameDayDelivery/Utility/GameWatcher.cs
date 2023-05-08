@@ -182,11 +182,12 @@ namespace SameDayDelivery.Controls
         private void UpdaterTimer(float currentTime) //used to update the timer text on screen to accurately reflect how much time is left 
         {
             currentTime += 1;
-            var minutes = Mathf.FloorToInt(currentTime / 60).ToString();
-            var seconds = Mathf.FloorToInt(currentTime % 60).ToString();
+            float minutes = Mathf.FloorToInt(currentTime / 60);
+            float seconds = Mathf.FloorToInt(currentTime % 60);
             var score = currentScore.ToString(CultureInfo.CurrentCulture);
 
-            UI.timerText.text = $"{minutes:00}:{seconds:00}";
+            UI.timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds); 
+            //UI.timerText.text = $"{minutes:00}:{seconds:00}";
             UI.scoreText.text = $"Score: {score}";
         }
 
